@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>German Trainer</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#111827">
+<style>
+:root {
+  --bg:#f6f7fb; --card:#fff; --text:#111827; --muted:#6b7280; --line:#e5e7eb; --accent:#111827;
+}
+* { box-sizing:border-box; }
+body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:var(--bg); color:var(--text); }
+.wrap { max-width:980px; margin:0 auto; padding:16px; }
+.hero,.card { background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+.hero { padding:18px; margin-bottom:16px; }
+h1 { margin:0 0 8px; font-size:28px; }
+.sub { color:var(--muted); line-height:1.45; }
+.controls { display:grid; grid-template-columns:1.4fr .8fr; gap:10px; margin-top:14px; }
+input,select,button { width:100%; min-height:44px; border-radius:12px; border:1px solid var(--line); background:white; color:var(--text); font-size:16px; padding:10px 12px; }
+button { cursor:pointer; font-weight:600; background:var(--accent); color:white; border:none; }
+button.secondary { background:white; color:var(--text); border:1px solid var(--line); }
+.top-actions { display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
+.stats { display:flex; justify-content:space-between; margin-top:12px; color:var(--muted); font-size:14px; }
+.bar { height:10px; background:#eef0f4; border-radius:999px; overflow:hidden; margin-top:6px; }
+.bar > div { height:100%; background:#111827; width:0%; }
+.grid { display:grid; grid-template-columns:1.1fr .9fr; gap:16px; align-items:start; }
+.card { padding:16px; }
+.badge { display:inline-block; font-size:12px; color:#374151; background:#f3f4f6; border:1px solid var(--line); border-radius:999px; padding:5px 10px; margin-bottom:12px; }
+.german { font-size:28px; line-height:1.25; font-weight:700; margin:4px 0 10px; }
+.english { font-size:18px; color:#374151; line-height:1.45; margin-bottom:12px; }
+.note { color:var(--muted); line-height:1.45; font-size:14px; margin-bottom:16px; }
+.actions { display:flex; gap:10px; flex-wrap:wrap; }
+.list { display:grid; gap:10px; max-height:72vh; overflow:auto; }
+.item { border:1px solid var(--line); border-radius:14px; padding:12px; background:white; cursor:pointer; }
+.item:hover { background:#fafafa; }
+.item .de { font-weight:600; line-height:1.35; }
+.item .en { color:var(--muted); margin-top:6px; line-height:1.4; }
+.row { display:flex; justify-content:space-between; gap:8px; align-items:center; }
+.help { margin-top:16px; padding:14px; background:#f9fafb; border:1px dashed var(--line); border-radius:14px; color:#374151; line-height:1.5; }
+@media (max-width:780px) {
+  .controls,.grid { grid-template-columns:1fr; }
+  .german { font-size:24px; }
+  .english { font-size:17px; }
+  .list { max-height:none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>German Trainer</h1>
+    <div class="sub">Interactive Week 1 trainer with audio, search, categories, and progress tracking.</div>
+    <div class="controls">
+      <input id="search" placeholder="Search German, English, or note">
+      <select id="category"></select>
+    </div>
+    <div class="top-actions">
+      <button id="shuffle">Shuffle card</button>
+      <button class="secondary" id="toggleDaily">Daily mode: Off</button>
+      <button class="secondary" id="resetProgress">Reset progress</button>
+    </div>
+    <div class="stats">
+      <div id="statsText"></div>
+      <div id="statsPct"></div>
+    </div>
+    <div class="bar"><div id="barFill"></div></div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div id="currentCard"></div>
+      <div class="help">
+        Start with Street chat, Control, and Shop / takeaway. Tap <em>Speak German</em>, then repeat aloud. Add this site to your Home Screen after deployment.
+      </div>
+    </div>
+    <div class="card">
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const phrases = [{"category": "Street chat", "german": "Hoi, wie geht’s?", "english": "Hi, how are you?", "note": "Informal, very common in Switzerland when greeting someone you know."}, {"category": "Street chat", "german": "Gut, danke, und dir?", "english": "Good, thanks, and you?", "note": "Natural quick reply in an informal chat."}, {"category": "Street chat", "german": "Schön, dich zu sehen.", "english": "Nice to see you.", "note": "Warm phrase for someone you know."}, {"category": "Street chat", "german": "Wie geht’s der Familie?", "english": "How is the family?", "note": "Good for brief friendly small talk."}, {"category": "Street chat", "german": "Viel los im Moment.", "english": "A lot going on at the moment.", "note": "Useful answer when making small talk."}, {"category": "Street chat", "german": "Ich bin gerade unterwegs.", "english": "I’m just on my way.", "note": "Polite way to keep the chat short."}, {"category": "Street chat", "german": "Bis bald.", "english": "See you soon.", "note": "Simple natural closing."}, {"category": "Identity", "german": "Ich heisse Nikos.", "english": "My name is Nikos.", "note": "Basic self-introduction."}, {"category": "Identity", "german": "Ich komme aus Zypern.", "english": "I come from Cyprus.", "note": "Use when people ask where you are from."}, {"category": "Identity", "german": "Ich lebe in der Schweiz.", "english": "I live in Switzerland.", "note": "High-value personal phrase."}, {"category": "Identity", "german": "Ich wohne in Baar.", "english": "I live in Baar.", "note": "Useful daily phrase."}, {"category": "Identity", "german": "Ich arbeite im Finanzbereich.", "english": "I work in finance.", "note": "Neutral and practical professional phrase."}, {"category": "Identity", "german": "Ich bin im Asset Management tätig.", "english": "I work in asset management.", "note": "More specific professional phrase."}, {"category": "Identity", "german": "Ich habe drei Töchter.", "english": "I have three daughters.", "note": "Useful for personal conversation."}, {"category": "Identity", "german": "Deutsch ist für mich sehr wichtig.", "english": "German is very important for me.", "note": "Useful when explaining motivation."}, {"category": "Identity", "german": "Ich lerne Deutsch, weil ich in der Schweiz lebe.", "english": "I am learning German because I live in Switzerland.", "note": "Excellent ready-made explanation."}, {"category": "Identity", "german": "Ich möchte flüssiger sprechen.", "english": "I want to speak more fluently.", "note": "Useful learning-goal phrase."}, {"category": "Control", "german": "Können Sie das bitte wiederholen?", "english": "Could you repeat that, please?", "note": "Use when someone speaks too fast or you missed something."}, {"category": "Control", "german": "Langsamer, bitte.", "english": "More slowly, please.", "note": "Short and essential."}, {"category": "Control", "german": "Ich habe das nicht ganz verstanden.", "english": "I did not fully understand that.", "note": "Polite and natural."}, {"category": "Control", "german": "Was bedeutet das genau?", "english": "What does that mean exactly?", "note": "Use when a word or idea is unclear."}, {"category": "Control", "german": "Können Sie mir das bitte erklären?", "english": "Could you explain that to me, please?", "note": "Useful almost everywhere."}, {"category": "Control", "german": "Können Sie mir das bitte zeigen?", "english": "Could you show me that, please?", "note": "Very useful in shops and offices."}, {"category": "Control", "german": "Einen Moment bitte.", "english": "One moment, please.", "note": "Buys you time."}, {"category": "Control", "german": "Ich bin nicht sicher.", "english": "I’m not sure.", "note": "Simple safe phrase."}, {"category": "Questions", "german": "Können Sie mir bitte helfen?", "english": "Could you help me, please?", "note": "Universal question."}, {"category": "Questions", "german": "Wo finde ich …?", "english": "Where can I find …?", "note": "Very useful in shops, stations, and offices."}, {"category": "Questions", "german": "Wie funktioniert das genau?", "english": "How does that work exactly?", "note": "Use for procedures or systems."}, {"category": "Questions", "german": "Was ist der Unterschied?", "english": "What is the difference?", "note": "High-value comparison phrase."}, {"category": "Questions", "german": "Wann wäre das möglich?", "english": "When would that be possible?", "note": "Useful for scheduling."}, {"category": "Questions", "german": "Haben Sie kurz Zeit?", "english": "Do you have a moment?", "note": "Good in work and daily life."}, {"category": "Shop / takeaway", "german": "Entschuldigung, ich suche …", "english": "Excuse me, I’m looking for …", "note": "Best simple opener in a shop."}, {"category": "Shop / takeaway", "german": "Ich schaue nur, danke.", "english": "I’m just looking, thanks.", "note": "Useful when staff approach you."}, {"category": "Shop / takeaway", "german": "Was kostet das?", "english": "How much does that cost?", "note": "Essential."}, {"category": "Shop / takeaway", "german": "Ich nehme das.", "english": "I’ll take that.", "note": "Simple buying phrase."}, {"category": "Shop / takeaway", "german": "Ich hätte gern …", "english": "I would like …", "note": "Best core ordering phrase."}, {"category": "Shop / takeaway", "german": "Für mich bitte …", "english": "For me, please …", "note": "Useful when ordering food."}, {"category": "Shop / takeaway", "german": "Zum Mitnehmen, bitte.", "english": "To take away, please.", "note": "Essential takeaway phrase."}, {"category": "Shop / takeaway", "german": "Hier essen, bitte.", "english": "To eat here, please.", "note": "Useful contrast to takeaway."}, {"category": "Shop / takeaway", "german": "Was empfehlen Sie?", "english": "What do you recommend?", "note": "Good in restaurants and takeaways."}, {"category": "Shop / takeaway", "german": "Kann ich bitte zahlen?", "english": "Can I pay, please?", "note": "Essential payment phrase."}, {"category": "Shop / takeaway", "german": "Kann ich mit Karte zahlen?", "english": "Can I pay by card?", "note": "Very common in Switzerland."}, {"category": "Appointments", "german": "Ich möchte einen Termin vereinbaren.", "english": "I would like to make an appointment.", "note": "Essential appointment phrase."}, {"category": "Appointments", "german": "Wann hätten Sie Zeit?", "english": "When would you have time?", "note": "Natural and useful."}, {"category": "Appointments", "german": "Passt Ihnen das?", "english": "Does that suit you?", "note": "Common scheduling phrase."}, {"category": "Appointments", "german": "Können wir den Termin verschieben?", "english": "Can we move the appointment?", "note": "Very practical."}, {"category": "Appointments", "german": "Ich komme ein paar Minuten später.", "english": "I will arrive a few minutes late.", "note": "Very practical daily phrase."}, {"category": "Family / school", "german": "Ich wollte kurz etwas wegen meiner Tochter besprechen.", "english": "I wanted to discuss something briefly regarding my daughter.", "note": "Strong parent opener."}, {"category": "Family / school", "german": "Mir ist wichtig, dass sie sich wohlfühlt.", "english": "It is important to me that she feels comfortable.", "note": "Calm, collaborative phrase."}, {"category": "Family / school", "german": "Wie sehen Sie die Situation?", "english": "How do you see the situation?", "note": "Useful with teachers and professionals."}, {"category": "Family / school", "german": "Danke für Ihre Rückmeldung.", "english": "Thank you for your feedback.", "note": "Polite and common."}, {"category": "Opinions", "german": "Ich denke, dass …", "english": "I think that …", "note": "Basic high-value opinion frame."}, {"category": "Opinions", "german": "Meiner Meinung nach …", "english": "In my opinion …", "note": "Very standard and useful."}, {"category": "Opinions", "german": "Für mich ist wichtig, dass …", "english": "For me, it is important that …", "note": "One of the best useful frames."}, {"category": "Opinions", "german": "Ich sehe das etwas anders.", "english": "I see that a bit differently.", "note": "Polite disagreement."}, {"category": "Opinions", "german": "Das kommt darauf an.", "english": "It depends.", "note": "Extremely high-value phrase."}];
+const storageKey = 'german_trainer_progress_v1';
+let mastered = JSON.parse(localStorage.getItem(storageKey) || '{}');
+let dailyMode = false;
+let currentIndex = 0;
+
+const searchEl = document.getElementById('search');
+const categoryEl = document.getElementById('category');
+const listEl = document.getElementById('list');
+const currentCardEl = document.getElementById('currentCard');
+const statsTextEl = document.getElementById('statsText');
+const statsPctEl = document.getElementById('statsPct');
+const barFillEl = document.getElementById('barFill');
+
+function categories() {
+  return ['All', ...new Set(phrases.map(p => p.category))];
+}
+function filtered() {
+  const q = searchEl.value.trim().toLowerCase();
+  const cat = categoryEl.value || 'All';
+  return phrases.filter((p, idx) => {
+    const matchQ = !q || p.german.toLowerCase().includes(q) || p.english.toLowerCase().includes(q) || p.note.toLowerCase().includes(q);
+    const matchC = cat === 'All' || p.category === cat;
+    const matchD = !dailyMode || !mastered[idx];
+    return matchQ && matchC && matchD;
+  });
+}
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(text);
+  const voices = speechSynthesis.getVoices();
+  const v = voices.find(x => (x.lang || '').toLowerCase().startsWith('de'));
+  if (v) u.voice = v;
+  u.lang = (v && v.lang) || 'de-DE';
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+function save() {
+  localStorage.setItem(storageKey, JSON.stringify(mastered));
+}
+function updateStats() {
+  const done = Object.values(mastered).filter(Boolean).length;
+  const pct = Math.round((done / phrases.length) * 100);
+  statsTextEl.textContent = `Mastered ${done} of ${phrases.length}`;
+  statsPctEl.textContent = `${pct}%`;
+  barFillEl.style.width = `${pct}%`;
+}
+function renderCard(item) {
+  if (!item) {
+    currentCardEl.innerHTML = '<div class="german">No phrases found.</div>';
+    return;
+  }
+  const idx = phrases.indexOf(item);
+  currentCardEl.innerHTML = `
+    <div class="badge">${item.category}</div>
+    <div class="german">${item.german}</div>
+    <div class="english">${item.english}</div>
+    <div class="note">Use: ${item.note}</div>
+    <div class="actions">
+      <button onclick="speakCurrent()">Speak German</button>
+      <button class="secondary" onclick="toggleMastered(${idx})">${mastered[idx] ? 'Mark unmastered' : 'Mark mastered'}</button>
+    </div>
+  `;
+}
+function renderList() {
+  const items = filtered();
+  listEl.innerHTML = items.map(item => {
+    const idx = phrases.indexOf(item);
+    return `
+      <div class="item" onclick="selectItem(${idx})">
+        <div class="row">
+          <div class="badge">${item.category}</div>
+          <div>${mastered[idx] ? '✓' : ''}</div>
+        </div>
+        <div class="de">${item.german}</div>
+        <div class="en">${item.english}</div>
+      </div>
+    `;
+  }).join('');
+  if (!items.length) {
+    renderCard(null);
+  } else {
+    const visibleCurrent = items.includes(phrases[currentIndex]) ? phrases[currentIndex] : items[0];
+    currentIndex = phrases.indexOf(visibleCurrent);
+    renderCard(visibleCurrent);
+  }
+  updateStats();
+}
+window.selectItem = function(idx) {
+  currentIndex = idx;
+  renderCard(phrases[idx]);
+}
+window.toggleMastered = function(idx) {
+  mastered[idx] = !mastered[idx];
+  save();
+  renderList();
+}
+window.speakCurrent = function() {
+  const item = phrases[currentIndex];
+  if (item) speak(item.german);
+}
+document.getElementById('shuffle').addEventListener('click', () => {
+  const items = filtered();
+  if (!items.length) return;
+  const pick = items[Math.floor(Math.random() * items.length)];
+  currentIndex = phrases.indexOf(pick);
+  renderCard(pick);
+});
+document.getElementById('toggleDaily').addEventListener('click', (e) => {
+  dailyMode = !dailyMode;
+  e.target.textContent = `Daily mode: ${dailyMode ? 'On' : 'Off'}`;
+  renderList();
+});
+document.getElementById('resetProgress').addEventListener('click', () => {
+  mastered = {};
+  save();
+  renderList();
+});
+searchEl.addEventListener('input', renderList);
+categoryEl.addEventListener('change', renderList);
+categories().forEach(c => {
+  const opt = document.createElement('option');
+  opt.value = c;
+  opt.textContent = c;
+  categoryEl.appendChild(opt);
+});
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+speechSynthesis.getVoices();
+renderList();
+</script>
+</body>
+</html>
