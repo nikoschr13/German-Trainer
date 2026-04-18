@@ -234,11 +234,20 @@
   <div class="card navy">
     <div class="card-header"><div class="card-icon">🎯</div><span class="badge badge-active">🔵 Active</span></div>
     <div class="card-title">SNIPER Trading System</div>
-    <div class="card-desc">Python algo · NXMAN formula · US + EU signals · Strangles · ~80% accuracy</div>
+    <div class="card-desc">Daily 4PM CET: read sheet → update → run autopilot · ~80% accuracy</div>
     <div class="links">
       <a class="btn primary" href="https://docs.google.com/spreadsheets/d/18ABqDaw_qRy3hrDgxyrn0pe1UtGMcD5oeYQrZx_VLfo/edit" target="_blank">
-        <span class="bi">📈</span><span class="bl">Platinum Sheet</span><span class="ba">›</span>
+        <span class="bi">📈</span><span class="bl">1. Platinum Sheet</span><span class="ba">›</span>
       </a>
+      <button class="btn" onclick="copyCmd('python3 ~/Downloads/sniper_gui.py', this)">
+        <span class="bi">🖥️</span><span class="bl">2. Launch GUI</span><span class="ba copy-hint">copy</span>
+      </button>
+      <button class="btn" onclick="copyCmd('python3 ~/Downloads/sniper_autopilot.py', this)">
+        <span class="bi">⚡</span><span class="bl">3. Run Autopilot</span><span class="ba copy-hint">copy</span>
+      </button>
+      <button class="btn" onclick="copyCmd('python3 ~/Downloads/sniper_signal_log.py', this)">
+        <span class="bi">📋</span><span class="bl">4. Signal Log</span><span class="ba copy-hint">copy</span>
+      </button>
     </div>
   </div>
 
@@ -433,52 +442,76 @@
 
 <!-- ══════════════ SUGGESTED NEW DATABASES ══════════════ -->
 <div class="section-header">
-  <span class="section-header-title">💡 Suggested Additions</span>
+  <span class="section-header-title">🏡 Notion — Life & Personal</span>
   <div class="section-header-line"></div>
 </div>
 
 <div class="grid">
 
-  <div class="card gray">
-    <div class="card-header"><div class="card-icon">💰</div></div>
+  <div class="card amber">
+    <div class="card-header"><div class="card-icon">💰</div><span class="badge badge-live">✅ Live</span></div>
     <div class="card-title">Finance Tracker</div>
-    <div class="card-desc">Monthly expenses, income, investments portfolio — net worth over time. Currently missing.</div>
-    <div class="suggest">+ Add to Notion</div>
+    <div class="card-desc">Income, expenses, investments, savings · CHF/EUR/USD · UBS & Swissquote</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/e0ab8f7c64be4416b530e2052c977409" target="_blank">
+        <span class="bi">💰</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
   </div>
 
-  <div class="card gray">
-    <div class="card-header"><div class="card-icon">🎯</div></div>
+  <div class="card amber">
+    <div class="card-header"><div class="card-icon">🎯</div><span class="badge badge-live">✅ Live</span></div>
     <div class="card-title">Goals & OKRs</div>
-    <div class="card-desc">Annual and quarterly goals, broken into key results. Link tasks and projects to goals.</div>
-    <div class="suggest">+ Add to Notion</div>
+    <div class="card-desc">Annual/quarterly goals · Finance, Health, Family, Business, Personal, Learning</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/6c053f454bd64e8f815955aa1f8ec9f1" target="_blank">
+        <span class="bi">🎯</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
   </div>
 
-  <div class="card gray">
-    <div class="card-header"><div class="card-icon">🏠</div></div>
+  <div class="card amber">
+    <div class="card-header"><div class="card-icon">🏠</div><span class="badge badge-live">✅ Live</span></div>
     <div class="card-title">Properties & Assets</div>
-    <div class="card-desc">Real estate, valuables, documents, insurance policies — everything in one place.</div>
-    <div class="suggest">+ Add to Notion</div>
+    <div class="card-desc">Properties, vehicles, accounts, insurance, valuables · Value tracking</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/0ab6856e5305452c89f32817a1fab876" target="_blank">
+        <span class="bi">🏠</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
   </div>
 
-  <div class="card gray">
-    <div class="card-header"><div class="card-icon">💪</div></div>
+  <div class="card amber">
+    <div class="card-header"><div class="card-icon">💪</div><span class="badge badge-live">✅ Live</span></div>
     <div class="card-title">Health & Fitness</div>
-    <div class="card-desc">Workouts log, health metrics, doctor appointments, medications.</div>
-    <div class="suggest">+ Add to Notion</div>
+    <div class="card-desc">Workouts, doctor visits, medications, health metrics · Weight tracker</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/2a87c55e2c614a01bd0b99cffbd187e8" target="_blank">
+        <span class="bi">💪</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
   </div>
 
-  <div class="card gray">
-    <div class="card-header"><div class="card-icon">🤝</div></div>
-    <div class="card-title">Deal Pipeline (CRM)</div>
-    <div class="card-desc">Deals and opportunities tracker — status, value, next steps. Already referenced in Research Library.</div>
-    <div class="suggest">+ Expand existing</div>
-  </div>
-
-  <div class="card gray">
-    <div class="card-header"><div class="card-icon">👨‍👧‍👧</div></div>
+  <div class="card amber">
+    <div class="card-header"><div class="card-icon">👨‍👧‍👧</div><span class="badge badge-live">✅ Live</span></div>
     <div class="card-title">Family</div>
-    <div class="card-desc">Important dates, school calendars, three daughters' activities, family documents.</div>
-    <div class="suggest">+ Add to Notion</div>
+    <div class="card-desc">Birthdays, school events, activities, doctors · All family members</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/ce37eef95e8045fbac271899d6f726a8" target="_blank">
+        <span class="bi">👨‍👧‍👧</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card amber">
+    <div class="card-header"><div class="card-icon">📦</div><span class="badge badge-live">✅ Live</span></div>
+    <div class="card-title">Documents Vault</div>
+    <div class="card-desc">Passports, contracts, insurance, tax, medical · Expiry date tracking</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/4836cd375f80485398bec132d94d6eab" target="_blank">
+        <span class="bi">📦</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
   </div>
 
 </div>
@@ -560,6 +593,25 @@
   }
   updateDate();
   setInterval(updateDate, 30000);
+
+  function copyCmd(cmd, btn) {
+    navigator.clipboard.writeText(cmd).then(() => {
+      const hint = btn.querySelector('.copy-hint');
+      const orig = hint.textContent;
+      hint.textContent = '✓ copied';
+      hint.style.color = '#16A34A';
+      setTimeout(() => { hint.textContent = orig; hint.style.color = ''; }, 2000);
+    }).catch(() => {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = cmd; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+      const hint = btn.querySelector('.copy-hint');
+      hint.textContent = '✓ copied';
+      setTimeout(() => { hint.textContent = 'copy'; }, 2000);
+    });
+  }
 </script>
 
 </body>
