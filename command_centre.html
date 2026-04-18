@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nikos HQ">
+<title>Nikos — Command Centre</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #F0F4FA;
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #103B73 0%, #1E88E5 100%);
+    color: white;
+    padding: 22px 20px 18px;
+    text-align: center;
+  }
+  .hero-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+  .hero-sub { font-size: 12px; opacity: 0.75; margin-top: 3px; }
+  .hero-date { font-size: 11px; opacity: 0.55; margin-top: 5px; }
+
+  /* ── Section header ── */
+  .section-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 16px 14px 6px;
+    max-width: 740px; margin: 0 auto;
+  }
+  .section-header-title {
+    font-size: 11px; font-weight: 700; color: #64748B;
+    letter-spacing: 0.9px; text-transform: uppercase;
+  }
+  .section-header-line { flex: 1; height: 1px; background: #D1D9E6; }
+
+  /* ── Grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 14px;
+    max-width: 740px;
+    margin: 0 auto;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    padding: 0 14px;
+    max-width: 740px;
+    margin: 0 auto;
+  }
+  @media (max-width: 480px) {
+    .grid, .grid-3 { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 481px) and (max-width: 600px) {
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── Card ── */
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 14px 13px 13px;
+    box-shadow: 0 2px 10px rgba(16,59,115,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card.wide { grid-column: 1 / -1; }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 14px 14px 0 0;
+  }
+  .card.blue::before   { background: linear-gradient(90deg,#1E88E5,#42A5F5); }
+  .card.green::before  { background: linear-gradient(90deg,#16A34A,#4ADE80); }
+  .card.purple::before { background: linear-gradient(90deg,#7C3AED,#A78BFA); }
+  .card.orange::before { background: linear-gradient(90deg,#EA580C,#FB923C); }
+  .card.navy::before   { background: linear-gradient(90deg,#0F172A,#334155); }
+  .card.teal::before   { background: linear-gradient(90deg,#0D9488,#34D399); }
+  .card.pink::before   { background: linear-gradient(90deg,#BE185D,#F472B6); }
+  .card.amber::before  { background: linear-gradient(90deg,#B45309,#FCD34D); }
+  .card.gray::before   { background: linear-gradient(90deg,#475569,#94A3B8); }
+
+  .card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
+  .card-icon { font-size: 22px; line-height: 1; }
+  .badge {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.3px;
+    padding: 2px 7px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-live   { background: #DCFCE7; color: #16A34A; }
+  .badge-active { background: #DBEAFE; color: #1D4ED8; }
+  .badge-notion { background: #F1F5F9; color: #475569; }
+
+  .card-title { font-size: 13px; font-weight: 700; color: #0F2D52; line-height: 1.3; }
+  .card-desc  { font-size: 11px; color: #64748B; line-height: 1.5; }
+
+  /* ── Link buttons ── */
+  .links { display: flex; flex-direction: column; gap: 6px; }
+  .links.row { flex-direction: row; flex-wrap: wrap; }
+
+  .btn {
+    display: flex; align-items: center; gap: 7px;
+    padding: 8px 11px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-size: 11px; font-weight: 600;
+    color: #0F2D52;
+    background: #F0F6FF;
+    border: 1px solid #D6E4F7;
+    transition: background 0.12s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+  }
+  .btn:active { background: #DBEAFE; transform: scale(0.97); }
+  .btn .bi { font-size: 13px; flex-shrink: 0; }
+  .btn .bl { flex: 1; }
+  .btn .ba { color: #94A3B8; font-size: 10px; }
+
+  .btn.primary {
+    background: linear-gradient(135deg,#103B73,#1E88E5);
+    color: white; border-color: transparent;
+  }
+  .btn.primary .ba { color: rgba(255,255,255,0.55); }
+  .btn.primary:active { opacity: 0.9; }
+
+  .btn.notion-btn {
+    background: #F8F9FA; border-color: #E2E8F0;
+    flex: 1; min-width: 130px;
+  }
+
+  /* ── Suggestion pill ── */
+  .suggest {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #FFF7ED; border: 1px solid #FED7AA;
+    color: #C2410C; border-radius: 8px;
+    font-size: 10px; font-weight: 600;
+    padding: 3px 8px; margin-top: 2px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    font-size: 10px; color: #94A3B8;
+    padding: 20px 14px 0;
+    max-width: 740px; margin: 0 auto;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-title">🏠 Nikos — Command Centre</div>
+  <div class="hero-sub">Projects · Notion · Quick Access · All in one tap</div>
+  <div class="hero-date" id="hero-date"></div>
+</div>
+
+<!-- ══════════════ PROJECTS ══════════════ -->
+<div class="section-header">
+  <span class="section-header-title">🚀 Active Projects</span>
+  <div class="section-header-line"></div>
+</div>
+
+<div class="grid">
+
+  <div class="card blue wide">
+    <div class="card-header"><div class="card-icon">📊</div><span class="badge badge-live">✅ Live</span></div>
+    <div class="card-title">Daily Market Brief</div>
+    <div class="card-desc">Streamlit · Live market data · PDF newsletter · Research Library · Morning Call parser</div>
+    <div class="links row">
+      <a class="btn primary" style="flex:1" href="https://nxman-brief.streamlit.app" target="_blank">
+        <span class="bi">🚀</span><span class="bl">Open Dashboard</span><span class="ba">›</span>
+      </a>
+      <a class="btn notion-btn" href="https://github.com/nikoschr13/nxman-brief" target="_blank">
+        <span class="bi">🐙</span><span class="bl">GitHub</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card green">
+    <div class="card-header"><div class="card-icon">💬</div><span class="badge badge-live">✅ Live</span></div>
+    <div class="card-title">Telegram Assistant</div>
+    <div class="card-desc">Ideas → Notion · Calendar → Fantastical · Email summaries · Make.com</div>
+    <div class="links">
+      <a class="btn primary" href="https://t.me" target="_blank">
+        <span class="bi">✈️</span><span class="bl">Open Telegram</span><span class="ba">›</span>
+      </a>
+      <a class="btn" href="https://www.make.com/en/scenarios" target="_blank">
+        <span class="bi">⚙️</span><span class="bl">Make.com Scenario</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card green">
+    <div class="card-header"><div class="card-icon">📋</div><span class="badge badge-live">✅ Live</span></div>
+    <div class="card-title">Meeting Agenda Generator</div>
+    <div class="card-desc">Notion checkbox → auto-generates agenda · Sends Telegram notification</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/404597eecbb743b084d79f7281e7fad9" target="_blank">
+        <span class="bi">📅</span><span class="bl">Meetings DB</span><span class="ba">›</span>
+      </a>
+      <a class="btn" href="https://www.make.com/en/scenarios" target="_blank">
+        <span class="bi">⚙️</span><span class="bl">Make.com Scenario</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="card-header"><div class="card-icon">🇩🇪</div><span class="badge badge-live">✅ Live</span></div>
+    <div class="card-title">German Trainer</div>
+    <div class="card-desc">V2.5 · 140+ phrases · Drive mode · Spaced repetition · Safari on iOS only</div>
+    <div class="links">
+      <a class="btn primary" href="https://nikoschr13.github.io/German-Trainer/" target="_blank">
+        <span class="bi">📖</span><span class="bl">Open Trainer</span><span class="ba">›</span>
+      </a>
+      <a class="btn" href="https://github.com/nikoschr13/German-Trainer" target="_blank">
+        <span class="bi">🐙</span><span class="bl">GitHub</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card navy">
+    <div class="card-header"><div class="card-icon">🎯</div><span class="badge badge-active">🔵 Active</span></div>
+    <div class="card-title">SNIPER Trading System</div>
+    <div class="card-desc">Python algo · NXMAN formula · US + EU signals · Strangles · ~80% accuracy</div>
+    <div class="links">
+      <a class="btn primary" href="https://docs.google.com/spreadsheets/d/18ABqDaw_qRy3hrDgxyrn0pe1UtGMcD5oeYQrZx_VLfo/edit" target="_blank">
+        <span class="bi">📈</span><span class="bl">Platinum Sheet</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ NOTION — PRODUCTIVITY ══════════════ -->
+<div class="section-header">
+  <span class="section-header-title">⚡ Notion — Daily Use</span>
+  <div class="section-header-line"></div>
+</div>
+
+<div class="grid">
+
+  <div class="card teal">
+    <div class="card-header"><div class="card-icon">🧠</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Dashboard</div>
+    <div class="card-desc">Your Notion home — Today's meetings, Active projects, Recent research</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/3238d49ff41380e68b4dca8e805a75b0" target="_blank">
+        <span class="bi">🏠</span><span class="bl">Open Dashboard</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card teal">
+    <div class="card-header"><div class="card-icon">✅</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Tasks</div>
+    <div class="card-desc">All your tasks and to-dos — linked to projects and meetings</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/26c08400d7df4ba898f1eee1c90dcd36" target="_blank">
+        <span class="bi">✅</span><span class="bl">Open Tasks</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">📅</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Meetings</div>
+    <div class="card-desc">All meetings · Auto-agenda generator · Action items · Follow-ups</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/404597eecbb743b084d79f7281e7fad9" target="_blank">
+        <span class="bi">📅</span><span class="bl">Open Meetings</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">👤</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Contacts</div>
+    <div class="card-desc">Your contact database — linked to meetings and client items</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/19a58768f36c4890830ca80190297592" target="_blank">
+        <span class="bi">👤</span><span class="bl">Open Contacts</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">💡</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Ideas</div>
+    <div class="card-desc">Quick-captured ideas from Telegram bot and manual entry</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/31e8d49ff41380d199dfc4e7eeaecb46" target="_blank">
+        <span class="bi">💡</span><span class="bl">Open Ideas</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">📥</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Inbox / Capture</div>
+    <div class="card-desc">Quick capture page — dump anything here, sort later</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/9a6bd9082b744fc48d265a018567b8c7" target="_blank">
+        <span class="bi">📥</span><span class="bl">Open Inbox</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ NOTION — KNOWLEDGE ══════════════ -->
+<div class="section-header">
+  <span class="section-header-title">📚 Notion — Knowledge</span>
+  <div class="section-header-line"></div>
+</div>
+
+<div class="grid">
+
+  <div class="card purple">
+    <div class="card-header"><div class="card-icon">📚</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Research Library</div>
+    <div class="card-desc">Market, Company, Asset, Industry, Macro research · Linked to deals</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/1083e443bdf043debc2ef6bc78d1782a" target="_blank">
+        <span class="bi">📚</span><span class="bl">Open Library</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="card-header"><div class="card-icon">📈</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Investment Research</div>
+    <div class="card-desc">Investment-focused research and analysis notes</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/2e04012a3f1a4516948351702abd935c" target="_blank">
+        <span class="bi">📈</span><span class="bl">Open Research</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="card-header"><div class="card-icon">🤖</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">AI Tools</div>
+    <div class="card-desc">Curated AI tools, prompts, and use cases</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/46b16fe0ac994542b986ef68c4655c30" target="_blank">
+        <span class="bi">🤖</span><span class="bl">Open AI Tools</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="card-header"><div class="card-icon">📖</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Books</div>
+    <div class="card-desc">Reading list, notes and summaries</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/85980e1143cc4405b8e4ed76d91213f8" target="_blank">
+        <span class="bi">📖</span><span class="bl">Open Books</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="card-header"><div class="card-icon">💼</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Business Ideas</div>
+    <div class="card-desc">Business ideas and opportunities under evaluation</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/3fc0a1b8d1684a5c9559f0d596c14b56" target="_blank">
+        <span class="bi">💼</span><span class="bl">Open Ideas</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="card-header"><div class="card-icon">✈️</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Travel Ideas</div>
+    <div class="card-desc">Destinations, trips and travel inspiration</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/51c47d396f2347afab163e3d204292c4" target="_blank">
+        <span class="bi">✈️</span><span class="bl">Open Travel</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ NOTION — LIFE ══════════════ -->
+<div class="section-header">
+  <span class="section-header-title">🏡 Notion — Life</span>
+  <div class="section-header-line"></div>
+</div>
+
+<div class="grid">
+
+  <div class="card orange">
+    <div class="card-header"><div class="card-icon">🍽️</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Food & Meal Plan</div>
+    <div class="card-desc">Foods catalog + weekly meal planner</div>
+    <div class="links row">
+      <a class="btn notion-btn" href="https://www.notion.so/778da70fddf44cdc92fc499b69f17cf2" target="_blank">
+        <span class="bi">🥗</span><span class="bl">Foods</span><span class="ba">›</span>
+      </a>
+      <a class="btn notion-btn" href="https://www.notion.so/fe8087dc1400413fa4d2b9a34d3b68a3" target="_blank">
+        <span class="bi">📆</span><span class="bl">Meal Plan</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="card orange">
+    <div class="card-header"><div class="card-icon">🗂️</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Client Items</div>
+    <div class="card-desc">Agenda items per client · Add to next meeting toggle</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/f6e144a8-4ab5-477a-836c-3a5697f7816c" target="_blank">
+        <span class="bi">🗂️</span><span class="bl">Open Client Items</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════ SUGGESTED NEW DATABASES ══════════════ -->
+<div class="section-header">
+  <span class="section-header-title">💡 Suggested Additions</span>
+  <div class="section-header-line"></div>
+</div>
+
+<div class="grid">
+
+  <div class="card gray">
+    <div class="card-header"><div class="card-icon">💰</div></div>
+    <div class="card-title">Finance Tracker</div>
+    <div class="card-desc">Monthly expenses, income, investments portfolio — net worth over time. Currently missing.</div>
+    <div class="suggest">+ Add to Notion</div>
+  </div>
+
+  <div class="card gray">
+    <div class="card-header"><div class="card-icon">🎯</div></div>
+    <div class="card-title">Goals & OKRs</div>
+    <div class="card-desc">Annual and quarterly goals, broken into key results. Link tasks and projects to goals.</div>
+    <div class="suggest">+ Add to Notion</div>
+  </div>
+
+  <div class="card gray">
+    <div class="card-header"><div class="card-icon">🏠</div></div>
+    <div class="card-title">Properties & Assets</div>
+    <div class="card-desc">Real estate, valuables, documents, insurance policies — everything in one place.</div>
+    <div class="suggest">+ Add to Notion</div>
+  </div>
+
+  <div class="card gray">
+    <div class="card-header"><div class="card-icon">💪</div></div>
+    <div class="card-title">Health & Fitness</div>
+    <div class="card-desc">Workouts log, health metrics, doctor appointments, medications.</div>
+    <div class="suggest">+ Add to Notion</div>
+  </div>
+
+  <div class="card gray">
+    <div class="card-header"><div class="card-icon">🤝</div></div>
+    <div class="card-title">Deal Pipeline (CRM)</div>
+    <div class="card-desc">Deals and opportunities tracker — status, value, next steps. Already referenced in Research Library.</div>
+    <div class="suggest">+ Expand existing</div>
+  </div>
+
+  <div class="card gray">
+    <div class="card-header"><div class="card-icon">👨‍👧‍👧</div></div>
+    <div class="card-title">Family</div>
+    <div class="card-desc">Important dates, school calendars, three daughters' activities, family documents.</div>
+    <div class="suggest">+ Add to Notion</div>
+  </div>
+
+</div>
+
+<!-- ══════════════ AI ASSISTANTS ══════════════ -->
+<div class="section-header">
+  <span class="section-header-title">🤖 AI Assistants in Notion</span>
+  <div class="section-header-line"></div>
+</div>
+
+<div class="grid">
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">📝</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">AI Meeting Notes</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/1b1330802be74a589dcf43d27f625e24" target="_blank">
+        <span class="bi">📝</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">🔍</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">AI Research Assistant</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/6b24ba304bd24d129f410262d0d3959e" target="_blank">
+        <span class="bi">🔍</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">💼</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">AI Deal Briefs</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/6486644a918148e0a3102453ac2187f2" target="_blank">
+        <span class="bi">💼</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">✍️</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">AI Writing Assistant</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/296b8050b1274a8380a6218c89269389" target="_blank">
+        <span class="bi">✍️</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">📋</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">SOPs & Prompts</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/fa8fdbb6ae474b9ca9a0bb7a5d8b68c1" target="_blank">
+        <span class="bi">📋</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+  <div class="card blue">
+    <div class="card-header"><div class="card-icon">⚙️</div><span class="badge badge-notion">Notion</span></div>
+    <div class="card-title">Automation Log</div>
+    <div class="links">
+      <a class="btn primary" href="https://www.notion.so/d283749978b3476ab240dde750d49104" target="_blank">
+        <span class="bi">⚙️</span><span class="bl">Open</span><span class="ba">›</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Nikos Command Centre · nchristou@me.com<br>
+  <strong>To add to iPhone home screen:</strong> open in Safari → Share → Add to Home Screen<br>
+  Hosted at nikoschr13.github.io/German-Trainer/command_centre.html
+</div>
+
+<script>
+  function updateDate() {
+    const now = new Date();
+    const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit', timeZone:'Europe/Zurich' };
+    document.getElementById('hero-date').textContent = now.toLocaleDateString('en-GB', opts) + ' · Zurich';
+  }
+  updateDate();
+  setInterval(updateDate, 30000);
+</script>
+
+</body>
+</html>
