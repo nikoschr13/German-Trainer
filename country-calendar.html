@@ -1,198 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌍 My Calendar</title>
-  <style>
-    :root {
-      --CH:#e53e3e; --CY:#d4a017; --SUI:#cc0000; --GER:#444444;
-      --AEK:#c9a000; --ANO:#003087; --RU:#b22222;
-      --TRAVEL:#0891b2; --BDAY:#db2777; --PERSONAL:#0d9488;
-      --WORK:#d97706; --FAMILY:#16a34a;
-      --bg:#0f1117; --card:#1c1f2e; --card2:#252940;
-      --border:#2a2d3e; --text:#e8eaf6; --muted:#7986cb;
-      --weekend:#5c6bc0; --today-ring:#3949ab;
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:16px;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 My Calendar</title>
+<style>
+:root{--bg:#0f1117;--card:#1c1f2e;--card2:#252940;--border:#2a2d3e;--text:#e8eaf6;--muted:#9aa8cc;--weekend:#5c6bc0;--today:#4f8cff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:14px;}
 
-    .header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;}
-    .header-left{display:flex;align-items:center;gap:12px;}
-    .title{font-size:1.2rem;font-weight:700;}
-    .sync-wrap{display:flex;align-items:center;gap:6px;}
-    .sync-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);cursor:pointer;padding:4px 9px;border-radius:6px;font-size:.7rem;display:flex;align-items:center;gap:4px;white-space:nowrap;transition:all .15s;}
-    .sync-btn:hover{background:var(--card2);color:var(--text);}
-    .sync-ts{font-size:.6rem;color:var(--muted);white-space:nowrap;}
-    .header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-    .year-nav{display:flex;align-items:center;gap:6px;}
-    .nav-btn{background:var(--card);border:1px solid var(--border);color:var(--text);cursor:pointer;width:28px;height:28px;border-radius:6px;font-size:1rem;display:flex;align-items:center;justify-content:center;}
-    .nav-btn:hover{background:var(--card2);}
-    .year-label{font-size:1.15rem;font-weight:700;min-width:50px;text-align:center;}
-    .view-btns{display:flex;background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
-    .view-btn{background:none;border:none;color:var(--muted);cursor:pointer;padding:5px 14px;font-size:0.8rem;font-weight:600;}
-    .view-btn.active{background:var(--card2);color:var(--text);}
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px;flex-wrap:wrap;gap:8px;}
+.hdr-l{display:flex;align-items:center;gap:10px;}
+.title{font-size:1.05rem;font-weight:700;}
+.sync-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);cursor:pointer;padding:4px 9px;border-radius:6px;font-size:.68rem;white-space:nowrap;}
+.sync-btn:hover{background:var(--card2);color:var(--text);}
+.sync-ts{font-size:.58rem;color:var(--muted);}
+.hdr-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.nav-row{display:flex;align-items:center;gap:5px;}
+.nb{background:var(--card);border:1px solid var(--border);color:var(--text);cursor:pointer;width:26px;height:26px;border-radius:6px;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+.nb:hover{background:var(--card2);}
+.nlbl{font-size:.95rem;font-weight:700;min-width:170px;text-align:center;}
+.vbtns{display:flex;background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.vb{background:none;border:none;border-right:1px solid var(--border);color:var(--muted);cursor:pointer;padding:5px 11px;font-size:.72rem;font-weight:600;}
+.vb:last-child{border-right:none;}
+.vb.active{background:var(--card2);color:var(--text);}
 
-    /* Legend */
-    .legend-wrap{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;}
-    .leg{display:flex;align-items:center;gap:5px;font-size:0.7rem;cursor:pointer;user-select:none;white-space:nowrap;padding:2px 0;}
-    .leg.off .leg-label{opacity:0.3;text-decoration:line-through;}
-    .leg-swatch{position:relative;width:13px;height:13px;border-radius:3px;flex-shrink:0;border:1px solid rgba(255,255,255,.12);}
-    .leg-swatch input[type=color]{opacity:0;position:absolute;inset:0;width:100%;height:100%;cursor:pointer;border:none;padding:0;}
-    .leg-label{color:var(--text);}
-    .leg-sep{width:1px;height:18px;background:var(--border);margin:0 4px;}
+/* FILTER BAR */
+.fbar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;}
+.ftag{font-size:.65rem;padding:3px 9px;border-radius:20px;background:var(--card);border:1px solid var(--border);color:var(--muted);cursor:pointer;user-select:none;}
+.ftag.on{background:rgba(255,255,255,.11);color:var(--text);border-color:rgba(255,255,255,.2);}
+.ftag:hover{background:var(--card2);}
 
-    /* Year view */
-    .yearly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;}
-    .mini-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;}
-    .mini-title{font-size:0.75rem;font-weight:700;text-align:center;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px;}
-    .mini-header{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:2px;}
-    .mini-header span{text-align:center;font-size:0.58rem;color:var(--muted);font-weight:600;}
-    .mini-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;}
-    .mc{text-align:center;font-size:0.65rem;padding:2px 0 0;border-radius:2px;cursor:pointer;position:relative;line-height:1.1;min-height:22px;transition:filter .1s;}
-    .mc:hover{filter:brightness(1.25);}
-    .mc.weekend{color:var(--weekend);}
-    .mc.ch-h{background:var(--CH);color:#fff;}
-    .mc.cy-h{background:var(--CY);color:#111;}
-    .mc.both-h{background:linear-gradient(135deg,var(--CH) 50%,var(--CY) 50%);color:#fff;}
-    .mc.is-today{outline:2px solid var(--today-ring);outline-offset:-1px;font-weight:700;border-radius:50%;}
-    .mc[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#111827;color:#f3f4f6;font-size:0.6rem;white-space:pre-wrap;padding:4px 8px;border-radius:5px;z-index:200;border:1px solid var(--border);pointer-events:none;max-width:200px;text-align:left;line-height:1.4;}
-    .mc-dots{display:flex;gap:1px;justify-content:center;flex-wrap:wrap;padding-bottom:1px;}
-    .mdot{width:4px;height:4px;border-radius:50%;flex-shrink:0;}
-    .mc-cbar{position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 2px 2px;}
+/* YEAR VIEW */
+.ygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px;}
+.mc-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;}
+.mc-title{font-size:.7rem;font-weight:700;text-align:center;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px;cursor:pointer;color:var(--text);}
+.mc-title:hover{color:var(--muted);}
+.mc-hdr{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:2px;}
+.mc-hdr span{text-align:center;font-size:.52rem;color:var(--muted);font-weight:600;}
+.mc-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;}
+.mc{text-align:center;font-size:.62rem;padding:3px 1px;border-radius:3px;cursor:pointer;min-height:19px;position:relative;}
+.mc:hover{background:rgba(255,255,255,.1);}
+.mc.wknd{color:var(--weekend);}
+.mc.today{outline:2px solid var(--today);outline-offset:-2px;font-weight:700;border-radius:50%;}
 
-    /* Month view */
-    .monthly-wrap{display:grid;grid-template-columns:1fr 240px;gap:12px;}
-    @media(max-width:800px){.monthly-wrap{grid-template-columns:1fr;}}
-    .month-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;}
-    .month-label{font-size:1.1rem;font-weight:700;min-width:180px;text-align:center;}
-    .big-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
-    .big-hdr{display:grid;grid-template-columns:repeat(7,1fr);background:var(--card2);}
-    .big-hdr span{text-align:center;padding:6px 2px;font-size:0.7rem;font-weight:600;color:var(--muted);}
-    .big-grid{display:grid;grid-template-columns:repeat(7,1fr);}
-    .bd{min-height:80px;padding:4px 5px;border-top:1px solid var(--border);border-right:1px solid var(--border);position:relative;overflow:hidden;}
-    .bd.empty{background:rgba(0,0,0,.2);}
-    .bd.ch-h{background:var(--CH);}
-    .bd.cy-h{background:var(--CY);}
-    .bd.both-h{background:linear-gradient(135deg,var(--CH) 50%,var(--CY) 50%);}
-    .bd.ch-h .dn,.bd.both-h .dn{color:rgba(255,255,255,.9);}
-    .bd.cy-h .dn{color:rgba(0,0,0,.75);}
-    .bd.weekend:not(.ch-h):not(.cy-h):not(.both-h) .dn{color:var(--weekend);}
-    .dn{font-size:.78rem;font-weight:600;margin-bottom:2px;display:inline-block;cursor:pointer;border-radius:3px;padding:0 2px;transition:background .12s;}
-    .dn:hover{background:rgba(255,255,255,.18);}
-    .dn-hint{font-size:.45rem;vertical-align:super;margin-left:1px;opacity:.7;}
-    .bd.is-today .dn{background:white;color:var(--bg)!important;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;}
-    .hname{font-size:.58rem;line-height:1.25;display:block;margin-top:1px;opacity:.9;overflow:hidden;max-width:100%;white-space:nowrap;text-overflow:ellipsis;}
-    .bd.ch-h .hname,.bd.both-h .hname{color:rgba(255,255,255,.9);}
-    .bd.cy-h .hname{color:rgba(0,0,0,.7);}
-    .etags{display:flex;flex-direction:column;gap:1px;margin-top:2px;}
-    .etag{font-size:.55rem;font-weight:700;padding:1px 3px;border-radius:2px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1.4;cursor:default;display:block;}
-    .etag.SUI{background:var(--SUI);}
-    .etag.GER{background:var(--GER);}
-    .etag.AEK{background:var(--AEK);color:#000;}
-    .etag.ANO{background:var(--ANO);}
-    .etag.RU{background:var(--RU);}
-    .etag.TRAVEL{background:var(--TRAVEL);}
-    .etag.BDAY{background:var(--BDAY);}
-    .etag.PERSONAL{background:var(--PERSONAL);}
-    .etag.WORK{background:var(--WORK);}
-    .etag.FAMILY{background:var(--FAMILY);}
-    .bd-cstripe{position:absolute;top:0;right:0;bottom:0;width:5px;border-radius:0 0 0 0;}
+/* MONTH VIEW */
+.mv-wrap{display:grid;grid-template-columns:1fr 210px;gap:12px;}
+@media(max-width:680px){.mv-wrap{grid-template-columns:1fr;}}
+.big-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.big-hdr{display:grid;grid-template-columns:repeat(7,1fr);background:var(--card2);}
+.big-hdr span{text-align:center;padding:5px 2px;font-size:.65rem;font-weight:600;color:var(--muted);}
+.big-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+.bd{min-height:90px;padding:3px 4px;border-top:1px solid var(--border);border-right:1px solid var(--border);overflow:hidden;cursor:pointer;}
+.bd:hover{background:rgba(255,255,255,.025);}
+.bd.empty{background:rgba(0,0,0,.15);cursor:default;}
+.dn{font-size:.72rem;font-weight:600;display:inline-flex;align-items:center;gap:2px;cursor:pointer;border-radius:3px;padding:0 2px;margin-bottom:1px;position:relative;z-index:1;}
+.dn:hover{background:rgba(255,255,255,.18);}
+.dn-hint{font-size:.42rem;opacity:.7;}
+.bd.today .dn{background:var(--today);color:#fff;width:19px;height:19px;border-radius:50%;justify-content:center;font-size:.66rem;}
+.bd.wknd .dn{color:var(--weekend);}
+.bd.today.wknd .dn{color:#fff;}
+.etags{display:flex;flex-direction:column;gap:1px;margin-top:1px;}
+.etag{font-size:.56rem;font-weight:500;padding:1px 3px;border-radius:2px;color:rgba(232,234,246,.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;line-height:1.4;display:block;background:rgba(255,255,255,.09);}
+.etag.rec{background:rgba(255,255,255,.04);color:rgba(232,234,246,.45);font-style:italic;}
+/* SIDEBAR */
+.sidebar{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px;height:fit-content;max-height:82vh;overflow-y:auto;}
+.sb-ttl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:7px;}
+.hr{display:flex;align-items:flex-start;gap:6px;padding:3px 0;border-bottom:1px solid var(--border);font-size:.68rem;}
+.hr:last-child{border-bottom:none;}
+.hd{color:var(--muted);min-width:34px;font-size:.63rem;}
 
-    /* Sidebar */
-    .sidebar{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;height:fit-content;max-height:85vh;overflow-y:auto;}
-    .sb-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;}
-    .h-row{display:flex;align-items:flex-start;gap:6px;padding:4px 0;border-bottom:1px solid var(--border);font-size:.72rem;}
-    .h-row:last-child{border-bottom:none;}
-    .h-dot{width:6px;height:6px;border-radius:50%;margin-top:3px;flex-shrink:0;}
-    .h-date{color:var(--muted);min-width:38px;font-size:.68rem;}
-    .no-h{font-size:.72rem;color:var(--muted);padding:5px 0;}
+/* WEEK VIEW */
+.wk-wrap{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.wk-hdr{display:grid;grid-template-columns:46px repeat(7,1fr);border-bottom:2px solid var(--border);}
+.wk-corner{border-right:1px solid var(--border);}
+.wk-hc{padding:6px 3px;text-align:center;border-right:1px solid var(--border);cursor:pointer;}
+.wk-hc:last-child{border-right:none;}
+.wk-hc:hover{background:rgba(255,255,255,.04);}
+.wk-dow{font-size:.6rem;color:var(--muted);font-weight:700;text-transform:uppercase;}
+.wk-date{font-size:.85rem;font-weight:700;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:2px auto;}
+.wk-date.today{background:var(--today);color:#fff;}
+.wk-ad{display:grid;grid-template-columns:46px repeat(7,1fr);border-bottom:1px solid var(--border);}
+.wk-ad-lbl{font-size:.52rem;color:var(--muted);display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border);padding:3px;}
+.wk-ad-col{border-right:1px solid var(--border);padding:2px;min-height:6px;}
+.wk-ad-col:last-child{border-right:none;}
+.wk-ae{font-size:.55rem;padding:1px 3px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;}
+.wk-body{display:grid;grid-template-columns:46px repeat(7,1fr);overflow-y:auto;max-height:540px;}
+.wk-tc{border-right:1px solid var(--border);}
+.wk-ts{height:50px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;padding:2px 3px;font-size:.55rem;color:var(--muted);}
+.wk-dc{border-right:1px solid var(--border);position:relative;}
+.wk-dc:last-child{border-right:none;}
+.wk-hl{position:absolute;left:0;right:0;border-top:1px solid rgba(255,255,255,.05);pointer-events:none;}
+.wk-ev{position:absolute;left:2px;right:2px;border-radius:3px;padding:2px 3px;background:rgba(255,255,255,.1);font-size:.55rem;overflow:hidden;border-left:2px solid rgba(255,255,255,.28);line-height:1.3;cursor:default;white-space:nowrap;text-overflow:ellipsis;}
+.wk-ev:hover{background:rgba(255,255,255,.16);}
 
-    /* Day Color Popup */
-    .dcp-overlay{position:fixed;inset:0;z-index:498;background:rgba(0,0,0,.35);display:none;}
-    .dcp-popup{position:fixed;z-index:499;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;min-width:210px;box-shadow:0 10px 40px rgba(0,0,0,.6);display:none;}
-    .dcp-title{font-size:.78rem;font-weight:700;margin-bottom:12px;color:var(--text);}
-    .dcp-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-    .dcp-row label{font-size:.7rem;color:var(--muted);}
-    #dcp-picker{width:44px;height:30px;border:1px solid var(--border);border-radius:5px;cursor:pointer;background:none;padding:2px;}
-    .dcp-preview{width:22px;height:22px;border-radius:4px;border:1px solid var(--border);display:inline-block;flex-shrink:0;}
-    .dcp-btns{display:flex;gap:6px;}
-    .dcp-btns button{background:var(--card2);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:5px 11px;border-radius:6px;font-size:.7rem;transition:background .12s;}
-    .dcp-btns button:hover{background:var(--border);}
-    .dcp-apply{background:#1e3a5f!important;border-color:#2563eb!important;color:#93c5fd!important;}
-    .dcp-apply:hover{background:#1e40af!important;}
-    .dcp-clear{color:#f87171!important;}
+/* DAY VIEW */
+.dv-wrap{max-width:560px;}
+.dv-hdr{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:13px 16px;margin-bottom:9px;display:flex;align-items:center;justify-content:space-between;}
+.dv-title{font-size:1.05rem;font-weight:700;}
+.dv-sub{font-size:.7rem;color:var(--muted);margin-top:2px;}
+.dv-cbtn{background:var(--card2);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:5px 10px;border-radius:6px;font-size:.68rem;}
+.dv-evts{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.dv-sec{padding:6px 13px 3px;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--border);}
+.dv-row{display:flex;align-items:flex-start;gap:10px;padding:8px 13px;border-bottom:1px solid var(--border);font-size:.76rem;}
+.dv-row:last-child{border-bottom:none;}
+.dv-time{min-width:46px;color:var(--muted);font-size:.68rem;font-weight:600;flex-shrink:0;padding-top:1px;}
+.dv-row.rec{opacity:.6;}
+.no-ev{padding:14px 13px;color:var(--muted);font-size:.75rem;}
 
-    /* Sync toast */
-    .sync-toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e3a5f;border:1px solid #2563eb;color:#93c5fd;padding:8px 18px;border-radius:8px;font-size:.75rem;z-index:600;opacity:0;transition:opacity .3s;pointer-events:none;}
-    .sync-toast.show{opacity:1;}
-  </style>
+/* DCP POPUP */
+.dcp-ov{position:fixed;inset:0;z-index:498;background:rgba(0,0,0,.35);display:none;}
+.dcp-pop{position:fixed;z-index:499;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;min-width:210px;box-shadow:0 10px 40px rgba(0,0,0,.6);display:none;}
+.dcp-ttl{font-size:.76rem;font-weight:700;margin-bottom:11px;}
+.dcp-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.dcp-row label{font-size:.68rem;color:var(--muted);}
+#dcp-picker{width:44px;height:30px;border:1px solid var(--border);border-radius:5px;cursor:pointer;background:none;padding:2px;}
+.dcp-prev{width:22px;height:22px;border-radius:4px;border:1px solid var(--border);display:inline-block;flex-shrink:0;}
+.dcp-btns{display:flex;gap:6px;}
+.dcp-btns button{background:var(--card2);border:1px solid var(--border);color:var(--text);cursor:pointer;padding:5px 11px;border-radius:6px;font-size:.68rem;}
+.dcp-apply{background:#1e3a5f!important;border-color:#2563eb!important;color:#93c5fd!important;}
+.dcp-clear{color:#f87171!important;}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e3a5f;border:1px solid #2563eb;color:#93c5fd;padding:8px 18px;border-radius:8px;font-size:.72rem;z-index:600;opacity:0;transition:opacity .3s;pointer-events:none;}
+.toast.show{opacity:1;}
+</style>
 </head>
 <body>
 <div id="app"></div>
-
-<!-- Day Color Popup -->
-<div class="dcp-overlay" id="dcp-overlay" onclick="closeDcp()"></div>
-<div class="dcp-popup" id="dcp-popup">
-  <div class="dcp-title">🎨 Color for <span id="dcp-label" style="font-weight:400;opacity:.8;"></span></div>
+<div class="dcp-ov" id="dcp-ov" onclick="closeDcp()"></div>
+<div class="dcp-pop" id="dcp-pop">
+  <div class="dcp-ttl">🎨 Color — <span id="dcp-lbl" style="font-weight:400;opacity:.8;"></span></div>
   <div class="dcp-row">
-    <label>Color:</label>
-    <input type="color" id="dcp-picker" value="#3949ab" oninput="document.getElementById('dcp-preview').style.background=this.value">
-    <span class="dcp-preview" id="dcp-preview" style="background:#3949ab;"></span>
+    <label>Pick:</label>
+    <input type="color" id="dcp-picker" value="#3949ab" oninput="document.getElementById('dcp-prev-el').style.background=this.value">
+    <span class="dcp-prev" id="dcp-prev-el" style="background:#3949ab;"></span>
   </div>
   <div class="dcp-btns">
-    <button class="dcp-apply" onclick="applyDayColor()">✓ Apply</button>
-    <button class="dcp-clear" onclick="clearDayColor()">✕ Clear</button>
+    <button class="dcp-apply" onclick="applyDcp()">✓ Apply</button>
+    <button class="dcp-clear" onclick="clearDcp()">✕ Clear</button>
     <button onclick="closeDcp()">Cancel</button>
   </div>
 </div>
-
-<!-- Sync Toast -->
-<div class="sync-toast" id="sync-toast"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  CATEGORY DEFINITIONS
-// ═══════════════════════════════════════════════════════
-const CAT = {
-  CH:      {label:'🇨🇭 CH Holidays',    cssVar:'--CH',      bg:true,  color:'#e53e3e'},
-  CY:      {label:'🇨🇾 CY Holidays',    cssVar:'--CY',      bg:true,  color:'#d4a017'},
-  SUI:     {label:'🇨🇭 SUI Football',   cssVar:'--SUI',     bg:false, color:'#cc0000'},
-  GER:     {label:'🇩🇪 GER Football',   cssVar:'--GER',     bg:false, color:'#444444'},
-  AEK:     {label:'⚽ AEK Larnaca',     cssVar:'--AEK',     bg:false, color:'#c9a000'},
-  ANO:     {label:'⚽ Anorthosis',       cssVar:'--ANO',     bg:false, color:'#003087'},
-  RU:      {label:'🇷🇺 RU Holidays',    cssVar:'--RU',      bg:false, color:'#b22222'},
-  TRAVEL:  {label:'✈️ Travel',           cssVar:'--TRAVEL',  bg:false, color:'#0891b2'},
-  BDAY:    {label:'🎂 Birthdays',        cssVar:'--BDAY',    bg:false, color:'#db2777'},
-  PERSONAL:{label:'🎉 Personal',         cssVar:'--PERSONAL',bg:false, color:'#0d9488'},
-  WORK:    {label:'💼 Work',             cssVar:'--WORK',    bg:false, color:'#d97706'},
-  FAMILY:  {label:'👨‍👩‍👧 Family',         cssVar:'--FAMILY',  bg:false, color:'#16a34a'},
-};
+const LAST_SYNCED='2026-04-21';
 
-// Last sync timestamp — updated by Claude when data is refreshed
-const LAST_SYNCED = '2026-04-21';
-
-// ═══════════════════════════════════════════════════════
-//  EVENT DATA  [month_0based, day, title]
-// ═══════════════════════════════════════════════════════
-const H = {
+// ── ONE-OFF EVENTS ─────────────────────────────
+// Format: H.CAT = { year: [[month_0based, day, "name"], ...] }
+const H={
   CH:{
-    2025:[[0,1,"New Year's Day"],[0,2,"Berchtoldstag"],[3,18,"Good Friday"],[3,20,"Easter Sunday"],[3,21,"Easter Monday"],[4,29,"Ascension Day"],[5,9,"Whit Monday"],[7,1,"National Day"],[11,25,"Christmas Day"],[11,26,"St. Stephen's Day"]],
-    2026:[[0,1,"New Year's Day"],[0,2,"Berchtolds Day"],[3,3,"Good Friday"],[3,6,"Easter Monday"],[3,20,"Sechseläuten 🎉"],[4,1,"May Day"],[4,14,"Ascension Day"],[4,25,"Whit Monday"],[5,4,"Corpus Christi (ZG)"],[7,1,"National Day"],[7,15,"Assumption Day (ZG)"],[8,14,"Knabenschiessen (ZH)"],[8,20,"Swiss Federal Fast (ZH)"],[10,1,"All Saints' Day (ZG)"],[11,8,"Immaculate Conception (ZG)"],[11,25,"Christmas Day"],[11,26,"St. Stephen's Day"]],
-    2027:[[0,1,"New Year's Day"],[0,2,"Berchtolds Day"],[2,26,"Good Friday"],[2,29,"Easter Monday"],[3,19,"Sechseläuten 🎉"],[4,1,"May Day"],[4,6,"Ascension Day"],[4,17,"Whit Monday"],[4,27,"Corpus Christi (ZG)"],[7,1,"National Day"],[7,15,"Assumption Day (ZG)"],[8,13,"Knabenschiessen (ZH)"],[8,19,"Swiss Federal Fast (ZH)"],[10,1,"All Saints' Day (ZG)"],[11,25,"Christmas Day"],[11,26,"St. Stephen's Day"]],
+    2025:[[0,1,"🇨🇭 New Year's Day"],[0,2,"🇨🇭 Berchtoldstag"],[3,18,"🇨🇭 Good Friday"],[3,20,"🇨🇭 Easter Sunday"],[3,21,"🇨🇭 Easter Monday"],[4,29,"🇨🇭 Ascension Day"],[5,9,"🇨🇭 Whit Monday"],[7,1,"🇨🇭 National Day"],[11,25,"🇨🇭 Christmas Day"],[11,26,"🇨🇭 St. Stephen's Day"]],
+    2026:[[0,1,"🇨🇭 New Year's Day"],[0,2,"🇨🇭 Berchtolds Day"],[3,3,"🇨🇭 Good Friday"],[3,6,"🇨🇭 Easter Monday"],[3,20,"🇨🇭 Sechseläuten 🎉"],[4,1,"🇨🇭 May Day"],[4,14,"🇨🇭 Ascension Day"],[4,25,"🇨🇭 Whit Monday"],[5,4,"🇨🇭 Corpus Christi (ZG)"],[7,1,"🇨🇭 National Day"],[7,15,"🇨🇭 Assumption Day (ZG)"],[8,14,"🇨🇭 Knabenschiessen (ZH)"],[8,20,"🇨🇭 Swiss Federal Fast"],[10,1,"🇨🇭 All Saints' Day (ZG)"],[11,8,"🇨🇭 Immaculate Conception (ZG)"],[11,25,"🇨🇭 Christmas Day"],[11,26,"🇨🇭 St. Stephen's Day"]],
+    2027:[[0,1,"🇨🇭 New Year's Day"],[0,2,"🇨🇭 Berchtolds Day"],[2,26,"🇨🇭 Good Friday"],[2,29,"🇨🇭 Easter Monday"],[3,19,"🇨🇭 Sechseläuten 🎉"],[4,1,"🇨🇭 May Day"],[4,6,"🇨🇭 Ascension Day"],[4,17,"🇨🇭 Whit Monday"],[7,1,"🇨🇭 National Day"],[11,25,"🇨🇭 Christmas Day"],[11,26,"🇨🇭 St. Stephen's Day"]],
   },
   CY:{
-    2025:[[0,1,"New Year's Day"],[0,6,"Epiphany"],[2,3,"Green Monday"],[2,25,"Greek Independence Day"],[3,1,"EOKA Day"],[3,18,"Orthodox Good Friday"],[3,20,"Orthodox Easter"],[3,21,"Orthodox Easter Monday"],[4,1,"Labour Day"],[5,9,"Orthodox Pentecost Monday"],[7,15,"Dormition of the Theotokos"],[9,1,"Cypriot Independence Day"],[9,28,"Ochi Day"],[11,25,"Christmas Day"],[11,26,"Boxing Day"]],
-    2026:[[0,1,"New Year's Day"],[0,6,"Feast of the Theophany"],[1,23,"Green Monday"],[2,25,"Greek Independence Day"],[3,1,"National Day"],[3,10,"Orthodox Good Friday"],[3,13,"Orthodox Easter Monday"],[4,1,"Labour Day"],[5,1,"Orthodox Pentecost Monday"],[7,15,"Dormition of the Theotokos"],[9,1,"Cypriot Independence Day"],[9,28,"Ochi Day"],[11,25,"Christmas Day"],[11,26,"Boxing Day"]],
-    2027:[[0,1,"New Year's Day"],[0,6,"Feast of the Theophany"],[2,15,"Green Monday"],[2,25,"Greek Independence Day"],[3,1,"National Day"],[3,30,"Orthodox Good Friday"],[4,1,"Labour Day"],[4,3,"Orthodox Easter Monday"],[5,21,"Orthodox Pentecost Monday"],[7,15,"Dormition of the Theotokos"],[9,1,"Cypriot Independence Day"],[9,28,"Ochi Day"],[11,25,"Christmas Day"],[11,26,"Boxing Day"]],
+    2025:[[0,1,"🇨🇾 New Year's Day"],[0,6,"🇨🇾 Epiphany"],[2,3,"🇨🇾 Green Monday"],[2,25,"🇨🇾 Greek Independence Day"],[3,1,"🇨🇾 EOKA Day"],[3,18,"🇨🇾 Orthodox Good Friday"],[3,20,"🇨🇾 Orthodox Easter"],[3,21,"🇨🇾 Orthodox Easter Monday"],[4,1,"🇨🇾 Labour Day"],[5,9,"🇨🇾 Orthodox Pentecost Monday"],[7,15,"🇨🇾 Dormition of the Theotokos"],[9,1,"🇨🇾 Independence Day"],[9,28,"🇨🇾 Ochi Day"],[11,25,"🇨🇾 Christmas Day"],[11,26,"🇨🇾 Boxing Day"]],
+    2026:[[0,1,"🇨🇾 New Year's Day"],[0,6,"🇨🇾 Theophany"],[1,23,"🇨🇾 Green Monday"],[2,25,"🇨🇾 Greek Independence Day"],[3,1,"🇨🇾 National Day"],[3,10,"🇨🇾 Orthodox Good Friday"],[3,13,"🇨🇾 Orthodox Easter Monday"],[4,1,"🇨🇾 Labour Day"],[5,1,"🇨🇾 Orthodox Pentecost Monday"],[7,15,"🇨🇾 Dormition of the Theotokos"],[9,1,"🇨🇾 Independence Day"],[9,28,"🇨🇾 Ochi Day"],[11,25,"🇨🇾 Christmas Day"],[11,26,"🇨🇾 Boxing Day"]],
+    2027:[[0,1,"🇨🇾 New Year's Day"],[0,6,"🇨🇾 Theophany"],[2,15,"🇨🇾 Green Monday"],[2,25,"🇨🇾 Greek Independence Day"],[3,1,"🇨🇾 National Day"],[3,30,"🇨🇾 Orthodox Good Friday"],[4,1,"🇨🇾 Labour Day"],[4,3,"🇨🇾 Orthodox Easter Monday"],[5,21,"🇨🇾 Orthodox Pentecost Monday"],[7,15,"🇨🇾 Dormition of the Theotokos"],[9,1,"🇨🇾 Independence Day"],[9,28,"🇨🇾 Ochi Day"],[11,25,"🇨🇾 Christmas Day"],[11,26,"🇨🇾 Boxing Day"]],
+  },
+  RU:{
+    2026:[[0,1,"🇷🇺 New Year's Day"],[0,2,"🇷🇺 New Year Holiday"],[0,3,"🇷🇺 New Year Holiday"],[0,7,"🇷🇺 Orthodox Christmas"],[1,23,"🇷🇺 Defence Day"],[2,8,"🇷🇺 Women's Day"],[4,1,"🇷🇺 Spring & Labor Day"],[4,9,"🇷🇺 Victory Day"],[5,12,"🇷🇺 Russia Day"],[10,4,"🇷🇺 Day of Unity"]],
   },
   SUI:{
-    2025:[[8,5,"🇨🇭 SUI 4–0 Kosovo"],[8,8,"🇨🇭 SUI 3–0 Slovenia"],[9,10,"🇨🇭 Sweden 0–2 SUI"],[9,13,"🇨🇭 Slovenia 0–0 SUI"],[10,15,"🇨🇭 SUI 4–1 Sweden"],[10,18,"🇨🇭 Kosovo 1–1 SUI"]],
-    2026:[[2,27,"🇨🇭 SUI 3–4 Germany"],[5,13,"🌍 Qatar – SUI"],[5,18,"🌍 SUI – Bosnia"],[5,24,"🌍 SUI – Canada"]],
+    2025:[[8,5,"⚽ SUI 4–0 Kosovo"],[8,8,"⚽ SUI 3–0 Slovenia"],[9,10,"⚽ Sweden 0–2 SUI"],[9,13,"⚽ Slovenia 0–0 SUI"],[10,15,"⚽ SUI 4–1 Sweden"],[10,18,"⚽ Kosovo 1–1 SUI"]],
+    2026:[[2,27,"⚽ SUI 3–4 Germany"],[5,13,"⚽ Qatar – SUI"],[5,18,"⚽ SUI – Bosnia"],[5,24,"⚽ SUI – Canada"]],
   },
   GER:{
-    2025:[[8,4,"🇩🇪 Slovakia 2–0 GER"],[8,7,"🇩🇪 GER 3–1 N.Ireland"],[9,10,"🇩🇪 GER 4–0 LUX"],[9,13,"🇩🇪 N.Ireland 0–1 GER"],[10,14,"🇩🇪 LUX 0–2 GER"],[10,17,"🇩🇪 GER 6–0 Slovakia"]],
-    2026:[[2,27,"🇩🇪 SUI 3–4 GER"],[2,30,"🇩🇪 GER 2–1 Ghana"],[4,31,"🇩🇪 GER – Finland"],[5,6,"🌍 USA – GER"],[5,14,"🌍 GER – Curaçao"],[5,20,"🌍 GER – C.d'Ivoire"],[5,25,"🌍 Ecuador – GER"],[8,24,"🇩🇪 Netherlands – GER"],[8,27,"🇩🇪 GER – Greece"],[9,1,"🇩🇪 GER – Serbia"],[9,4,"🇩🇪 Greece – GER"],[10,13,"🇩🇪 Serbia – GER"],[10,16,"🇩🇪 GER – Netherlands"]],
+    2025:[[8,4,"⚽ Slovakia 2–0 GER"],[8,7,"⚽ GER 3–1 N.Ireland"],[9,10,"⚽ GER 4–0 LUX"],[9,13,"⚽ N.Ireland 0–1 GER"],[10,14,"⚽ LUX 0–2 GER"],[10,17,"⚽ GER 6–0 Slovakia"]],
+    2026:[[2,27,"⚽ SUI 3–4 GER"],[2,30,"⚽ GER 2–1 Ghana"],[5,6,"⚽ USA – GER"],[5,14,"⚽ GER – Curaçao"],[5,20,"⚽ GER – C.d'Ivoire"],[5,25,"⚽ Ecuador – GER"]],
   },
   AEK:{
     2025:[[6,10,"⚽ AEK 1–0 Partizan"],[6,17,"⚽ Partizan 2–1 AEK"],[6,24,"⚽ Celje 1–1 AEK"],[6,31,"⚽ AEK 2–1 Celje"],[7,7,"⚽ AEK 4–1 Legia"],[7,14,"⚽ Legia 2–1 AEK"],[7,21,"⚽ Brann 2–1 AEK"],[7,27,"⚽ AEK 0–4 Brann"],[7,31,"⚽ AEK 2–0 AEL"],[8,13,"⚽ AEK 1–1 Anorthosis"],[8,17,"⚽ Omonia 1–0 AEK"],[8,22,"⚽ AEK 3–2 Aris"],[8,27,"⚽ Ypsonas 0–4 AEK"],[9,2,"⚽ AEK 4–0 AZ"],[9,5,"⚽ AEK 2–4 Paphos"],[9,18,"⚽ Enosis 0–2 AEK"],[9,23,"⚽ C.Palace 0–1 AEK"],[9,27,"⚽ AEK 1–1 APOEL"],[9,30,"⚽ Paphos 1–1 AEK"],[10,2,"⚽ Apollon 1–2 AEK"],[10,6,"⚽ AEK 0–0 Aberdeen"],[10,9,"⚽ AEK 1–0 Omonia A."],[10,22,"⚽ Olympiakos 1–4 AEK"],[10,27,"⚽ Rijeka 0–0 AEK"],[11,1,"⚽ Akritas 1–1 AEK"],[11,6,"⚽ AEK 2–1 Ethnikos"],[11,11,"⚽ Häcken 1–1 AEK"],[11,15,"⚽ AEK 1–1 Omonia"],[11,18,"⚽ AEK 1–0 Shkendija"],[11,22,"⚽ AEL 0–1 AEK"]],
@@ -202,26 +180,25 @@ const H = {
     2025:[[7,23,"⚽ ANO 0–0 Omonia A."],[7,30,"⚽ Olympiakos 2–1 ANO"],[8,13,"⚽ ANO 1–1 AEK"],[8,20,"⚽ Ethnikos 2–0 ANO"],[8,28,"⚽ ANO 0–5 Omonia"],[9,4,"⚽ AEL 4–1 ANO"],[9,18,"⚽ ANO 2–2 Akritas"],[9,26,"⚽ ANO 1–1 Aris"],[10,2,"⚽ Ypsonas 0–1 ANO"],[10,9,"⚽ ANO 1–1 Paphos"],[10,23,"⚽ Enosis 2–3 ANO"],[10,29,"⚽ ANO 1–1 APOEL"],[11,3,"⚽ Karmiotissa 1–3 ANO"],[11,7,"⚽ Apollon 0–0 ANO"],[11,13,"⚽ Omonia A. 1–0 ANO"],[11,20,"⚽ ANO 0–0 Olympiakos"]],
     2026:[[0,4,"⚽ AEK 4–0 ANO"],[0,11,"⚽ ANO 1–0 Ethnikos"],[0,14,"⚽ Apollon 2–0 ANO"],[0,18,"⚽ Omonia 2–0 ANO"],[0,25,"⚽ ANO 2–1 AEL"],[1,1,"⚽ Akritas 2–0 ANO"],[1,9,"⚽ Aris 0–1 ANO"],[1,13,"⚽ ANO 1–1 Krasava"],[1,21,"⚽ Paphos 0–0 ANO"],[1,28,"⚽ ANO 3–0 Enosis"],[2,8,"⚽ APOEL 0–2 ANO"],[2,15,"⚽ ANO 1–1 Apollon"],[2,21,"⚽ ANO 3–2 Akritas"],[3,5,"⚽ Ethnikos 1–0 ANO"],[3,19,"⚽ ANO 1–1 Omonia A."],[3,27,"⚽ AEL – ANO"]],
   },
-  RU:{
-    2026:[[0,1,"New Year's Day"],[0,2,"New Year Holiday"],[0,3,"New Year Holiday"],[0,6,"New Year Holiday"],[0,7,"Orthodox Christmas"],[0,8,"Orthodox Christmas Holiday"],[0,9,"Orthodox Christmas Holiday"],[1,23,"Defence of Fatherland Day"],[2,8,"International Women's Day"],[2,9,"Women's Day (in lieu)"],[4,1,"Day of Spring & Labor"],[4,9,"Victory Day"],[4,11,"Victory Day (in lieu)"],[5,12,"Russia Day"],[10,2,"Day of Unity Holiday"],[10,3,"Day of Unity Holiday"],[10,4,"Day of Unity"]],
-    2027:[[0,1,"New Year's Day"],[0,2,"New Year Holiday"],[0,3,"New Year Holiday"],[0,6,"New Year Holiday"],[0,7,"Orthodox Christmas"],[0,8,"Orthodox Christmas Holiday"],[1,22,"Defence Day (bridge)"],[1,23,"Defence of Fatherland Day"],[2,8,"International Women's Day"],[4,1,"Day of Spring & Labor"],[4,9,"Victory Day"],[4,10,"Victory Day (in lieu)"],[5,12,"Russia Day"],[10,4,"Day of Unity"]],
-  },
   TRAVEL:{
     2025:[
       [1,3,"✈️ ZRH→ATH"],[1,5,"✈️ ZRH→LCA"],[1,9,"✈️ LCA→ZRH"],[1,19,"✈️ LCA→ZRH"],
+      [1,21,"🚂 Train ZRH→Milano"],[1,23,"🚂 Train Milano→Zug"],
       [2,5,"✈️ ZRH→LCA"],[2,28,"✈️ ZRH→LHR"],[2,30,"✈️ LCY→ZRH"],
       [3,4,"✈️ LCY→ZRH"],[3,12,"✈️ ZRH→ATH→LCA"],[3,21,"✈️ LCA→ZRH"],[3,24,"✈️ LCA→ZRH"],
       [5,6,"✈️ ZRH→LCA"],[5,9,"✈️ LCA→ZRH"],
+      [6,10,"🏨 Milan hotel"],[6,12,"🚂 Train Zug→Milano"],[6,31,"🏔️ Davos trip"],
+      [7,3,"🏔️ Davos trip"],
       [8,27,"✈️ ZRH→LCA"],[8,29,"✈️ LCA→ZRH"],
       [9,6,"✈️ ZRH→ATH→LCA"],[9,16,"✈️ LCA→ZRH"],
       [9,31,"✈️ ZRH→LCA"],[10,2,"✈️ LCA→ZRH"],[10,7,"✈️ ZRH→LCA"],[10,9,"✈️ LCA→ZRH"],
       [10,13,"✈️ →ZRH"],[10,19,"✈️ →LCA"],
-      [11,7,"✈️ ZRH→ATH (family)"],[11,7,"✈️ ZRH→LCA"],
+      [11,7,"✈️ ZRH→ATH"],[11,7,"✈️ ZRH→LCA"],
       [11,24,"✈️ ZRH→LCA"],[11,28,"✈️ LCA→MUC→ZRH"],[11,31,"✈️ LCA→ZRH"],
     ],
     2026:[
       [1,7,"✈️ ZRH→ATH"],[1,8,"✈️ ATH→ZRH"],
-      [3,2,"✈️ ZRH→FCO (Rome trip)"],[3,6,"✈️ FCO→ZRH"],
+      [3,2,"✈️ ZRH→FCO (Rome)"],[3,6,"✈️ FCO→ZRH"],
       [3,11,"✈️ ZRH→LCA"],[3,20,"✈️ LCA→ZRH"],
       [6,4,"✈️ ZRH→ATH"],[6,12,"✈️ ATH→ZRH"],
     ],
@@ -230,7 +207,7 @@ const H = {
     2025:[
       [0,11,"🎂 Kiriaki Kasiouri"],[0,21,"🎂 Sebastian"],
       [1,2,"🎂 Valentina"],[1,8,"🎉 Maria Magdalini party"],[1,10,"💍 Peter Robert"],[1,20,"🎂 Andria"],[1,24,"🎂 Orestis"],
-      [2,9,"🎂 Kalia Christou"],[2,25,"🎂 Julia Seroka"],[2,26,"🎂 Nathaniel Kourpas · Olivia"],
+      [2,9,"🎂 Kalia Christou"],[2,25,"🎂 Julia Seroka"],[2,26,"🎂 Nathaniel Kourpas · Olivia"],[2,28,"🎂 Aria's Birthday 🎈"],
       [3,8,"🎂 Karolina"],[3,12,"🎂 Demetris Shouftas"],[3,30,"🎂 Andrea"],
       [4,4,"🎂 Costas Karakontis"],[4,6,"🎂 Dimi Dimitriadis"],[4,12,"🎂🎉 Nikos Christou!"],[4,14,"🎂 Elysia"],[4,19,"🎂 Ariana"],
       [5,2,"🎂 Olena Maslova"],[5,8,"🎂 Jean-Pierre H."],[5,9,"🎂 Marco Stavri"],
@@ -244,9 +221,8 @@ const H = {
     2026:[
       [0,11,"🎂 Kiriaki Kasiouri"],[0,21,"🎂 Sebastian"],
       [1,2,"🎂 Valentina"],[1,10,"💍 Peter Robert"],[1,17,"🎂 Daphne"],[1,18,"🎉 Monika's party"],[1,20,"🎂 Andria"],[1,24,"🎂 Orestis"],
-      [2,9,"🎂 Kalia Christou"],[2,25,"🎂 Julia Seroka"],[2,26,"🎂 Nathaniel Kourpas · Olivia"],
-      [3,1,"🎉 Leona's party"],[3,8,"🎂 Karolina"],[3,12,"🎂 Demetris Shouftas"],[3,30,"🎂 Andrea"],
-      [3,31,"🎉 Aria's Birthday Party 🎈"],
+      [2,9,"🎂 Kalia Christou"],[2,25,"🎂 Julia Seroka"],[2,26,"🎂 Nathaniel Kourpas · Olivia"],[2,28,"🎂 Aria's Birthday 🎈"],
+      [3,1,"🎉 Leona's party"],[3,1,"🎉 Aria's Birthday Party @ Lush 🎈"],[3,8,"🎂 Karolina"],[3,12,"🎂 Demetris Shouftas"],[3,30,"🎂 Andrea"],
       [4,4,"🎂 Costas Karakontis"],[4,6,"🎂 Dimi Dimitriadis"],[4,12,"🎂🎉 Nikos Christou!"],[4,14,"🎂 Elysia"],[4,19,"🎂 Ariana"],
       [5,2,"🎂 Olena Maslova"],[5,8,"🎂 Jean-Pierre H."],[5,9,"🎂 Marco Stavri"],
       [6,9,"🎂 Kristian Messios"],
@@ -259,7 +235,7 @@ const H = {
     2027:[
       [0,11,"🎂 Kiriaki Kasiouri"],[0,21,"🎂 Sebastian"],
       [1,2,"🎂 Valentina"],[1,10,"💍 Peter Robert"],[1,20,"🎂 Andria"],[1,24,"🎂 Orestis"],
-      [2,9,"🎂 Kalia Christou"],[2,25,"🎂 Julia Seroka"],[2,26,"🎂 Nathaniel Kourpas · Olivia"],
+      [2,9,"🎂 Kalia Christou"],[2,25,"🎂 Julia Seroka"],[2,26,"🎂 Nathaniel Kourpas · Olivia"],[2,28,"🎂 Aria's Birthday 🎈"],
       [3,8,"🎂 Karolina"],[3,12,"🎂 Demetris Shouftas"],[3,30,"🎂 Andrea"],
       [4,4,"🎂 Costas Karakontis"],[4,6,"🎂 Dimi Dimitriadis"],[4,12,"🎂🎉 Nikos Christou!"],[4,14,"🎂 Elysia"],[4,19,"🎂 Ariana"],
       [5,2,"🎂 Olena Maslova"],[5,8,"🎂 Jean-Pierre H."],[5,9,"🎂 Marco Stavri"],
@@ -270,329 +246,397 @@ const H = {
   },
   PERSONAL:{
     2025:[
-      [1,2,"🏒 HC Davos event"],[1,26,"🎉 Geburtstagsparty Hedda"],
-      [2,9,"🎿 Ski Lessons"],[2,16,"🎿 Ski Lessons · HC Davos"],[2,23,"🎿 Ski Lessons"],
-      [3,6,"🐣 Schoggi Osterhasen"],[3,8,"🏥 HNO Aria"],
-      [4,1,"🏒 Ice Hockey SWI vs SWE"],[4,25,"🎈 Lea's party · Ice Hockey"],
-      [5,7,"🎊 Lydia's Wedding Dinner"],
-      [6,6,"🏆 Match SUI/ICE Women"],[6,9,"🎸 Iron Maiden"],
+      [1,2,"🏒 HC Davos · Logenplatz"],[1,10,"🎿 Ski Buskurs (Nelia)"],[1,22,"🍽️ La Porta Rossa Milano"],[1,24,"🏥 Lipödem consult"],[1,26,"🎉 Geburtstagsparty Hedda"],
+      [2,1,"🎭 Konfetischlacht"],[2,9,"🎿 Ski Lessons"],[2,16,"🎿 Ski Lessons · HC Davos"],[2,23,"🎿 Ski Lessons"],[2,28,"📝 Englisch TEST Marita"],
+      [3,4,"🎹 STUFENTEST Klavier"],[3,6,"🐣 Schoggi Osterhasen"],[3,7,"🎹 Piano Trial Lesson"],[3,8,"🏥 HNO Aria"],[3,9,"🗣️ Logopädie Aria"],[3,18,"🍹 Almar w/ Costas & friends"],[3,26,"🚑 First Aid"],[3,28,"🤝 Estermann & Stalder"],[3,29,"🏢 Apartment viewing"],[3,29,"🗣️ Logopädie Aria"],
+      [4,1,"🏒 Ice Hockey SWI vs SWE"],[4,5,"🥂 Maslovs"],[4,25,"🎈 Lea's party · Ice Hockey"],
+      [5,7,"🎊 Lydia's Wedding Dinner"],[5,8,"⛪ Vaftisia Noah"],[5,29,"🎊 TDC AHOI"],
+      [6,5,"🎂 Emily Geburtstagsparty"],[6,6,"🏆 Match SUI/ICE Women"],[6,9,"🎸 Iron Maiden 🤘"],
       [6,11,"✂️ HEAD CASE Baar"],[6,19,"🎉 Birthday Party Wonder Bar"],
       [6,27,"🏟️ Euro FINAL Basel"],
-      [7,27,"🏟️ Weltklasse"],[7,28,"🏟️ Weltklasse Zürich"],
-      [8,12,"✂️ HEAD CASE Baar"],[8,20,"🏒 HC Davos - Lugano"],
-      [10,7,"🤝 Najeb"],[10,24,"✂️ HEAD CASE Baar"],
-      [11,6,"🎉 Lush Birthday Party"],[11,7,"🎉 Charlotte Birthday Party"],
+      [7,15,"🎈 Mia's Geburtstagsfeier"],[7,20,"🏫 Schulbeginn"],[7,21,"🎂 Anastasia Birthday"],[7,22,"🎡 Europa Park"],[7,27,"🏟️ Weltklasse"],[7,28,"🏟️ Weltklasse Zürich"],
+      [8,12,"✂️ HEAD CASE Baar"],[8,20,"🏒 HC Davos - Lugano"],[8,28,"⛪ Church"],
+      [9,4,"🏒 HCD vs Fribourg"],[9,19,"🎉 Yury & Fatima 40 years"],[9,23,"🔴 C.Palace vs AEK (London!) ✈️"],
+      [9,31,"🎃 TDC Halloween"],
+      [10,6,"🕯️ Räbeliechtlichumzug"],[10,7,"🤝 Najeb"],[10,14,"🍫 Schoggi-Tram Honold"],[10,24,"✂️ HEAD CASE Baar"],
+      [11,1,"🕯️ Kerzenziehen"],[11,3,"🏒 HC Davos"],[11,5,"🏒 HC Davos"],[11,6,"🎉 Lush Birthday Party"],[11,7,"🎉 Charlotte Birthday Party"],[11,7,"🏒 HC Davos"],[11,14,"🎄 Weihnachtsevent Familien"],[11,19,"🏒 HC Davos"],[11,20,"🏒 HC Davos"],[11,23,"🏒 HC Davos"],
     ],
     2026:[
-      [0,12,"✂️ HEAD CASE Baar"],
-      [1,23,"👕 Gwändli-Ausgabe"],[1,25,"VIU Eyewear"],
+      [0,12,"✂️ HEAD CASE Baar"],[0,15,"🎹 Piano Concert"],[0,16,"🏒 EVZ Game · Marita"],[0,21,"🎹 Piano Concert"],
+      [1,2,"⛸️ Aria Ice Skating (school)"],[1,7,"🎭 Addams Family musical (Athens)"],[1,9,"⛷️ Ski Kurs (school week)"],[1,14,"🎭 Konfettischlacht"],[1,23,"👕 Gwändli-Ausgabe"],[1,25,"🎉 Adea's Geburtstagsparty"],[1,25,"👓 VIU Eyewear"],
+      [2,28,"🎭 TDC Aufführung (MAN & MARITA) 🎉"],[2,29,"🎭 TDC Aufführung (MAN & MARITA) 🎉"],
+      [3,25,"🎨 Creative Saturday ZUG"],[3,29,"🎉 Neubürgerfeier"],
     ],
   },
   WORK:{
     2025:[
-      [2,25,"💼 Partners Group × Elxi"],[6,2,"💼 Elxi × PG"],
-      [9,2,"💼 PG / Elxi q"],[10,13,"🏭 Visit Agile Wind Power"],
+      [2,25,"💼 Partners Group × Elxi · GNB Abalone/Macquarie"],
+      [4,13,"🤝 Lunch Elxi↔Athlos"],
+      [5,1,"📞 Work call"],
+      [6,2,"💼 Elxi × PG"],[6,11,"📋 GNB Abalone Projects"],
+      [8,16,"📊 Luxembourg Fund Setup"],
+      [9,2,"💼 PG / Elxi"],[10,13,"🏭 Visit Agile Wind Power"],
     ],
     2026:[
       [2,26,"💼 Teams Call: Stefan"],
+      [3,2,"📚 AML Online Training (SAM)"],[3,8,"🤝 NC Meeting · Simane"],[3,10,"🤝 NC Meeting MASV & CLS"],[3,15,"🤝 Partners Meeting"],[3,16,"🤝 Partners Meeting"],[3,22,"🤝 EQT meeting"],
     ],
   },
   FAMILY:{
     2025:[
       [5,26,"🎭 TDC Probe MARITA & ARIA"],
+      [6,14,"🏖️ Lago di Garda 🌊"],[6,15,"🏖️ Lago di Garda"],[6,16,"🏖️ Lago di Garda"],[6,17,"🏖️ Lago di Garda"],[6,18,"🏖️ Lago di Garda"],[6,19,"🏖️ Lago di Garda · last day"],
+      [7,22,"🎡 Europa Park"],[7,23,"🎡 Europa Park"],[7,24,"🎡 Europa Park"],
     ],
     2026:[
       [0,17,"🏊 Swimming"],
       [1,7,"✈️ Family ZRH→ATH"],[1,8,"✈️ Family ATH→ZRH"],
       [1,18,"👕 Gwändli-Ausgabe"],
-      [3,2,"✈️ Family ZRH→Rome"],[3,6,"✈️ Family Rome→ZRH"],
+      [3,2,"✈️ Family ZRH→Rome"],[3,3,"🏛️ Rome · Vatican"],[3,4,"🏛️ Rome · Colosseum"],[3,5,"🍝 Rome dinner"],[3,6,"✈️ Family Rome→ZRH"],
     ],
   },
 };
 
-// ═══════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════
-const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-const MONTHS_S = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-const DAYS_S = ["Mo","Tu","We","Th","Fr","Sa","Su"];
+// ── RECURRING WEEKLY EVENTS ────────────────────
+// dow: 0=Mon 1=Tue 2=Wed 3=Thu 4=Fri 5=Sat 6=Sun
+// h/m: 24h start time, dur: minutes
+const RECURRING=[
+  {dow:0,h:8, m:30,dur:165,label:"Spielgruppe – Nelia"},
+  {dow:0,h:15,m:0, dur:60, label:"AtoZ – Nelia"},
+  {dow:0,h:16,m:0, dur:60, label:"AtoZ – Aria"},
+  {dow:0,h:19,m:15,dur:45, label:"Greek Lesson – Aria"},
+  {dow:1,h:11,m:45,dur:45, label:"Klavier Unterricht – Marita"},
+  {dow:1,h:16,m:0, dur:45, label:"TDC – Nelia"},
+  {dow:1,h:16,m:15,dur:30, label:"Singen"},
+  {dow:1,h:16,m:45,dur:45, label:"TDC – Aria"},
+  {dow:2,h:12,m:0, dur:60, label:"VOCAL"},
+  {dow:2,h:12,m:50,dur:45, label:"Kinderchor – Aria"},
+  {dow:2,h:14,m:0, dur:30, label:"Piano – Nelia"},
+  {dow:2,h:14,m:30,dur:30, label:"Piano – Aria"},
+  {dow:2,h:15,m:0, dur:60, label:"TDC – Marita"},
+  {dow:2,h:16,m:0, dur:60, label:"SKEMA – Nelia"},
+  {dow:2,h:16,m:15,dur:60, label:"Mandarin – Marita"},
+  {dow:2,h:17,m:0, dur:60, label:"SKEMA – Aria"},
+  {dow:2,h:18,m:0, dur:60, label:"Gymnastics – Marita"},
+  {dow:3,h:15,m:15,dur:60, label:"Deutsch Spielgruppe"},
+  {dow:3,h:16,m:15,dur:45, label:"TDC – Aria"},
+  {dow:3,h:17,m:0, dur:60, label:"TDC – Marita"},
+  {dow:3,h:18,m:15,dur:60, label:"Greek Lesson – Marita"},
+  {dow:4,h:8, m:30,dur:165,label:"Spielgruppe – Nelia"},
+  {dow:4,h:13,m:30,dur:90, label:"Unterricht – Marita"},
+  {dow:4,h:15,m:30,dur:45, label:"Gymnastics – Aria"},
+  {dow:4,h:17,m:0, dur:60, label:"Tennis – Marita"},
+  {dow:4,h:17,m:0, dur:60, label:"Tennis – Aria"},
+];
 
-let state = {view:'yearly', year:new Date().getFullYear(), month:new Date().getMonth()};
-const today = new Date();
+// ── FILTER GROUPS ──────────────────────────────
+const FILTERS={
+  holidays:{label:"🏖️ Holidays", cats:['CH','CY','RU'], on:true},
+  football:{label:"⚽ Football",  cats:['SUI','GER','AEK','ANO'], on:true},
+  travel:  {label:"✈️ Travel",    cats:['TRAVEL'], on:true},
+  bday:    {label:"🎂 Birthdays", cats:['BDAY'], on:true},
+  personal:{label:"🎉 Personal",  cats:['PERSONAL'], on:true},
+  work:    {label:"💼 Work",      cats:['WORK'], on:true},
+  family:  {label:"👨‍👩‍👧 Family",   cats:['FAMILY'], on:true},
+  recurring:{label:"🔄 Recurring",cats:[], on:true},
+};
 
-// Load or init colors (persisted)
-const colors = Object.fromEntries(Object.entries(CAT).map(([k,v])=>[k,v.color]));
-try { const sc=localStorage.getItem('cal_colors'); if(sc) Object.assign(colors,JSON.parse(sc)); } catch(e){}
+// ── CONSTANTS ─────────────────────────────────
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const MONTHS_S=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DAYS_S=["Mo","Tu","We","Th","Fr","Sa","Su"];
+const DAYS_F=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 
-const visible = Object.fromEntries(Object.keys(CAT).map(k=>[k,true]));
+// ── STATE ──────────────────────────────────────
+const today=new Date();
+function getMon(d){const r=new Date(d);r.setDate(r.getDate()-((r.getDay()+6)%7));r.setHours(0,0,0,0);return r;}
+let state={view:'yearly',year:today.getFullYear(),month:today.getMonth(),weekMon:getMon(today),dayDate:new Date(today)};
+let customDays={};
+try{const cd=localStorage.getItem('cal_cd');if(cd)customDays=JSON.parse(cd);}catch(e){}
+let dcpKey=null;
+function saveCD(){try{localStorage.setItem('cal_cd',JSON.stringify(customDays));}catch(e){}}
 
-// Custom per-day colors: key = "year-month0-day", value = "#hex"
-let customDays = {};
-try { const cd=localStorage.getItem('cal_custom_days'); if(cd) customDays=JSON.parse(cd); } catch(e){}
+// ── HELPERS ────────────────────────────────────
+function fd(y,m){return(new Date(y,m,1).getDay()+6)%7;}
+function di(y,m){return new Date(y,m+1,0).getDate();}
+function dow(y,m,d){return(new Date(y,m,d).getDay()+6)%7;}
+function isT(y,m,d){return y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate();}
+function dk(y,m,d){return y+'-'+m+'-'+d;}
+function addD(date,n){const d=new Date(date);d.setDate(d.getDate()+n);return d;}
+function ft(h,m){return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');}
+function contrast(hex){if(!hex)return'#fff';const c=hex.startsWith('#')?hex.slice(1):hex;const r=parseInt(c.slice(0,2),16),g=parseInt(c.slice(2,4),16),b=parseInt(c.slice(4,6),16);return(0.299*r+0.587*g+0.114*b)>128?'#111':'#fff';}
+function catOn(cat){for(const[k,f]of Object.entries(FILTERS)){if(k==='recurring')continue;if(f.cats.includes(cat))return f.on;}return true;}
 
-// Day color popup state
-let dcpKey = null;
-
-// ─── Persistence helpers ────────────────────────────────
-function saveColors(){ try{localStorage.setItem('cal_colors',JSON.stringify(colors));}catch(e){} }
-function saveCustomDays(){ try{localStorage.setItem('cal_custom_days',JSON.stringify(customDays));}catch(e){} }
-
-function updateCSSVars(){
-  for(const [k,v] of Object.entries(CAT))
-    document.documentElement.style.setProperty(v.cssVar, colors[k]);
-}
-
-// ═══════════════════════════════════════════════════════
-//  LOOKUP BUILDER
-// ═══════════════════════════════════════════════════════
-function buildLookup(year){
-  const map={};
-  for(const [cat, ydata] of Object.entries(H)){
-    if(!visible[cat]) continue;
-    for(const [m,d,name] of (ydata[year]||[])){
-      const k=`${m}-${d}`;
-      if(!map[k]) map[k]=[];
-      map[k].push({cat,name});
+function getEvts(y,m0,d){
+  const res=[];
+  for(const[cat,ydata]of Object.entries(H)){
+    if(!catOn(cat))continue;
+    for(const[em,ed,name]of(ydata[y]||[])){
+      if(em===m0&&ed===d)res.push({rec:false,cat,label:name});
     }
   }
-  return map;
-}
-
-function firstDow(y,m){return(new Date(y,m,1).getDay()+6)%7;}
-function daysIn(y,m){return new Date(y,m+1,0).getDate();}
-
-function bgClass(items){
-  if(!items?.length) return '';
-  const bg=items.filter(i=>CAT[i.cat].bg).map(i=>i.cat);
-  if(!bg.length) return '';
-  if(bg.includes('CH')&&bg.includes('CY')) return 'both-h';
-  if(bg.includes('CH')) return 'ch-h';
-  return 'cy-h';
-}
-
-function tipText(items){
-  return items.map(i=>i.name).join('\n');
-}
-
-// ═══════════════════════════════════════════════════════
-//  YEAR VIEW
-// ═══════════════════════════════════════════════════════
-function miniMonth(y,m){
-  const lk=buildLookup(y);
-  const fd=firstDow(y,m), days=daysIn(y,m);
-  let cells='';
-  for(let i=0;i<fd;i++) cells+=`<div class="mc"></div>`;
-  for(let d=1;d<=days;d++){
-    const dayKey=`${y}-${m}-${d}`;
-    const items=lk[`${m}-${d}`]||[];
-    const hc=bgClass(items);
-    const dow=(fd+d-1)%7;
-    const wk=(!hc&&dow>=5)?'weekend':'';
-    const isT=y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate();
-    const dotItems=items.filter(i=>!CAT[i.cat].bg);
-    const dots=dotItems.slice(0,6).map(i=>`<span class="mdot" style="background:${colors[i.cat]}"></span>`).join('');
-    const tip=items.length?` data-tip="${tipText(items).replace(/"/g,'&quot;')}"` :'';
-    const customColor=customDays[dayKey];
-    const cbar=customColor?`<div class="mc-cbar" style="background:${customColor}"></div>`:'';
-    cells+=`<div class="mc ${hc} ${wk} ${isT?'is-today':''}"${tip} onclick="openDcp(event,'${dayKey}','${MONTHS_S[m]} ${d}')">${d}${dots?`<div class="mc-dots">${dots}</div>`:''}${cbar}</div>`;
+  if(FILTERS.recurring.on){
+    const dw=(new Date(y,m0,d).getDay()+6)%7;
+    for(const r of RECURRING){
+      if(r.dow===dw)res.push({rec:true,label:r.label,h:r.h,m:r.m,dur:r.dur});
+    }
+    res.sort((a,b)=>{
+      if(a.rec!==b.rec)return a.rec?1:-1;
+      if(a.rec&&b.rec)return(a.h*60+a.m)-(b.h*60+b.m);
+      return 0;
+    });
   }
-  return `<div class="mini-card">
-    <div class="mini-title">${MONTHS[m]}</div>
-    <div class="mini-header">${DAYS_S.map(d=>`<span>${d}</span>`).join('')}</div>
-    <div class="mini-grid">${cells}</div>
+  return res;
+}
+
+// ── YEAR VIEW ─────────────────────────────────
+function renderYear(){
+  let h='<div class="ygrid">';
+  for(let m=0;m<12;m++)h+=renderMini(state.year,m);
+  return h+'</div>';
+}
+function renderMini(y,m){
+  const f=fd(y,m),days=di(y,m);
+  let cells='';
+  for(let i=0;i<f;i++)cells+='<div class="mc"></div>';
+  for(let d=1;d<=days;d++){
+    const key=dk(y,m,d);
+    const dw=(f+d-1)%7;
+    const cc=customDays[key];
+    const st=cc?` style="background:${cc};color:${contrast(cc)}"`:''
+    cells+=`<div class="mc ${dw>=5&&!cc?'wknd':''} ${isT(y,m,d)?'today':''}"${st} onclick="openDcp(event,'${key}','${MONTHS_S[m]} ${d}')">${d}</div>`;
+  }
+  return `<div class="mc-card">
+    <div class="mc-title" onclick="goMonth(${y},${m})">${MONTHS[m]}</div>
+    <div class="mc-hdr">${DAYS_S.map(d=>`<span>${d}</span>`).join('')}</div>
+    <div class="mc-grid">${cells}</div>
   </div>`;
 }
 
-function renderYearly(){
-  let h='<div class="yearly-grid">';
-  for(let m=0;m<12;m++) h+=miniMonth(state.year,m);
-  return h+'</div>';
-}
-
-// ═══════════════════════════════════════════════════════
-//  MONTH VIEW
-// ═══════════════════════════════════════════════════════
-function renderMonthly(){
-  const {year:y,month:m}=state;
-  const lk=buildLookup(y);
-  const fd=firstDow(y,m), days=daysIn(y,m);
-
+// ── MONTH VIEW ────────────────────────────────
+function renderMonth(){
+  const{year:y,month:m}=state;
+  const f=fd(y,m),days=di(y,m);
   let cells='';
-  for(let i=0;i<fd;i++) cells+=`<div class="bd empty"></div>`;
+  for(let i=0;i<f;i++)cells+='<div class="bd empty"></div>';
   for(let d=1;d<=days;d++){
-    const dayKey=`${y}-${m}-${d}`;
-    const items=lk[`${m}-${d}`]||[];
-    const hc=bgClass(items);
-    const dow=(fd+d-1)%7;
-    const wk=dow>=5?'weekend':'';
-    const isT=y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate();
-    const bgNames=items.filter(i=>CAT[i.cat].bg).map(i=>`<span class="hname">${i.name}</span>`).join('');
-    const tags=items.filter(i=>!CAT[i.cat].bg).map(i=>`<span class="etag ${i.cat}" title="${i.name}">${i.name}</span>`).join('');
-    const customColor=customDays[dayKey];
-    const cstripe=customColor?`<div class="bd-cstripe" style="background:${customColor}"></div>`:'';
-    const hint=customColor?`<span class="dn-hint" style="color:${customColor}">●</span>`:'';
-    cells+=`<div class="bd ${hc} ${wk} ${isT?'is-today':''}">
-      ${cstripe}
-      <span class="dn" onclick="openDcp(event,'${dayKey}','${MONTHS_S[m]} ${d}')">${d}${hint}</span>
-      ${bgNames}
+    const key=dk(y,m,d);
+    const dw=(f+d-1)%7;
+    const cc=customDays[key];
+    const bg=cc?` style="background:${cc}"`:''
+    const dnSt=cc?`style="color:${contrast(cc)}"`:''
+    const hint=cc?'<span class="dn-hint">●</span>':'';
+    const evts=getEvts(y,m,d);
+    const tags=evts.map(e=>`<span class="etag${e.rec?' rec':''}" title="${e.label}">${e.label}</span>`).join('');
+    cells+=`<div class="bd ${isT(y,m,d)?'today':''} ${dw>=5?'wknd':''}"${bg} onclick="goDay(${y},${m},${d})">
+      <span class="dn" ${dnSt} onclick="event.stopPropagation();openDcp(event,'${key}','${MONTHS_S[m]} ${d}')">${d}${hint}</span>
       ${tags?`<div class="etags">${tags}</div>`:''}
     </div>`;
   }
-
-  const bigCal=`<div>
-    <div class="month-nav">
-      <button class="nav-btn" onclick="prevM()">‹</button>
-      <span class="month-label">${MONTHS[m]} ${y}</span>
-      <button class="nav-btn" onclick="nextM()">›</button>
-    </div>
-    <div class="big-card">
-      <div class="big-hdr">${DAYS_S.map(d=>`<span>${d}</span>`).join('')}</div>
-      <div class="big-grid">${cells}</div>
-    </div>
-  </div>`;
-
   const allEvts=[];
-  for(let d=1;d<=days;d++){
-    for(const i of (lk[`${m}-${d}`]||[])) allEvts.push({d,cat:i.cat,name:i.name});
-  }
+  for(let d=1;d<=days;d++)for(const e of getEvts(y,m,d))allEvts.push({d,label:e.label,rec:e.rec});
   const sbRows=allEvts.length
-    ? allEvts.map(e=>`<div class="h-row"><span class="h-dot" style="background:${colors[e.cat]}"></span><span class="h-date">${MONTHS_S[m]} ${e.d}</span><span>${e.name}</span></div>`).join('')
-    : `<div class="no-h">No events</div>`;
-
-  const sidebar=`<div class="sidebar">
-    <div class="sb-title">📅 ${MONTHS[m]} ${y}</div>${sbRows}
+    ?allEvts.map(e=>`<div class="hr"><span class="hd">${MONTHS_S[m]} ${e.d}</span><span style="opacity:${e.rec?.5:1}">${e.label}</span></div>`).join('')
+    :'<div style="padding:5px;color:var(--muted);font-size:.7rem;">No events</div>';
+  return `<div class="mv-wrap">
+    <div>
+      <div class="nav-row" style="justify-content:center;margin-bottom:10px;">
+        <button class="nb" onclick="prevM()">‹</button>
+        <span class="nlbl">${MONTHS[m]} ${y}</span>
+        <button class="nb" onclick="nextM()">›</button>
+      </div>
+      <div class="big-card">
+        <div class="big-hdr">${DAYS_S.map(d=>`<span>${d}</span>`).join('')}</div>
+        <div class="big-grid">${cells}</div>
+      </div>
+    </div>
+    <div class="sidebar"><div class="sb-ttl">📅 ${MONTHS[m]} ${y}</div>${sbRows}</div>
   </div>`;
-
-  return `<div class="monthly-wrap">${bigCal}${sidebar}</div>`;
 }
 
-// ═══════════════════════════════════════════════════════
-//  LEGEND
-// ═══════════════════════════════════════════════════════
-function renderLegend(){
-  const keys=Object.keys(CAT);
-  return keys.map((k,i)=>{
-    const sep=(i===1||i===6||i===9)?'<div class="leg-sep"></div>':'';
-    return `${sep}<div class="leg ${visible[k]?'':'off'}" id="leg-${k}" onclick="toggleCat('${k}')">
-      <div class="leg-swatch" style="background:${colors[k]}">
-        <input type="color" value="${colors[k]}" onclick="event.stopPropagation()" onchange="changeCatColor('${k}',this.value)">
-      </div>
-      <span class="leg-label">${CAT[k].label}</span>
+// ── WEEK VIEW ─────────────────────────────────
+const WK_H0=8,WK_H1=21,WK_PH=50;
+function renderWeek(){
+  const mon=state.weekMon;
+  const days=Array.from({length:7},(_,i)=>addD(mon,i));
+  // header
+  let hdr='<div class="wk-corner"></div>';
+  for(const dd of days){
+    const dw=(dd.getDay()+6)%7;
+    const key=dk(dd.getFullYear(),dd.getMonth(),dd.getDate());
+    const cc=customDays[key];
+    const st=cc?` style="background:${cc};color:${contrast(cc)}"`:''
+    const isTd=isT(dd.getFullYear(),dd.getMonth(),dd.getDate());
+    hdr+=`<div class="wk-hc" onclick="goDay(${dd.getFullYear()},${dd.getMonth()},${dd.getDate()})"${st}>
+      <div class="wk-dow">${DAYS_S[dw]}</div>
+      <div class="wk-date${isTd?' today':''}">${dd.getDate()}</div>
     </div>`;
-  }).join('');
+  }
+  // all-day row
+  let ad='<div class="wk-ad-lbl">all-day</div>';
+  for(const dd of days){
+    const evts=getEvts(dd.getFullYear(),dd.getMonth(),dd.getDate()).filter(e=>!e.rec);
+    ad+=`<div class="wk-ad-col">${evts.map(e=>`<span class="wk-ae" title="${e.label}">${e.label}</span>`).join('')}</div>`;
+  }
+  // time grid
+  const totalH=WK_H1-WK_H0;
+  const colH=totalH*WK_PH;
+  let tc='<div class="wk-tc">';
+  for(let h=WK_H0;h<=WK_H1;h++)tc+=`<div class="wk-ts">${h}:00</div>`;
+  tc+='</div>';
+  let dcs='';
+  for(const dd of days){
+    const evts=getEvts(dd.getFullYear(),dd.getMonth(),dd.getDate()).filter(e=>e.rec);
+    let lines='';
+    for(let h=0;h<=totalH;h++)lines+=`<div class="wk-hl" style="top:${h*WK_PH}px"></div>`;
+    let blocks='';
+    for(const e of evts){
+      const top=((e.h-WK_H0)*60+e.m)*(WK_PH/60);
+      const ht=Math.max(e.dur*(WK_PH/60),16);
+      if(top<0||top>colH)continue;
+      blocks+=`<div class="wk-ev" style="top:${top.toFixed(1)}px;height:${ht.toFixed(1)}px" title="${e.label}">${e.label}</div>`;
+    }
+    dcs+=`<div class="wk-dc" style="height:${colH}px">${lines}${blocks}</div>`;
+  }
+  const s=days[0],e=days[6];
+  const lbl=`${MONTHS_S[s.getMonth()]} ${s.getDate()} – ${MONTHS_S[e.getMonth()]} ${e.getDate()}, ${e.getFullYear()}`;
+  return `<div>
+    <div class="nav-row" style="justify-content:center;margin-bottom:10px;">
+      <button class="nb" onclick="prevWk()">‹</button>
+      <span class="nlbl">${lbl}</span>
+      <button class="nb" onclick="nextWk()">›</button>
+    </div>
+    <div class="wk-wrap">
+      <div class="wk-hdr">${hdr}</div>
+      <div class="wk-ad">${ad}</div>
+      <div class="wk-body">${tc}${dcs}</div>
+    </div>
+  </div>`;
 }
 
-// ═══════════════════════════════════════════════════════
-//  RENDER
-// ═══════════════════════════════════════════════════════
-function render(){
-  const isYear=state.view==='yearly';
-  const syncDate=new Date(LAST_SYNCED+'T12:00:00');
-  const syncLabel=`${MONTHS_S[syncDate.getMonth()]} ${syncDate.getDate()}, ${syncDate.getFullYear()}`;
-  document.getElementById('app').innerHTML=`
-    <div class="header">
-      <div class="header-left">
-        <div class="title">🌍 My Calendar</div>
-        <div class="sync-wrap">
-          <button class="sync-btn" id="sync-btn" onclick="syncCalendar()">🔄 Sync</button>
-          <span class="sync-ts">Synced ${syncLabel}</span>
-        </div>
+// ── DAY VIEW ──────────────────────────────────
+function renderDay(){
+  const dd=state.dayDate;
+  const y=dd.getFullYear(),m=dd.getMonth(),d=dd.getDate();
+  const dw=(dd.getDay()+6)%7;
+  const key=dk(y,m,d);
+  const cc=customDays[key];
+  const evts=getEvts(y,m,d);
+  const oneoff=evts.filter(e=>!e.rec);
+  const rec=evts.filter(e=>e.rec);
+  const hst=cc?` style="background:${cc};color:${contrast(cc)}"`:''
+  const isTd=isT(y,m,d);
+  let evtHtml='';
+  if(oneoff.length){
+    evtHtml+=`<div class="dv-sec">Events</div>`;
+    evtHtml+=oneoff.map(e=>`<div class="dv-row"><span class="dv-time">all-day</span><span>${e.label}</span></div>`).join('');
+  }
+  if(rec.length){
+    evtHtml+=`<div class="dv-sec">Schedule</div>`;
+    evtHtml+=rec.map(e=>`<div class="dv-row rec"><span class="dv-time">${ft(e.h,e.m)}</span><span>${e.label}</span></div>`).join('');
+  }
+  if(!evts.length)evtHtml='<div class="no-ev">No events for this day.</div>';
+  return `<div class="dv-wrap">
+    <div class="nav-row" style="justify-content:center;margin-bottom:10px;">
+      <button class="nb" onclick="prevDay()">‹</button>
+      <span class="nlbl">${DAYS_F[dw]}, ${MONTHS[m]} ${d}</span>
+      <button class="nb" onclick="nextDay()">›</button>
+    </div>
+    <div class="dv-hdr"${hst}>
+      <div>
+        <div class="dv-title">${MONTHS[m]} ${d}, ${y}${isTd?' <span style="font-size:.7rem;opacity:.7">(Today)</span>':''}</div>
+        <div class="dv-sub">${DAYS_F[dw]}</div>
       </div>
-      <div class="header-right">
-        <div class="year-nav">
-          <button class="nav-btn" onclick="changeYear(-1)">‹</button>
-          <span class="year-label">${state.year}</span>
-          <button class="nav-btn" onclick="changeYear(1)">›</button>
-        </div>
-        <div class="view-btns">
-          <button class="view-btn ${isYear?'active':''}" onclick="setView('yearly')">Year</button>
-          <button class="view-btn ${!isYear?'active':''}" onclick="setView('monthly')">Month</button>
+      <button class="dv-cbtn" onclick="openDcp(event,'${key}','${MONTHS_S[m]} ${d}')">🎨 Color</button>
+    </div>
+    <div class="dv-evts">${evtHtml}</div>
+  </div>`;
+}
+
+// ── FILTER BAR ────────────────────────────────
+function renderFbar(){
+  return Object.entries(FILTERS).map(([k,f])=>
+    `<div class="ftag${f.on?' on':''}" onclick="toggleF('${k}')">${f.label}</div>`
+  ).join('');
+}
+
+// ── MAIN RENDER ───────────────────────────────
+function render(){
+  const sd=new Date(LAST_SYNCED+'T12:00:00');
+  const sl=`${MONTHS_S[sd.getMonth()]} ${sd.getDate()}, ${sd.getFullYear()}`;
+  let yearNav='';
+  if(state.view==='yearly'){
+    yearNav=`<div class="nav-row">
+      <button class="nb" onclick="changeYear(-1)">‹</button>
+      <span style="font-size:1.1rem;font-weight:700;min-width:54px;text-align:center;">${state.year}</span>
+      <button class="nb" onclick="changeYear(1)">›</button>
+    </div>`;
+  }
+  let main='';
+  if(state.view==='yearly')main=renderYear();
+  else if(state.view==='monthly')main=renderMonth();
+  else if(state.view==='weekly')main=renderWeek();
+  else main=renderDay();
+  document.getElementById('app').innerHTML=`
+    <div class="hdr">
+      <div class="hdr-l">
+        <div class="title">🌍 My Calendar</div>
+        <button class="sync-btn" onclick="syncCal()">🔄 Sync</button>
+        <span class="sync-ts">Synced ${sl}</span>
+      </div>
+      <div class="hdr-r">
+        ${yearNav}
+        <div class="vbtns">
+          <button class="vb${state.view==='yearly'?' active':''}" onclick="setV('yearly')">Year</button>
+          <button class="vb${state.view==='monthly'?' active':''}" onclick="setV('monthly')">Month</button>
+          <button class="vb${state.view==='weekly'?' active':''}" onclick="setV('weekly')">Week</button>
+          <button class="vb${state.view==='daily'?' active':''}" onclick="setV('daily')">Day</button>
         </div>
       </div>
     </div>
-    <div class="legend-wrap">${renderLegend()}</div>
-    <div>${isYear?renderYearly():renderMonthly()}</div>
-  `;
+    <div class="fbar">${renderFbar()}</div>
+    ${main}`;
 }
 
-// ═══════════════════════════════════════════════════════
-//  ACTIONS
-// ═══════════════════════════════════════════════════════
-function changeYear(d){state.year+=d;render();}
-function setView(v){state.view=v;render();}
+// ── ACTIONS ───────────────────────────────────
+function setV(v){state.view=v;render();}
+function changeYear(n){state.year+=n;render();}
 function prevM(){if(--state.month<0){state.month=11;state.year--;}render();}
 function nextM(){if(++state.month>11){state.month=0;state.year++;}render();}
-function toggleCat(k){visible[k]=!visible[k];render();}
-function changeCatColor(k,v){colors[k]=v;saveColors();updateCSSVars();render();}
+function prevWk(){state.weekMon=addD(state.weekMon,-7);render();}
+function nextWk(){state.weekMon=addD(state.weekMon,7);render();}
+function prevDay(){state.dayDate=addD(state.dayDate,-1);render();}
+function nextDay(){state.dayDate=addD(state.dayDate,1);render();}
+function goMonth(y,m){state.view='monthly';state.year=y;state.month=m;render();}
+function goDay(y,m,d){state.view='daily';state.dayDate=new Date(y,m,d);render();}
+function toggleF(k){FILTERS[k].on=!FILTERS[k].on;render();}
 
-// ─── Sync ────────────────────────────────────────────────
-function syncCalendar(){
-  const prompt='Sync my country calendar from Fantastical and update country-calendar.html';
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(prompt).then(()=>{
-      showToast('📋 Sync prompt copied! Paste it to Claude, then click Sync again to reload.');
-      const btn=document.getElementById('sync-btn');
-      if(btn){btn.textContent='✅ Copied!';setTimeout(()=>{btn.innerHTML='🔄 Sync';},2000);}
-    }).catch(()=>fallbackSync(prompt));
-  } else { fallbackSync(prompt); }
-}
-function fallbackSync(prompt){
-  // fallback: show prompt in a toast with instructions
-  showToast('Ask Claude: "'+prompt+'" — then reload this page.');
-}
-function showToast(msg){
-  const t=document.getElementById('sync-toast');
-  t.textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),4000);
-}
-
-// ─── Day Color Popup ─────────────────────────────────────
-function openDcp(e, key, label){
+// ── DCP ───────────────────────────────────────
+function openDcp(e,key,lbl){
   e.stopPropagation();
   dcpKey=key;
-  document.getElementById('dcp-label').textContent=label;
-  const existing=customDays[key]||'#3949ab';
-  const picker=document.getElementById('dcp-picker');
-  picker.value=existing;
-  document.getElementById('dcp-preview').style.background=existing;
-  const popup=document.getElementById('dcp-popup');
-  const overlay=document.getElementById('dcp-overlay');
-  popup.style.display='block';
-  overlay.style.display='block';
-  // Position near click, keep in viewport
-  const pw=210, ph=120;
-  let x=e.clientX+8, y=e.clientY+8;
-  if(x+pw>window.innerWidth-8) x=e.clientX-pw-8;
-  if(y+ph>window.innerHeight-8) y=e.clientY-ph-8;
-  popup.style.left=Math.max(8,x)+'px';
-  popup.style.top=Math.max(8,y)+'px';
+  document.getElementById('dcp-lbl').textContent=lbl;
+  const cc=customDays[key]||'#3949ab';
+  document.getElementById('dcp-picker').value=cc;
+  document.getElementById('dcp-prev-el').style.background=cc;
+  const pop=document.getElementById('dcp-pop');
+  pop.style.top=Math.min(e.clientY+10,window.innerHeight-160)+'px';
+  pop.style.left=Math.min(e.clientX+10,window.innerWidth-240)+'px';
+  pop.style.display='block';
+  document.getElementById('dcp-ov').style.display='block';
 }
+function closeDcp(){document.getElementById('dcp-pop').style.display='none';document.getElementById('dcp-ov').style.display='none';dcpKey=null;}
+function applyDcp(){if(!dcpKey)return;customDays[dcpKey]=document.getElementById('dcp-picker').value;saveCD();closeDcp();render();}
+function clearDcp(){if(!dcpKey)return;delete customDays[dcpKey];saveCD();closeDcp();render();}
 
-function applyDayColor(){
-  if(!dcpKey) return;
-  customDays[dcpKey]=document.getElementById('dcp-picker').value;
-  saveCustomDays();
-  closeDcp();
-  render();
+// ── SYNC ──────────────────────────────────────
+function syncCal(){
+  const p='Sync my country calendar from Fantastical and update country-calendar.html';
+  if(navigator.clipboard)navigator.clipboard.writeText(p).then(()=>showToast('📋 Prompt copied!'));
+  setTimeout(()=>location.reload(),1500);
 }
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-function clearDayColor(){
-  if(!dcpKey) return;
-  delete customDays[dcpKey];
-  saveCustomDays();
-  closeDcp();
-  render();
-}
-
-function closeDcp(){
-  document.getElementById('dcp-popup').style.display='none';
-  document.getElementById('dcp-overlay').style.display='none';
-  dcpKey=null;
-}
-
-// ─── Init ─────────────────────────────────────────────────
-updateCSSVars();
 render();
 </script>
 </body>
