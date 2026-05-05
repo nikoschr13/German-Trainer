@@ -9,69 +9,72 @@
 <title>Nikos · Command Centre</title>
 <style>
   :root {
-    --bg:        #F5F7FA;
+    --bg:        #F4F6FA;
     --surface:   #FFFFFF;
-    --border:    #E5E9F0;
-    --text-1:    #0F2D52;
+    --border:    #E3E8F0;
+    --border-2:  #CFD7E3;
+    --text-1:    #0A2340;
     --text-2:    #475569;
     --text-3:    #94A3B8;
-    --primary:   #0F2D52;
-    --primary-2: #1E3A8A;
-    --accent:    #2563EB;
-    --pink:      #DB2777;
+    --primary:   #0A2340;
+    --primary-2: #14315B;
+    --pink:      #BE185D;
     --amber:     #B45309;
     --emerald:   #047857;
-    --indigo:    #4338CA;
-    --shadow-1:  0 1px 2px rgba(15,45,82,0.04), 0 1px 3px rgba(15,45,82,0.06);
-    --shadow-2:  0 4px 12px rgba(15,45,82,0.08);
+    --shadow-1:  0 1px 2px rgba(10,35,64,0.04), 0 1px 3px rgba(10,35,64,0.05);
+    --shadow-2:  0 4px 14px rgba(10,35,64,0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, sans-serif;
     background: var(--bg);
     color: var(--text-1);
     min-height: 100vh;
-    padding-bottom: 48px;
+    padding-bottom: 56px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv11";
   }
 
   /* ── Hero ── */
   .hero {
-    background: linear-gradient(180deg, #0F2D52 0%, #1E3A8A 100%);
+    background: var(--primary);
     color: white;
-    padding: 28px 22px 24px;
+    padding: 32px 22px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
-  .hero-inner { max-width: 760px; margin: 0 auto; }
+  .hero-inner { max-width: 780px; margin: 0 auto; }
   .hero-eyebrow {
-    font-size: 10px; font-weight: 600; letter-spacing: 1.6px;
-    text-transform: uppercase; opacity: 0.65; margin-bottom: 6px;
+    font-size: 10px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; opacity: 0.55; margin-bottom: 10px;
   }
   .hero-title {
-    font-size: 22px; font-weight: 700; letter-spacing: -0.4px;
-    line-height: 1.2;
+    font-size: 26px; font-weight: 700; letter-spacing: -0.5px;
+    line-height: 1.15;
   }
   .hero-date {
-    font-size: 12px; font-weight: 500; opacity: 0.7;
-    margin-top: 6px; letter-spacing: 0.2px;
+    font-size: 12px; font-weight: 500; opacity: 0.65;
+    margin-top: 8px; letter-spacing: 0.1px;
   }
 
   /* ── Section ── */
-  .section { max-width: 760px; margin: 0 auto; padding: 24px 16px 0; }
+  .section { max-width: 780px; margin: 0 auto; padding: 28px 18px 0; }
   .section-header {
-    display: flex; align-items: baseline; gap: 10px;
-    margin-bottom: 14px;
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 16px;
   }
   .section-label {
-    font-size: 11px; font-weight: 700; color: var(--text-2);
-    letter-spacing: 1.4px; text-transform: uppercase;
+    font-size: 10.5px; font-weight: 700; color: var(--text-2);
+    letter-spacing: 1.6px; text-transform: uppercase;
   }
   .section-rule {
     flex: 1; height: 1px; background: var(--border);
   }
   .section-meta {
-    font-size: 11px; color: var(--text-3); font-weight: 500;
+    font-size: 10.5px; color: var(--text-3);
+    font-weight: 500; letter-spacing: 0.4px;
   }
 
   /* ── Grid ── */
@@ -96,40 +99,36 @@
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 14px 14px 12px;
     display: flex; flex-direction: column; gap: 10px;
     box-shadow: var(--shadow-1);
-    transition: box-shadow 0.15s, transform 0.1s;
+    transition: box-shadow 0.18s, border-color 0.18s, transform 0.1s;
     position: relative;
     overflow: hidden;
   }
-  .card.wide { grid-column: 1 / -1; }
-  .card.featured {
-    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
+  .card:hover {
+    border-color: var(--border-2);
+    box-shadow: var(--shadow-2);
   }
   .card .accent {
     position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px; background: var(--accent);
+    width: 2px; background: transparent;
   }
   .card.acc-pink   .accent { background: var(--pink); }
   .card.acc-amber  .accent { background: var(--amber); }
   .card.acc-emerald .accent { background: var(--emerald); }
-  .card.acc-indigo .accent { background: var(--indigo); }
-  .card.acc-gray   .accent { background: var(--text-3); }
 
   .card-row {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 8px;
+    gap: 8px; min-height: 22px;
   }
   .card-icon {
-    font-size: 18px; line-height: 1;
-    width: 28px; height: 28px;
-    display: inline-flex; align-items: center; justify-content: center;
-    border-radius: 8px; background: #F1F5F9;
+    font-size: 17px; line-height: 1;
+    opacity: 0.95;
   }
   .card-title {
-    font-size: 14px; font-weight: 600; color: var(--text-1);
+    font-size: 13.5px; font-weight: 600; color: var(--text-1);
     line-height: 1.3; letter-spacing: -0.1px;
   }
   .card-desc {
@@ -137,23 +136,26 @@
   }
   .status {
     display: inline-flex; align-items: center; gap: 5px;
-    font-size: 10px; font-weight: 600; color: var(--text-3);
-    text-transform: uppercase; letter-spacing: 0.6px;
+    font-size: 9.5px; font-weight: 700; color: var(--emerald);
+    text-transform: uppercase; letter-spacing: 0.8px;
   }
   .status::before {
-    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    content: ""; width: 5px; height: 5px; border-radius: 50%;
     background: var(--emerald);
   }
-  .status.muted::before { background: var(--text-3); }
+  .status.amber { color: var(--amber); }
+  .status.amber::before { background: var(--amber); }
+  .status.pink { color: var(--pink); }
+  .status.pink::before { background: var(--pink); }
 
   /* ── Buttons ── */
-  .actions { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; }
+  .actions { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
   .actions.row { flex-direction: row; flex-wrap: wrap; }
 
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 8px 11px;
-    border-radius: 8px;
+    border-radius: 7px;
     font-family: inherit;
     font-size: 12px; font-weight: 600;
     color: var(--text-1);
@@ -164,26 +166,28 @@
     -webkit-tap-highlight-color: transparent;
     line-height: 1;
   }
-  .btn:hover { background: #F8FAFC; border-color: #CBD5E1; }
+  .btn:hover { background: #F8FAFC; border-color: var(--border-2); }
   .btn:active { transform: scale(0.98); }
-  .btn .ic { font-size: 13px; }
+  .btn .ic { font-size: 12px; opacity: 0.85; }
   .btn .lbl { flex: 1; text-align: left; }
   .btn .ch { color: var(--text-3); font-size: 11px; }
   .btn.primary {
     background: var(--primary); color: white; border-color: var(--primary);
   }
   .btn.primary:hover { background: var(--primary-2); border-color: var(--primary-2); }
-  .btn.primary .ch { color: rgba(255,255,255,0.6); }
+  .btn.primary .ic { opacity: 1; }
+  .btn.primary .ch { color: rgba(255,255,255,0.55); }
   .btn.full { width: 100%; }
   .btn.half { flex: 1; min-width: 120px; }
 
   /* ── Footer ── */
   .footer {
     text-align: center;
-    font-size: 11px; color: var(--text-3);
-    padding: 32px 16px 0;
-    max-width: 760px; margin: 0 auto;
+    font-size: 10.5px; color: var(--text-3);
+    padding: 36px 18px 0;
+    max-width: 780px; margin: 0 auto;
     line-height: 1.7;
+    letter-spacing: 0.1px;
   }
   .footer strong { color: var(--text-2); font-weight: 600; }
 
@@ -209,76 +213,21 @@
 
   <div class="grid-today">
 
-    <div class="card featured">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">📊</span>
-        <span class="status">Live</span>
-      </div>
-      <div class="card-title">Daily Market Brief</div>
-      <div class="card-desc">Streamlit · Live data · PDF newsletter · Research Library</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://nxman-brief-djegbbybg5wqwyjzgaxjvc.streamlit.app" target="_blank">
-          <span class="ic">🚀</span><span class="lbl">Open Dashboard</span><span class="ch">›</span>
-        </a>
-        <a class="btn full" href="https://github.com/nikoschr13/nxman-brief" target="_blank">
-          <span class="ic">🐙</span><span class="lbl">GitHub</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card featured acc-pink">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">✅</span>
-        <span class="status">Personal</span>
-      </div>
-      <div class="card-title">Todoist</div>
-      <div class="card-desc">Personal tasks · Errands · Recurring</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://todoist.com/app/today" target="_blank">
-          <span class="ic">📆</span><span class="lbl">Today</span><span class="ch">›</span>
-        </a>
-        <a class="btn full" href="https://todoist.com/app/inbox" target="_blank">
-          <span class="ic">📥</span><span class="lbl">Inbox</span><span class="ch">›</span>
-        </a>
-        <a class="btn full" href="https://todoist.com/app/upcoming" target="_blank">
-          <span class="ic">🗓️</span><span class="lbl">Upcoming</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card featured">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">💼</span>
-        <span class="status muted">Notion</span>
-      </div>
-      <div class="card-title">Work Tasks</div>
-      <div class="card-desc">Linked to projects, meetings, clients</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/26c08400d7df4ba898f1eee1c90dcd36" target="_blank">
-          <span class="ic">✓</span><span class="lbl">Open Work Tasks</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card featured">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🧠</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Notion Dashboard</div>
       <div class="card-desc">Today's meetings · Active projects · Recent research</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/3238d49ff41380e68b4dca8e805a75b0" target="_blank">
-          <span class="ic">🏠</span><span class="lbl">Open Dashboard</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open Dashboard</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card featured acc-emerald">
+    <div class="card acc-emerald">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🌍</span>
@@ -288,223 +237,124 @@
       <div class="card-desc">CH · CY holidays · Football · Travel · Family</div>
       <div class="actions">
         <a class="btn primary full" href="./country-calendar.html" target="_blank">
-          <span class="ic">📅</span><span class="lbl">Open Calendar</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open Calendar</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card featured acc-amber">
+    <div class="card acc-emerald">
+      <span class="accent"></span>
+      <div class="card-row">
+        <span class="card-icon">📊</span>
+        <span class="status">Live</span>
+      </div>
+      <div class="card-title">Daily Market Brief</div>
+      <div class="card-desc">Streamlit · Live data · PDF newsletter · Research</div>
+      <div class="actions">
+        <a class="btn primary full" href="https://nxman-brief-djegbbybg5wqwyjzgaxjvc.streamlit.app" target="_blank">
+          <span class="ic">→</span><span class="lbl">Open Brief</span><span class="ch">›</span>
+        </a>
+        <a class="btn full" href="https://github.com/nikoschr13/nxman-brief" target="_blank">
+          <span class="ic">⌘</span><span class="lbl">GitHub</span><span class="ch">›</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="accent"></span>
+      <div class="card-row">
+        <span class="card-icon">💼</span>
+      </div>
+      <div class="card-title">Work Tasks</div>
+      <div class="card-desc">Linked to projects, meetings, clients</div>
+      <div class="actions">
+        <a class="btn primary full" href="https://www.notion.so/26c08400d7df4ba898f1eee1c90dcd36" target="_blank">
+          <span class="ic">→</span><span class="lbl">Open Work Tasks</span><span class="ch">›</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card acc-pink">
+      <span class="accent"></span>
+      <div class="card-row">
+        <span class="card-icon">✓</span>
+        <span class="status pink">Personal</span>
+      </div>
+      <div class="card-title">Todoist</div>
+      <div class="card-desc">Personal tasks · Errands · Recurring</div>
+      <div class="actions">
+        <a class="btn primary full" href="https://todoist.com/app/today" target="_blank">
+          <span class="ic">→</span><span class="lbl">Today</span><span class="ch">›</span>
+        </a>
+        <a class="btn full" href="https://todoist.com/app/inbox" target="_blank">
+          <span class="ic">⌘</span><span class="lbl">Inbox</span><span class="ch">›</span>
+        </a>
+        <a class="btn full" href="https://todoist.com/app/upcoming" target="_blank">
+          <span class="ic">⌘</span><span class="lbl">Upcoming</span><span class="ch">›</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card acc-amber">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🎯</span>
-        <span class="status">Active</span>
+        <span class="status amber">Active</span>
       </div>
       <div class="card-title">SNIPER Trading</div>
       <div class="card-desc">Daily 4PM CET workflow · ~80% accuracy</div>
       <div class="actions">
         <a class="btn primary full" href="https://docs.google.com/spreadsheets/d/18ABqDaw_qRy3hrDgxyrn0pe1UtGMcD5oeYQrZx_VLfo/edit" target="_blank">
-          <span class="ic">📈</span><span class="lbl">1. Platinum Sheet</span><span class="ch">›</span>
+          <span class="ic">1</span><span class="lbl">Platinum Sheet</span><span class="ch">›</span>
         </a>
         <a class="btn full" href="https://drive.google.com/drive/folders/1v-cQwGRZ6MtyLafrc6WJT6c52udgrVIL" target="_blank">
-          <span class="ic">📥</span><span class="lbl">Upload Research</span><span class="ch">›</span>
+          <span class="ic">⌘</span><span class="lbl">Upload Research</span><span class="ch">›</span>
         </a>
         <button class="btn full" onclick="copyCmd('python3 ~/SNIPER/sniper_gui.py', this)">
-          <span class="ic">🖥️</span><span class="lbl">2. Launch GUI</span><span class="ch copy-hint">copy</span>
+          <span class="ic">2</span><span class="lbl">Launch GUI</span><span class="ch copy-hint">copy</span>
         </button>
         <button class="btn full" onclick="copyCmd('python3 ~/SNIPER/sniper_autopilot.py', this)">
-          <span class="ic">⚡</span><span class="lbl">3. Autopilot</span><span class="ch copy-hint">copy</span>
+          <span class="ic">3</span><span class="lbl">Autopilot</span><span class="ch copy-hint">copy</span>
         </button>
         <button class="btn full" onclick="copyCmd('python3 ~/SNIPER/sniper_signal_log.py', this)">
-          <span class="ic">📋</span><span class="lbl">4. Signal Log</span><span class="ch copy-hint">copy</span>
+          <span class="ic">4</span><span class="lbl">Signal Log</span><span class="ch copy-hint">copy</span>
         </button>
         <button class="btn full" onclick="copyCmd('python3 ~/SNIPER/sniper_3way_agreement.py', this)">
-          <span class="ic">🔀</span><span class="lbl">5. 3-Way Agreement</span><span class="ch copy-hint">copy</span>
+          <span class="ic">5</span><span class="lbl">3-Way Agreement</span><span class="ch copy-hint">copy</span>
         </button>
       </div>
     </div>
 
-    <div class="card featured acc-indigo">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
-        <span class="card-icon">🇩🇪</span>
-        <span class="status">Live</span>
+        <span class="card-icon">📖</span>
       </div>
       <div class="card-title">German Trainer</div>
       <div class="card-desc">V2.5 · 140+ phrases · Drive mode · SRS</div>
       <div class="actions">
         <a class="btn primary full" href="https://nikoschr13.github.io/German-Trainer/" target="_blank">
-          <span class="ic">📖</span><span class="lbl">Open Trainer</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open Trainer</span><span class="ch">›</span>
         </a>
         <a class="btn full" href="https://github.com/nikoschr13/German-Trainer" target="_blank">
-          <span class="ic">🐙</span><span class="lbl">GitHub</span><span class="ch">›</span>
+          <span class="ic">⌘</span><span class="lbl">GitHub</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card featured acc-gray">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🍽️</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Food & Meal Plan</div>
       <div class="card-desc">Foods catalog · Weekly meal planner</div>
       <div class="actions row">
         <a class="btn half" href="https://www.notion.so/778da70fddf44cdc92fc499b69f17cf2" target="_blank">
-          <span class="ic">🥗</span><span class="lbl">Foods</span><span class="ch">›</span>
+          <span class="ic">⌘</span><span class="lbl">Foods</span><span class="ch">›</span>
         </a>
         <a class="btn half" href="https://www.notion.so/fe8087dc1400413fa4d2b9a34d3b68a3" target="_blank">
-          <span class="ic">📆</span><span class="lbl">Meal Plan</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══════════════ TOOLS & AUTOMATIONS ══════════════ -->
-<section class="section">
-  <div class="section-header">
-    <span class="section-label">Tools & Automations</span>
-    <span class="section-rule"></span>
-  </div>
-
-  <div class="grid">
-
-    <div class="card acc-emerald">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">💬</span>
-        <span class="status">Live</span>
-      </div>
-      <div class="card-title">Telegram Assistant</div>
-      <div class="card-desc">Ideas → Notion · Calendar → Fantastical · Email summaries via Make.com</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://t.me" target="_blank">
-          <span class="ic">✈️</span><span class="lbl">Open Telegram</span><span class="ch">›</span>
-        </a>
-        <a class="btn full" href="https://www.make.com/en/scenarios" target="_blank">
-          <span class="ic">⚙️</span><span class="lbl">Make.com Scenario</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card acc-emerald">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">📋</span>
-        <span class="status">Live</span>
-      </div>
-      <div class="card-title">Meeting Agenda Generator</div>
-      <div class="card-desc">Notion checkbox → auto-generates agenda · Sends Telegram notification</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/404597eecbb743b084d79f7281e7fad9" target="_blank">
-          <span class="ic">📅</span><span class="lbl">Meetings DB</span><span class="ch">›</span>
-        </a>
-        <a class="btn full" href="https://www.make.com/en/scenarios" target="_blank">
-          <span class="ic">⚙️</span><span class="lbl">Make.com Scenario</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══════════════ KNOWLEDGE ══════════════ -->
-<section class="section">
-  <div class="section-header">
-    <span class="section-label">Knowledge</span>
-    <span class="section-rule"></span>
-  </div>
-
-  <div class="grid">
-
-    <div class="card acc-indigo">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">📚</span>
-        <span class="status muted">Notion</span>
-      </div>
-      <div class="card-title">Research Library</div>
-      <div class="card-desc">Market · Company · Asset · Industry · Macro</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/1083e443bdf043debc2ef6bc78d1782a" target="_blank">
-          <span class="ic">📚</span><span class="lbl">Open Library</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card acc-indigo">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">📈</span>
-        <span class="status muted">Notion</span>
-      </div>
-      <div class="card-title">Investment Research</div>
-      <div class="card-desc">Investment-focused notes and analysis</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/2e04012a3f1a4516948351702abd935c" target="_blank">
-          <span class="ic">📈</span><span class="lbl">Open Research</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card acc-indigo">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">🤖</span>
-        <span class="status muted">Notion</span>
-      </div>
-      <div class="card-title">AI Tools</div>
-      <div class="card-desc">Curated tools, prompts, use cases</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/46b16fe0ac994542b986ef68c4655c30" target="_blank">
-          <span class="ic">🤖</span><span class="lbl">Open AI Tools</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card acc-indigo">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">📖</span>
-        <span class="status muted">Notion</span>
-      </div>
-      <div class="card-title">Books</div>
-      <div class="card-desc">Reading list, notes, summaries</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/85980e1143cc4405b8e4ed76d91213f8" target="_blank">
-          <span class="ic">📖</span><span class="lbl">Open Books</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card acc-indigo">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">💡</span>
-        <span class="status muted">Notion</span>
-      </div>
-      <div class="card-title">Business Ideas</div>
-      <div class="card-desc">Opportunities under evaluation</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/3fc0a1b8d1684a5c9559f0d596c14b56" target="_blank">
-          <span class="ic">💼</span><span class="lbl">Open Ideas</span><span class="ch">›</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="card acc-indigo">
-      <span class="accent"></span>
-      <div class="card-row">
-        <span class="card-icon">✈️</span>
-        <span class="status muted">Notion</span>
-      </div>
-      <div class="card-title">Travel Ideas</div>
-      <div class="card-desc">Destinations and trip inspiration</div>
-      <div class="actions">
-        <a class="btn primary full" href="https://www.notion.so/51c47d396f2347afab163e3d204292c4" target="_blank">
-          <span class="ic">✈️</span><span class="lbl">Open Travel</span><span class="ch">›</span>
+          <span class="ic">⌘</span><span class="lbl">Meal Plan</span><span class="ch">›</span>
         </a>
       </div>
     </div>
@@ -517,111 +367,105 @@
   <div class="section-header">
     <span class="section-label">Life & Personal</span>
     <span class="section-rule"></span>
+    <span class="section-meta">Long-form Notion</span>
   </div>
 
   <div class="grid">
 
-    <div class="card acc-gray">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🗂️</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Client Items</div>
       <div class="card-desc">Agenda items per client · Add to next meeting</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/f6e144a8-4ab5-477a-836c-3a5697f7816c" target="_blank">
-          <span class="ic">🗂️</span><span class="lbl">Open Client Items</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card acc-amber">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">💰</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Finance Tracker</div>
       <div class="card-desc">Income · Expenses · Investments · CHF/EUR/USD</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/e0ab8f7c64be4416b530e2052c977409" target="_blank">
-          <span class="ic">💰</span><span class="lbl">Open</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card acc-amber">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🎯</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Goals & OKRs</div>
       <div class="card-desc">Annual / quarterly goals across life areas</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/6c053f454bd64e8f815955aa1f8ec9f1" target="_blank">
-          <span class="ic">🎯</span><span class="lbl">Open</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card acc-amber">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🏠</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Properties & Assets</div>
       <div class="card-desc">Properties, vehicles, accounts, valuables</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/0ab6856e5305452c89f32817a1fab876" target="_blank">
-          <span class="ic">🏠</span><span class="lbl">Open</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card acc-amber">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">💪</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Health & Fitness</div>
       <div class="card-desc">Workouts · Doctors · Medications · Metrics</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/2a87c55e2c614a01bd0b99cffbd187e8" target="_blank">
-          <span class="ic">💪</span><span class="lbl">Open</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card acc-amber">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">👨‍👧‍👧</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Family</div>
       <div class="card-desc">Birthdays · School · Activities · Doctors</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/ce37eef95e8045fbac271899d6f726a8" target="_blank">
-          <span class="ic">👨‍👧‍👧</span><span class="lbl">Open</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open</span><span class="ch">›</span>
         </a>
       </div>
     </div>
 
-    <div class="card acc-amber">
+    <div class="card">
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">📦</span>
-        <span class="status muted">Notion</span>
       </div>
       <div class="card-title">Documents Vault</div>
       <div class="card-desc">Passports, contracts, insurance · Expiry tracking</div>
       <div class="actions">
         <a class="btn primary full" href="https://www.notion.so/4836cd375f80485398bec132d94d6eab" target="_blank">
-          <span class="ic">📦</span><span class="lbl">Open</span><span class="ch">›</span>
+          <span class="ic">→</span><span class="lbl">Open</span><span class="ch">›</span>
         </a>
       </div>
     </div>
@@ -630,9 +474,8 @@
 </section>
 
 <div class="footer">
-  Nikos · Command Centre · nchristou@me.com<br>
-  <strong>iPhone home screen:</strong> Open in Safari → Share → Add to Home Screen<br>
-  Hosted at nikoschr13.github.io/German-Trainer/command_centre.html
+  Nikos Christou · <strong>nchristou@me.com</strong> · Zurich<br>
+  iPhone home screen — Open in Safari → Share → Add to Home Screen
 </div>
 
 <script>
