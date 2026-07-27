@@ -66,7 +66,32 @@
 <body>
 <div class="container">
   <h1>SNIPER Dashboard</h1>
-  <div class="subtitle">Monday, 27 July 2026 · 12:40</div>
+  <div class="subtitle">Monday, 27 July 2026 · 12:48</div>
+
+  <div style="margin-bottom:16px">
+    <button id="research-btn" onclick="readResearch()" style="background:#2a3a55;
+      color:#e0e1dd; border:1px solid #415a77; border-radius:8px; padding:9px 16px;
+      font-size:13px; font-weight:600; cursor:pointer">📥 Read Research Now</button>
+    <span id="research-status" class="card-sub" style="margin-left:10px"></span>
+  </div>
+  <script>
+  function readResearch() {
+    var s = document.getElementById('research-status');
+    s.textContent = 'Contacting bridge…';
+    fetch('http://127.0.0.1:8765/research', {method: 'POST'})
+      .then(function(r) { return r.json(); })
+      .then(function(j) {
+        s.textContent = j.ok ? '✓ Sweep started — check Drive Research_Processed in ~1 min'
+                             : ('✗ ' + (j.error || 'bridge refused'));
+      })
+      .catch(function() {
+        s.innerHTML = '✗ Bridge unreachable (works on the Mac with the bridge running). ' +
+          'Fallback — run in Terminal: ' +
+          '<code style="background:#1b263b;padding:2px 6px;border-radius:4px">' +
+          'python3 ~/SNIPER/sniper_autopilot.py --signals-only</code>';
+      });
+  }
+  </script>
   <div class="regime-bar">
     <span class="card-sub" style="min-width:28px">🇺🇸 US</span>
     <span class="chip regime-bear">S3 · BEAR_RATES_GENERIC</span>
