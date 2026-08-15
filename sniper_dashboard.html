@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SNIPER Dashboard · 2026-08-14</title>
+<title>SNIPER Dashboard · 2026-08-15</title>
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Segoe UI, sans-serif;
@@ -66,7 +66,7 @@
 <body>
 <div class="container">
   <h1>SNIPER Dashboard</h1>
-  <div class="subtitle">Friday, 14 August 2026 · 16:51</div>
+  <div class="subtitle">Saturday, 15 August 2026 · 15:28</div>
 
   <div style="margin-bottom:16px">
     <button id="research-btn" onclick="readResearch()" style="background:#2a3a55;
@@ -112,23 +112,23 @@
   <div class="cards">
     <div class="card">
       <div class="card-label">Today · Actions</div>
-      <div class="card-value">1 US · 6 EU · <span class=sell>8 SELL</span></div>
-      <div class="card-sub">11 add-to-held on US side · 11 exits in next 3d</div>
+      <div class="card-value">1 US · 6 EU</div>
+      <div class="card-sub">11 add-to-held on US side · 16 exits in next 3d</div>
     </div>
     <div class="card">
       <div class="card-label">Portfolio · Open</div>
-      <div class="card-value">55</div>
+      <div class="card-value">47</div>
       <div class="card-sub">positions running</div>
     </div>
     <div class="card">
       <div class="card-label">Total Realized PnL</div>
-      <div class="card-value win">$+16,094</div>
-      <div class="card-sub">162 closed · 58.0% hit rate</div>
+      <div class="card-value win">$+19,263</div>
+      <div class="card-sub">170 closed · 58.8% hit rate</div>
     </div>
     <div class="card">
       <div class="card-label">Avg PnL Per Trade</div>
-      <div class="card-value win">+3.04%</div>
-      <div class="card-sub">≈ $+99 avg per trade</div>
+      <div class="card-value win">+3.20%</div>
+      <div class="card-sub">≈ $+113 avg per trade</div>
     </div>
     <div class="card">
       <div class="card-label">Macro</div>
@@ -141,13 +141,13 @@
   <div class="cards">
     <div class="card">
       <div class="card-label">Winners</div>
-      <div class="card-value win">94</div>
-      <div class="card-sub">avg <span class="win">+10.63%</span> per winning trade</div>
+      <div class="card-value win">100</div>
+      <div class="card-sub">avg <span class="win">+10.64%</span> per winning trade</div>
     </div>
     <div class="card">
       <div class="card-label">Losers</div>
-      <div class="card-value loss">68</div>
-      <div class="card-sub">avg <span class="loss">-7.46%</span> per losing trade</div>
+      <div class="card-value loss">70</div>
+      <div class="card-sub">avg <span class="loss">-7.44%</span> per losing trade</div>
     </div>
     <div class="card">
       <div class="card-label">Best Trade</div>
@@ -160,7 +160,7 @@
       <div class="card-sub">single-trade max loss</div>
     </div>
   </div>
-  <h2>Positions To Sell — due now (8) · next 3 days (11)</h2>
+  <h2>Positions To Sell — due now (0) · next 3 days (16)</h2>
   <table>
     <thead><tr>
       <th>Status</th><th>Ticker</th><th>Entry Date</th><th class="num">Entry $</th>
@@ -168,229 +168,193 @@
       <th>Target Exit</th><th class="num">Days</th><th>Regime</th><th class="num">Size</th>
     </tr></thead><tbody>
     <tr>
-      <td class="sell">OVERDUE 1d</td>
-      <td class="ticker">NVDA</td>
-      <td>2026-07-23</td>
-      <td class="num">$212.06</td>
-      <td class="num">$191.89</td>
-      <td class="num loss">-9.51%</td>
-      <td>2026-08-13</td>
-      <td class="num">-1</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="sell">OVERDUE 1d</td>
-      <td class="ticker">AMD</td>
-      <td>2026-07-23</td>
-      <td class="num">$552.33</td>
-      <td class="num">$249.03</td>
-      <td class="num loss">-54.91%</td>
-      <td>2026-08-13</td>
-      <td class="num">-1</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="sell">SELL TODAY</td>
-      <td class="ticker">NKE</td>
-      <td>2026-07-24</td>
-      <td class="num">$41.14</td>
-      <td class="num">$42.33</td>
-      <td class="num win">+2.89%</td>
-      <td>2026-08-14</td>
-      <td class="num">+0</td>
-      <td>S3</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td class="sell">SELL TODAY</td>
-      <td class="ticker">HD</td>
-      <td>2026-07-24</td>
-      <td class="num">$326.08</td>
-      <td class="num">$335.12</td>
-      <td class="num win">+2.77%</td>
-      <td>2026-08-14</td>
-      <td class="num">+0</td>
-      <td>S3</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td class="sell">SELL TODAY</td>
-      <td class="ticker">AMZN</td>
-      <td>2026-07-24</td>
-      <td class="num">$232.92</td>
-      <td class="num">$237.90</td>
-      <td class="num win">+2.14%</td>
-      <td>2026-08-14</td>
-      <td class="num">+0</td>
-      <td>S3</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td class="sell">SELL TODAY</td>
-      <td class="ticker">MSFT</td>
-      <td>2026-07-24</td>
-      <td class="num">$380.69</td>
-      <td class="num">$380.40</td>
-      <td class="num loss">-0.08%</td>
-      <td>2026-08-14</td>
-      <td class="num">+0</td>
-      <td>S3</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td class="sell">SELL TODAY</td>
-      <td class="ticker">XLC</td>
-      <td>2026-07-24</td>
-      <td class="num">$106.53</td>
-      <td class="num">$115.37</td>
-      <td class="num win">+8.30%</td>
-      <td>2026-08-14</td>
-      <td class="num">+0</td>
-      <td>S3</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td class="sell">SELL TODAY</td>
-      <td class="ticker">SPY</td>
-      <td>2026-07-24</td>
-      <td class="num">$738.10</td>
-      <td class="num">$679.82</td>
-      <td class="num loss">-7.90%</td>
-      <td>2026-08-14</td>
-      <td class="num">+0</td>
-      <td>S3</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">WMT</td>
       <td>2026-07-27</td>
       <td class="num">$110.48</td>
       <td class="num">$128.60</td>
       <td class="num win">+16.40%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S3</td>
       <td class="num">0.60×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">TSM</td>
       <td>2026-07-27</td>
       <td class="num">$400.85</td>
       <td class="num">$370.53</td>
       <td class="num loss">-7.56%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S3</td>
       <td class="num">0.60×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">AMAT</td>
       <td>2026-07-27</td>
       <td class="num">$531.79</td>
       <td class="num">$393.00</td>
       <td class="num loss">-26.10%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S3</td>
       <td class="num">0.60×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">SMH</td>
       <td>2026-07-27</td>
       <td class="num">$556.43</td>
       <td class="num">$441.66</td>
       <td class="num loss">-20.63%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S3</td>
       <td class="num">0.60×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">XLK</td>
       <td>2026-07-27</td>
       <td class="num">$176.75</td>
       <td class="num">$143.90</td>
       <td class="num loss">-18.59%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S3</td>
       <td class="num">0.60×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">INTC</td>
       <td>2026-07-27</td>
       <td class="num">$92.62</td>
       <td class="num">$64.20</td>
       <td class="num loss">-30.68%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S3</td>
       <td class="num">0.60×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">ALV.DE</td>
       <td>2026-07-27</td>
       <td class="num">$429.20</td>
-      <td class="num">$438.90</td>
-      <td class="num win">+2.26%</td>
+      <td class="num">$442.70</td>
+      <td class="num win">+3.15%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S5</td>
       <td class="num">0.30×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">BNP.PA</td>
       <td>2026-07-27</td>
       <td class="num">$105.92</td>
-      <td class="num">$112.48</td>
-      <td class="num win">+6.19%</td>
+      <td class="num">$112.10</td>
+      <td class="num win">+5.83%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S5</td>
       <td class="num">0.30×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">HSBA.L</td>
       <td>2026-07-27</td>
       <td class="num">$1560.60</td>
       <td class="num">$1527.80</td>
       <td class="num loss">-2.10%</td>
       <td>2026-08-17</td>
-      <td class="num">+3</td>
+      <td class="num">+2</td>
       <td>S5</td>
       <td class="num">0.30×</td>
     </tr>
     <tr>
-      <td class="add">in 3d</td>
+      <td class="add">in 2d</td>
       <td class="ticker">AIR.PA</td>
       <td>2026-07-27</td>
       <td class="num">$206.05</td>
-      <td class="num">$213.65</td>
-      <td class="num win">+3.69%</td>
+      <td class="num">$215.40</td>
+      <td class="num win">+4.54%</td>
       <td>2026-08-17</td>
+      <td class="num">+2</td>
+      <td>S5</td>
+      <td class="num">0.30×</td>
+    </tr>
+    <tr>
+      <td class="add">in 2d</td>
+      <td class="ticker">NOVN.SW</td>
+      <td>2026-07-27</td>
+      <td class="num">$126.90</td>
+      <td class="num">$122.44</td>
+      <td class="num loss">-3.51%</td>
+      <td>2026-08-17</td>
+      <td class="num">+2</td>
+      <td>S5</td>
+      <td class="num">0.30×</td>
+    </tr>
+    <tr>
+      <td class="add">in 3d</td>
+      <td class="ticker">AVGO</td>
+      <td>2026-07-28</td>
+      <td class="num">$375.91</td>
+      <td class="num">$374.09</td>
+      <td class="num loss">-0.48%</td>
+      <td>2026-08-18</td>
+      <td class="num">+3</td>
+      <td>S3</td>
+      <td class="num">0.60×</td>
+    </tr>
+    <tr>
+      <td class="add">in 3d</td>
+      <td class="ticker">SHEL.L</td>
+      <td>2026-07-28</td>
+      <td class="num">$3305.50</td>
+      <td class="num">$3320.00</td>
+      <td class="num win">+0.44%</td>
+      <td>2026-08-18</td>
       <td class="num">+3</td>
       <td>S5</td>
       <td class="num">0.30×</td>
     </tr>
     <tr>
       <td class="add">in 3d</td>
-      <td class="ticker">NOVN.SW</td>
-      <td>2026-07-27</td>
-      <td class="num">$126.90</td>
-      <td class="num">$124.20</td>
-      <td class="num loss">-2.13%</td>
-      <td>2026-08-17</td>
+      <td class="ticker">TTE.PA</td>
+      <td>2026-07-28</td>
+      <td class="num">$75.90</td>
+      <td class="num">$75.78</td>
+      <td class="num loss">-0.16%</td>
+      <td>2026-08-18</td>
+      <td class="num">+3</td>
+      <td>S5</td>
+      <td class="num">0.30×</td>
+    </tr>
+    <tr>
+      <td class="add">in 3d</td>
+      <td class="ticker">INGA.AS</td>
+      <td>2026-07-28</td>
+      <td class="num">$29.40</td>
+      <td class="num">$30.89</td>
+      <td class="num win">+5.07%</td>
+      <td>2026-08-18</td>
+      <td class="num">+3</td>
+      <td>S5</td>
+      <td class="num">0.30×</td>
+    </tr>
+    <tr>
+      <td class="add">in 3d</td>
+      <td class="ticker">BP.L</td>
+      <td>2026-07-28</td>
+      <td class="num">$548.40</td>
+      <td class="num">$522.90</td>
+      <td class="num loss">-4.65%</td>
+      <td>2026-08-18</td>
       <td class="num">+3</td>
       <td>S5</td>
       <td class="num">0.30×</td>
@@ -559,7 +523,7 @@
       <td>Tech</td><td class="add">2026-08-13</td><td>2026-09-03</td>
     </tr>
   </tbody></table>
-  <h2>Open Positions (55: 22 EU · 33 US) — unrealized <span class='loss'>$-10,393</span> <span style='font-weight:400;text-transform:none;letter-spacing:0'>(55 marked, prices: last pipeline close)</span></h2>
+  <h2>Open Positions (47: 22 EU · 25 US) — unrealized <span class='loss'>$-8,493</span> <span style='font-weight:400;text-transform:none;letter-spacing:0'>(47 marked, prices: last pipeline close)</span></h2>
   <table>
     <thead><tr>
       <th>Region</th><th>Ticker</th><th>Entry Date</th><th class="num">Entry $</th>
@@ -572,10 +536,10 @@
       <td class="ticker">ALV.DE</td>
       <td>2026-07-27</td>
       <td class="num">$429.20</td>
-      <td class="num">$438.90</td>
-      <td class="num win">+2.26%</td>
+      <td class="num">$442.70</td>
+      <td class="num win">+3.15%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -584,10 +548,10 @@
       <td class="ticker">BNP.PA</td>
       <td>2026-07-27</td>
       <td class="num">$105.92</td>
-      <td class="num">$112.48</td>
-      <td class="num win">+6.19%</td>
+      <td class="num">$112.10</td>
+      <td class="num win">+5.83%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -599,7 +563,7 @@
       <td class="num">$1527.80</td>
       <td class="num loss">-2.10%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -608,10 +572,10 @@
       <td class="ticker">AIR.PA</td>
       <td>2026-07-27</td>
       <td class="num">$206.05</td>
-      <td class="num">$213.65</td>
-      <td class="num win">+3.69%</td>
+      <td class="num">$215.40</td>
+      <td class="num win">+4.54%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -620,10 +584,10 @@
       <td class="ticker">NOVN.SW</td>
       <td>2026-07-27</td>
       <td class="num">$126.90</td>
-      <td class="num">$124.20</td>
-      <td class="num loss">-2.13%</td>
+      <td class="num">$122.44</td>
+      <td class="num loss">-3.51%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -632,10 +596,10 @@
       <td class="ticker">SHEL.L</td>
       <td>2026-07-28</td>
       <td class="num">$3305.50</td>
-      <td class="num">$3295.50</td>
-      <td class="num loss">-0.30%</td>
+      <td class="num">$3320.00</td>
+      <td class="num win">+0.44%</td>
       <td>2026-08-18</td>
-      <td class="num">4d</td>
+      <td class="num">3d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -644,10 +608,10 @@
       <td class="ticker">TTE.PA</td>
       <td>2026-07-28</td>
       <td class="num">$75.90</td>
-      <td class="num">$75.53</td>
-      <td class="num loss">-0.49%</td>
+      <td class="num">$75.78</td>
+      <td class="num loss">-0.16%</td>
       <td>2026-08-18</td>
-      <td class="num">4d</td>
+      <td class="num">3d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -656,10 +620,10 @@
       <td class="ticker">INGA.AS</td>
       <td>2026-07-28</td>
       <td class="num">$29.40</td>
-      <td class="num">$30.85</td>
-      <td class="num win">+4.93%</td>
+      <td class="num">$30.89</td>
+      <td class="num win">+5.07%</td>
       <td>2026-08-18</td>
-      <td class="num">4d</td>
+      <td class="num">3d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -668,10 +632,10 @@
       <td class="ticker">BP.L</td>
       <td>2026-07-28</td>
       <td class="num">$548.40</td>
-      <td class="num">$523.20</td>
-      <td class="num loss">-4.60%</td>
+      <td class="num">$522.90</td>
+      <td class="num loss">-4.65%</td>
       <td>2026-08-18</td>
-      <td class="num">4d</td>
+      <td class="num">3d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -680,10 +644,10 @@
       <td class="ticker">SIE.DE</td>
       <td>2026-07-29</td>
       <td class="num">$271.65</td>
-      <td class="num">$281.95</td>
-      <td class="num win">+3.79%</td>
+      <td class="num">$284.00</td>
+      <td class="num win">+4.55%</td>
       <td>2026-08-19</td>
-      <td class="num">5d</td>
+      <td class="num">4d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -692,10 +656,10 @@
       <td class="ticker">SREN.SW</td>
       <td>2026-07-29</td>
       <td class="num">$136.45</td>
-      <td class="num">$137.20</td>
-      <td class="num win">+0.55%</td>
+      <td class="num">$139.45</td>
+      <td class="num win">+2.20%</td>
       <td>2026-08-19</td>
-      <td class="num">5d</td>
+      <td class="num">4d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -704,10 +668,10 @@
       <td class="ticker">MRK.DE</td>
       <td>2026-07-29</td>
       <td class="num">$141.75</td>
-      <td class="num">$140.00</td>
-      <td class="num loss">-1.23%</td>
+      <td class="num">$136.30</td>
+      <td class="num loss">-3.84%</td>
       <td>2026-08-19</td>
-      <td class="num">5d</td>
+      <td class="num">4d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -716,10 +680,10 @@
       <td class="ticker">OR.PA</td>
       <td>2026-07-29</td>
       <td class="num">$387.50</td>
-      <td class="num">$380.45</td>
-      <td class="num loss">-1.82%</td>
+      <td class="num">$379.50</td>
+      <td class="num loss">-2.06%</td>
       <td>2026-08-19</td>
-      <td class="num">5d</td>
+      <td class="num">4d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -728,10 +692,10 @@
       <td class="ticker">SIKA.SW</td>
       <td>2026-07-30</td>
       <td class="num">$179.00</td>
-      <td class="num">$191.15</td>
-      <td class="num win">+6.79%</td>
+      <td class="num">$190.85</td>
+      <td class="num win">+6.62%</td>
       <td>2026-08-20</td>
-      <td class="num">6d</td>
+      <td class="num">5d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -740,10 +704,10 @@
       <td class="ticker">DBK.DE</td>
       <td>2026-07-31</td>
       <td class="num">$31.98</td>
-      <td class="num">$33.35</td>
-      <td class="num win">+4.28%</td>
+      <td class="num">$33.38</td>
+      <td class="num win">+4.38%</td>
       <td>2026-08-21</td>
-      <td class="num">7d</td>
+      <td class="num">6d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -752,10 +716,10 @@
       <td class="ticker">HEIA.AS</td>
       <td>2026-07-31</td>
       <td class="num">$78.86</td>
-      <td class="num">$74.02</td>
-      <td class="num loss">-6.14%</td>
+      <td class="num">$73.52</td>
+      <td class="num loss">-6.77%</td>
       <td>2026-08-21</td>
-      <td class="num">7d</td>
+      <td class="num">6d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -764,10 +728,10 @@
       <td class="ticker">SAP.DE</td>
       <td>2026-07-31</td>
       <td class="num">$154.00</td>
-      <td class="num">$175.96</td>
-      <td class="num win">+14.26%</td>
+      <td class="num">$180.14</td>
+      <td class="num win">+16.97%</td>
       <td>2026-08-21</td>
-      <td class="num">7d</td>
+      <td class="num">6d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -776,10 +740,10 @@
       <td class="ticker">UBSG.SW</td>
       <td>2026-08-05</td>
       <td class="num">$43.42</td>
-      <td class="num">$43.65</td>
-      <td class="num win">+0.53%</td>
+      <td class="num">$43.55</td>
+      <td class="num win">+0.30%</td>
       <td>2026-08-26</td>
-      <td class="num">12d</td>
+      <td class="num">11d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -788,10 +752,10 @@
       <td class="ticker">BAYN.DE</td>
       <td>2026-08-06</td>
       <td class="num">$49.28</td>
-      <td class="num">$47.76</td>
-      <td class="num loss">-3.08%</td>
+      <td class="num">$47.79</td>
+      <td class="num loss">-3.02%</td>
       <td>2026-08-27</td>
-      <td class="num">13d</td>
+      <td class="num">12d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -800,10 +764,10 @@
       <td class="ticker">LONN.SW</td>
       <td>2026-08-06</td>
       <td class="num">$566.20</td>
-      <td class="num">$572.80</td>
-      <td class="num win">+1.17%</td>
+      <td class="num">$562.60</td>
+      <td class="num loss">-0.64%</td>
       <td>2026-08-27</td>
-      <td class="num">13d</td>
+      <td class="num">12d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -812,10 +776,10 @@
       <td class="ticker">RIO.L</td>
       <td>2026-08-06</td>
       <td class="num">$7487.00</td>
-      <td class="num">$7522.89</td>
-      <td class="num win">+0.48%</td>
+      <td class="num">$7059.00</td>
+      <td class="num loss">-5.72%</td>
       <td>2026-08-27</td>
-      <td class="num">13d</td>
+      <td class="num">12d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
     </tr>
@@ -824,108 +788,12 @@
       <td class="ticker">ABBN.SW</td>
       <td>2026-08-13</td>
       <td class="num">$83.60</td>
-      <td class="num">$83.48</td>
-      <td class="num loss">-0.14%</td>
+      <td class="num">$82.78</td>
+      <td class="num loss">-0.98%</td>
       <td>2026-09-03</td>
-      <td class="num">20d</td>
+      <td class="num">19d</td>
       <td>Unknown</td>
       <td class="num">0.30×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">NVDA</td>
-      <td>2026-07-23</td>
-      <td class="num">$212.06</td>
-      <td class="num">$191.89</td>
-      <td class="num loss">-9.51%</td>
-      <td>2026-08-13</td>
-      <td class="num">-1d</td>
-      <td>Tech</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">AMD</td>
-      <td>2026-07-23</td>
-      <td class="num">$552.33</td>
-      <td class="num">$249.03</td>
-      <td class="num loss">-54.91%</td>
-      <td>2026-08-13</td>
-      <td class="num">-1d</td>
-      <td>Tech</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">NKE</td>
-      <td>2026-07-24</td>
-      <td class="num">$41.14</td>
-      <td class="num">$42.33</td>
-      <td class="num win">+2.89%</td>
-      <td>2026-08-14</td>
-      <td class="num">0d</td>
-      <td>Consumer</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">HD</td>
-      <td>2026-07-24</td>
-      <td class="num">$326.08</td>
-      <td class="num">$335.12</td>
-      <td class="num win">+2.77%</td>
-      <td>2026-08-14</td>
-      <td class="num">0d</td>
-      <td>Consumer</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">AMZN</td>
-      <td>2026-07-24</td>
-      <td class="num">$232.92</td>
-      <td class="num">$237.90</td>
-      <td class="num win">+2.14%</td>
-      <td>2026-08-14</td>
-      <td class="num">0d</td>
-      <td>Consumer</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">MSFT</td>
-      <td>2026-07-24</td>
-      <td class="num">$380.69</td>
-      <td class="num">$380.40</td>
-      <td class="num loss">-0.08%</td>
-      <td>2026-08-14</td>
-      <td class="num">0d</td>
-      <td>Tech</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">XLC</td>
-      <td>2026-07-24</td>
-      <td class="num">$106.53</td>
-      <td class="num">$115.37</td>
-      <td class="num win">+8.30%</td>
-      <td>2026-08-14</td>
-      <td class="num">0d</td>
-      <td>ETF-Sector</td>
-      <td class="num">0.60×</td>
-    </tr>
-    <tr>
-      <td>🇺🇸 US</td>
-      <td class="ticker">SPY</td>
-      <td>2026-07-24</td>
-      <td class="num">$738.10</td>
-      <td class="num">$679.82</td>
-      <td class="num loss">-7.90%</td>
-      <td>2026-08-14</td>
-      <td class="num">0d</td>
-      <td>ETF-Broad</td>
-      <td class="num">0.60×</td>
     </tr>
     <tr>
       <td>🇺🇸 US</td>
@@ -935,7 +803,7 @@
       <td class="num">$128.60</td>
       <td class="num win">+16.40%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Consumer</td>
       <td class="num">0.60×</td>
     </tr>
@@ -947,7 +815,7 @@
       <td class="num">$370.53</td>
       <td class="num loss">-7.56%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Tech</td>
       <td class="num">0.60×</td>
     </tr>
@@ -959,7 +827,7 @@
       <td class="num">$393.00</td>
       <td class="num loss">-26.10%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Tech</td>
       <td class="num">0.60×</td>
     </tr>
@@ -971,7 +839,7 @@
       <td class="num">$441.66</td>
       <td class="num loss">-20.63%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>ETF-Theme</td>
       <td class="num">0.60×</td>
     </tr>
@@ -983,7 +851,7 @@
       <td class="num">$143.90</td>
       <td class="num loss">-18.59%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>ETF-Sector</td>
       <td class="num">0.60×</td>
     </tr>
@@ -995,7 +863,7 @@
       <td class="num">$64.20</td>
       <td class="num loss">-30.68%</td>
       <td>2026-08-17</td>
-      <td class="num">3d</td>
+      <td class="num">2d</td>
       <td>Tech</td>
       <td class="num">0.60×</td>
     </tr>
@@ -1007,7 +875,7 @@
       <td class="num">$374.09</td>
       <td class="num loss">-0.48%</td>
       <td>2026-08-18</td>
-      <td class="num">4d</td>
+      <td class="num">3d</td>
       <td>Tech</td>
       <td class="num">0.60×</td>
     </tr>
@@ -1019,7 +887,7 @@
       <td class="num">$416.90</td>
       <td class="num loss">-48.16%</td>
       <td>2026-08-19</td>
-      <td class="num">5d</td>
+      <td class="num">4d</td>
       <td>Tech</td>
       <td class="num">0.60×</td>
     </tr>
@@ -1031,7 +899,7 @@
       <td class="num">$262.06</td>
       <td class="num loss">-9.95%</td>
       <td>2026-08-20</td>
-      <td class="num">6d</td>
+      <td class="num">5d</td>
       <td>ETF-Broad</td>
       <td class="num">0.60×</td>
     </tr>
@@ -1043,7 +911,7 @@
       <td class="num">$171.12</td>
       <td class="num loss">-3.82%</td>
       <td>2026-08-20</td>
-      <td class="num">6d</td>
+      <td class="num">5d</td>
       <td>ETF-Sector</td>
       <td class="num">0.60×</td>
     </tr>
@@ -1055,7 +923,7 @@
       <td class="num">$26.82</td>
       <td class="num loss">+0.00%</td>
       <td>2026-08-28</td>
-      <td class="num">14d</td>
+      <td class="num">13d</td>
       <td>Healthcare</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1067,7 +935,7 @@
       <td class="num">$476.48</td>
       <td class="num loss">+0.00%</td>
       <td>2026-08-28</td>
-      <td class="num">14d</td>
+      <td class="num">13d</td>
       <td>ETF-Broad</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1079,7 +947,7 @@
       <td class="num">$52.54</td>
       <td class="num loss">+0.00%</td>
       <td>2026-08-31</td>
-      <td class="num">17d</td>
+      <td class="num">16d</td>
       <td>Financials</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1091,7 +959,7 @@
       <td class="num">$57.29</td>
       <td class="num loss">+0.00%</td>
       <td>2026-08-31</td>
-      <td class="num">17d</td>
+      <td class="num">16d</td>
       <td>ETF-Sector</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1103,7 +971,7 @@
       <td class="num">$1182.31</td>
       <td class="num loss">-3.39%</td>
       <td>2026-09-01</td>
-      <td class="num">18d</td>
+      <td class="num">17d</td>
       <td>Healthcare</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1115,7 +983,7 @@
       <td class="num">$309.24</td>
       <td class="num loss">+0.00%</td>
       <td>2026-09-01</td>
-      <td class="num">18d</td>
+      <td class="num">17d</td>
       <td>Financials</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1127,7 +995,7 @@
       <td class="num">$146.43</td>
       <td class="num loss">+0.00%</td>
       <td>2026-09-01</td>
-      <td class="num">18d</td>
+      <td class="num">17d</td>
       <td>ETF-Sector</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1139,7 +1007,7 @@
       <td class="num">$112.63</td>
       <td class="num loss">+0.00%</td>
       <td>2026-09-01</td>
-      <td class="num">18d</td>
+      <td class="num">17d</td>
       <td>ETF-Sector</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1151,7 +1019,7 @@
       <td class="num">$615.41</td>
       <td class="num loss">-0.48%</td>
       <td>2026-09-02</td>
-      <td class="num">19d</td>
+      <td class="num">18d</td>
       <td>Industrials</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1163,7 +1031,7 @@
       <td class="num">$134.76</td>
       <td class="num win">+2.08%</td>
       <td>2026-09-02</td>
-      <td class="num">19d</td>
+      <td class="num">18d</td>
       <td>Healthcare</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1175,7 +1043,7 @@
       <td class="num">$126.40</td>
       <td class="num loss">+0.00%</td>
       <td>2026-09-02</td>
-      <td class="num">19d</td>
+      <td class="num">18d</td>
       <td>Financials</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1187,7 +1055,7 @@
       <td class="num">$85.72</td>
       <td class="num loss">+0.00%</td>
       <td>2026-09-02</td>
-      <td class="num">19d</td>
+      <td class="num">18d</td>
       <td>Financials</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1199,7 +1067,7 @@
       <td class="num">$52.21</td>
       <td class="num loss">+0.00%</td>
       <td>2026-09-02</td>
-      <td class="num">19d</td>
+      <td class="num">18d</td>
       <td>ETF-Sector</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1211,7 +1079,7 @@
       <td class="num">$272.81</td>
       <td class="num loss">-1.60%</td>
       <td>2026-09-03</td>
-      <td class="num">20d</td>
+      <td class="num">19d</td>
       <td>Consumer</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1223,7 +1091,7 @@
       <td class="num">$150.10</td>
       <td class="num loss">+0.00%</td>
       <td>2026-09-03</td>
-      <td class="num">20d</td>
+      <td class="num">19d</td>
       <td>Tech</td>
       <td class="num">0.40×</td>
     </tr>
@@ -1236,6 +1104,94 @@
       <th class="num">P/L %</th><th class="num">P/L $</th>
       <th>Regime</th><th class="num">Size</th>
     </tr></thead><tbody>
+    <tr>
+      <td class="ticker">NKE</td>
+      <td>2026-07-24</td>
+      <td class="num">$41.14</td>
+      <td>2026-08-14</td>
+      <td class="num">$40.73</td>
+      <td class="num loss">-1.00%</td>
+      <td class="num loss">$-60</td>
+      <td>S3</td>
+      <td class="num">0.60×</td>
+    </tr>
+    <tr>
+      <td class="ticker">HD</td>
+      <td>2026-07-24</td>
+      <td class="num">$326.08</td>
+      <td>2026-08-14</td>
+      <td class="num">$338.86</td>
+      <td class="num win">+3.92%</td>
+      <td class="num win">$+235</td>
+      <td>S3</td>
+      <td class="num">0.60×</td>
+    </tr>
+    <tr>
+      <td class="ticker">AMZN</td>
+      <td>2026-07-24</td>
+      <td class="num">$232.92</td>
+      <td>2026-08-14</td>
+      <td class="num">$262.65</td>
+      <td class="num win">+12.76%</td>
+      <td class="num win">$+766</td>
+      <td>S3</td>
+      <td class="num">0.60×</td>
+    </tr>
+    <tr>
+      <td class="ticker">MSFT</td>
+      <td>2026-07-24</td>
+      <td class="num">$380.69</td>
+      <td>2026-08-14</td>
+      <td class="num">$495.40</td>
+      <td class="num win">+30.13%</td>
+      <td class="num win">$+1,808</td>
+      <td>S3</td>
+      <td class="num">0.60×</td>
+    </tr>
+    <tr>
+      <td class="ticker">XLC</td>
+      <td>2026-07-24</td>
+      <td class="num">$106.53</td>
+      <td>2026-08-14</td>
+      <td class="num">$112.95</td>
+      <td class="num win">+6.03%</td>
+      <td class="num win">$+362</td>
+      <td>S3</td>
+      <td class="num">0.60×</td>
+    </tr>
+    <tr>
+      <td class="ticker">SPY</td>
+      <td>2026-07-24</td>
+      <td class="num">$738.10</td>
+      <td>2026-08-14</td>
+      <td class="num">$776.34</td>
+      <td class="num win">+5.18%</td>
+      <td class="num win">$+311</td>
+      <td>S3</td>
+      <td class="num">0.60×</td>
+    </tr>
+    <tr>
+      <td class="ticker">NVDA</td>
+      <td>2026-07-23</td>
+      <td class="num">$212.06</td>
+      <td>2026-08-13</td>
+      <td class="num">$225.30</td>
+      <td class="num win">+6.24%</td>
+      <td class="num win">$+250</td>
+      <td>S4</td>
+      <td class="num">0.40×</td>
+    </tr>
+    <tr>
+      <td class="ticker">AMD</td>
+      <td>2026-07-23</td>
+      <td class="num">$552.33</td>
+      <td>2026-08-13</td>
+      <td class="num">$483.01</td>
+      <td class="num loss">-12.55%</td>
+      <td class="num loss">$-502</td>
+      <td>S4</td>
+      <td class="num">0.40×</td>
+    </tr>
     <tr>
       <td class="ticker">QQQ</td>
       <td>2026-07-21</td>
@@ -1368,94 +1324,6 @@
       <td>S4</td>
       <td class="num">0.40×</td>
     </tr>
-    <tr>
-      <td class="ticker">OXY</td>
-      <td>2026-07-20</td>
-      <td class="num">$54.79</td>
-      <td>2026-08-11</td>
-      <td class="num">$58.65</td>
-      <td class="num win">+7.05%</td>
-      <td class="num win">$+282</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="ticker">ADBE</td>
-      <td>2026-07-17</td>
-      <td class="num">$234.92</td>
-      <td>2026-08-10</td>
-      <td class="num">$265.21</td>
-      <td class="num win">+12.89%</td>
-      <td class="num win">$+516</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="ticker">TMUS</td>
-      <td>2026-07-17</td>
-      <td class="num">$195.86</td>
-      <td>2026-08-10</td>
-      <td class="num">$177.19</td>
-      <td class="num loss">-9.53%</td>
-      <td class="num loss">$-381</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="ticker">BIIB</td>
-      <td>2026-07-17</td>
-      <td class="num">$213.67</td>
-      <td>2026-08-10</td>
-      <td class="num">$207.94</td>
-      <td class="num loss">-2.68%</td>
-      <td class="num loss">$-107</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="ticker">KRE</td>
-      <td>2026-07-17</td>
-      <td class="num">$77.18</td>
-      <td>2026-08-10</td>
-      <td class="num">$76.21</td>
-      <td class="num loss">-1.26%</td>
-      <td class="num loss">$-50</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="ticker">AAPL</td>
-      <td>2026-07-17</td>
-      <td class="num">$331.90</td>
-      <td>2026-08-10</td>
-      <td class="num">$313.33</td>
-      <td class="num loss">-5.60%</td>
-      <td class="num loss">$-224</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="ticker">BAC</td>
-      <td>2026-07-17</td>
-      <td class="num">$61.53</td>
-      <td>2026-08-10</td>
-      <td class="num">$63.17</td>
-      <td class="num win">+2.67%</td>
-      <td class="num win">$+107</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
-    <tr>
-      <td class="ticker">CRM</td>
-      <td>2026-07-17</td>
-      <td class="num">$173.27</td>
-      <td>2026-08-10</td>
-      <td class="num">$192.74</td>
-      <td class="num win">+11.24%</td>
-      <td class="num win">$+450</td>
-      <td>S4</td>
-      <td class="num">0.40×</td>
-    </tr>
   </tbody></table>
   <h2>Regime Guide — where the system trades and how big</h2>
   <table>
@@ -1526,7 +1394,7 @@
     Historical hit / mean are from the original cross-validated backtest.
   </div>
   <div class="footer">
-    <span>Brief: 2026-08-14 09:41 · Positions: 55 open / 163 closed · Realized $+16,094 (58.0% hit)</span>
+    <span>Brief: 2026-08-14 09:41 · Positions: 47 open / 171 closed · Realized $+19,263 (58.8% hit)</span>
     <span>Regenerate: <code>python3 ~/SNIPER/sniper_dashboard.py</code></span>
   </div>
 </div>
