@@ -264,23 +264,22 @@
       <span class="accent"></span>
       <div class="card-row">
         <span class="card-icon">🧠</span>
+        <span class="status" id="ai-pill" style="display:none">Live</span>
       </div>
       <div class="card-title">AI Universe</div>
       <div class="card-desc">128 AI-infra names · Wyckoff phases · Mosh replication check</div>
       <div class="actions">
-        <button class="btn primary full" onclick="copyCmd('python3 ~/SNIPER/sniper_ai_universe.py --html --json', this)">
-          <span class="ic">1</span><span class="lbl">Run Dashboard</span><span class="ch copy-hint">copy</span>
+        <button class="btn primary full" id="ai-run" onclick="aiRun()">
+          <span class="ic">▶</span><span class="lbl">Run Screener</span><span class="ch" id="ai-run-ch">›</span>
         </button>
-        <button class="btn full" onclick="copyCmd('python3 ~/SNIPER/sniper_ai_universe.py --compare', this)">
-          <span class="ic">2</span><span class="lbl">Compare vs Mosh</span><span class="ch copy-hint">copy</span>
-        </button>
-        <button class="btn full" onclick="copyCmd('open ~/Downloads/ai_universe_dashboard.html', this)">
-          <span class="ic">3</span><span class="lbl">Open Output</span><span class="ch copy-hint">copy</span>
-        </button>
+        <a class="btn full" id="ai-open" href="http://127.0.0.1:8765/ai/screener" target="_blank" rel="noopener noreferrer">
+          <span class="ic">→</span><span class="lbl">Open Screener</span><span class="ch">›</span>
+        </a>
         <a class="btn full" href="https://docs.google.com/spreadsheets/d/10nAH2yzmHVSnGknXmRr0DbnAILr209Z7oPeM4YBud7Q/edit" target="_blank" rel="noopener noreferrer">
           <span class="ic">⌘</span><span class="lbl">Mosh AI Market Sheet</span><span class="ch">›</span>
         </a>
       </div>
+      <div class="card-desc" id="ai-status" style="font-size:11px;color:var(--text-3)"></div>
     </div>
 
     <div class="card">
@@ -346,6 +345,76 @@
   }
   updateDate();
   setInterval(updateDate, 30000);
+
+  // ── AI Universe card → SNIPER bridge (127.0.0.1:8765) ──
+  var AI_BRIDGE = 'http://127.0.0.1:8765';
+  var aiPoll = null;
+
+  function aiSay(msg) { document.getElementById('ai-status').innerHTML = msg; }
+
+  function aiFallback() {
+    document.getElementById('ai-pill').style.display = 'none';
+    aiSay('Bridge unreachable — this runs on the Mac with the bridge up. ' +
+          '<a href="#" onclick="copyCmd(\'python3 ~/SNIPER/sniper_ai_universe.py --mosh-view\', ' +
+          'this.parentNode.parentNode);return false" style="color:var(--primary)">Copy the command</a> ' +
+          '<span class="copy-hint"></span>');
+  }
+
+  function aiStatus(quiet) {
+    return fetch(AI_BRIDGE + '/ai/status')
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var pill = document.getElementById('ai-pill');
+        pill.style.display = '';
+        pill.textContent = 'Bridge live';
+        if (j.built) {
+          var d = new Date(j.built);
+          if (!quiet) aiSay('Last built ' + d.toLocaleString('en-GB',
+            { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }));
+        } else if (!quiet) {
+          aiSay('No screener built yet — hit Run.');
+        }
+        return j;
+      })
+      .catch(function () { aiFallback(); return null; });
+  }
+
+  function aiRun() {
+    var b = document.getElementById('ai-run');
+    aiSay('Starting…');
+    fetch(AI_BRIDGE + '/ai', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({})
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j.ok) { aiSay('✗ ' + (j.error || 'bridge refused')); return; }
+        b.disabled = true; b.style.opacity = 0.55;
+        document.getElementById('ai-run-ch').textContent = 'running';
+        var t0 = Date.now();
+        aiSay('Building — 128 tickers with market caps, ~3-5 min.');
+        if (aiPoll) clearInterval(aiPoll);
+        aiPoll = setInterval(function () {
+          aiStatus(true).then(function (st) {
+            if (!st) return;
+            var run = st.last_run || {};
+            if (run.status === 'done' || run.status === 'failed') {
+              clearInterval(aiPoll); aiPoll = null;
+              b.disabled = false; b.style.opacity = 1;
+              document.getElementById('ai-run-ch').textContent = '›';
+              var secs = Math.round((Date.now() - t0) / 1000);
+              aiSay(run.status === 'done'
+                ? '✓ Built in ' + secs + 's — open the screener.'
+                : '✗ Run failed (exit ' + run.returncode + ') — see ~/Library/Logs/sniper_bridge/');
+            }
+          });
+        }, 5000);
+      })
+      .catch(aiFallback);
+  }
+
+  aiStatus(false);
 
   function copyCmd(cmd, btn) {
     navigator.clipboard.writeText(cmd).then(() => {
