@@ -30,7 +30,7 @@ button{cursor:pointer;font-weight:600;background:var(--accent);color:white;borde
 @media (max-width:820px){.toolbar,.grid,.sessionRow,.homeGrid{grid-template-columns:1fr 1fr}.german{font-size:24px}.english{font-size:17px}.list{max-height:none}}
 @media (max-width:820px){.toolbar,.grid,.sessionRow{grid-template-columns:1fr}}
 </style></head><body><div class='wrap'>
-<div class='hero'><div class='version'>V3.2 Practice anywhere</div><h1>German Trainer</h1><div class='sub'>Adaptive lessons that learn from your mistakes, your own hands-free audio course for the car, and custom stories for your walks.</div>
+<div class='hero'><div class='version'>V3.3 Tap where you are</div><h1>German Trainer</h1><div class='sub'>Adaptive lessons that learn from your mistakes, your own hands-free audio course for the car, and custom stories for your walks.</div>
 <div class='tabs'><button class='tab active' data-view='learn'>🎓 Learn</button><button class='tab' data-view='course'>🎧 Course</button><button class='tab' data-view='stories'>📖 Stories</button><button class='tab' data-view='drive'>🚗 Drive</button><button class='tab' data-view='talk'>🎤 Talk</button><button class='tab' data-view='browse'>Browse</button><button class='tab' data-view='quiz'>Quiz</button><button class='tab' data-view='stats'>📊 Stats</button><button class='tab' data-view='builder'>My phrases</button></div>
 <div id='browseControls' class='toolbar hidden'><input id='search' placeholder='Search German, English, or note'><select id='category'></select><button id='shuffle'>Shuffle card</button></div>
 <div id='syncBar' style='display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:10px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted)'><span id='syncStatus'>Not signed in — progress saved locally only</span><button id='authBtn' style='width:auto;min-height:36px;padding:6px 14px;font-size:13px'>Sign in with Google</button></div>
@@ -353,15 +353,21 @@ function learnHomeHtml(){
     <div class='pill' style='text-align:center;padding:12px 8px'><div style='font-size:26px;font-weight:700;line-height:1'>${mastN}</div><div class='small' style='margin-top:4px'>🏆 Mastered</div></div>
   </div>
   ${todaysPlanHtml()}
-  <div style='margin-top:14px;font-weight:600'>Where are you right now?</div>
-  <div class='actions' style='margin-top:8px'>${Object.entries(CONTEXTS).map(([k,c])=>`<button class='${(state.context||'any')===k?'':'secondary'}' style='width:auto' onclick="setContextAction('${k}')">${c.label}</button>`).join('')}</div>
-  <div class='small' style='margin-top:8px'>${CONTEXTS[state.context||'any'].desc}${(state.context||'any')==='any'?" In the car or gym, use the <a href='#' onclick=\"setView('course');return false\">🎧 Course</a> instead.":''}</div>
-  <div class='actions' style='margin-top:14px'><button onclick='startLessonAction()' style='font-size:17px'>▶ Start today's lesson</button><button class='secondary' onclick='toggleLessonSizeAction()'>Length: ${state.lessonSize==='deep'?'Deep ~30 min':'Quick ~10 min'}</button></div>
+  <div style='margin-top:16px;font-weight:600;font-size:17px'>Where are you? Tap to start.</div>
+  <div style='display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px'>
+   <div class='item' onclick="startPlaceAction('office')"><div style='font-size:28px'>🏢</div><div style='font-weight:700;margin:4px 0'>Office</div><div class='small'>Silent typed lesson. No sound, no mic — just you and the keyboard.</div></div>
+   <div class='item' onclick="setView('course')"><div style='font-size:28px'>🚗</div><div style='font-weight:700;margin:4px 0'>Car / Gym</div><div class='small'>Hands-free audio course: listen, speak in the pauses.</div></div>
+   <div class='item' onclick="startPlaceAction('train')"><div style='font-size:28px'>🚆</div><div style='font-weight:700;margin:4px 0'>Train</div><div class='small'>Listen &amp; tap: hear German, choose the meaning. Headphones only.</div></div>
+   <div class='item' onclick="walkPlaceAction()"><div style='font-size:28px'>🚶</div><div style='font-weight:700;margin:4px 0'>Walk</div><div class='small'>Story of the day — listen and repeat aloud as you go.</div></div>
+   <div class='item' onclick="startPlaceAction('home')"><div style='font-size:28px'>🏠</div><div style='font-weight:700;margin:4px 0'>Home</div><div class='small'>Speaking lesson: say the German, the mic checks you.</div></div>
+   <div class='item' onclick="startPlaceAction('any')"><div style='font-size:28px'>✨</div><div style='font-weight:700;margin:4px 0'>Anywhere</div><div class='small'>Mixed lesson: choice, typing, and a little speaking.</div></div>
+  </div>
+  <div class='actions' style='margin-top:12px'><button class='secondary' onclick='toggleLessonSizeAction()'>Lesson length: ${state.lessonSize==='deep'?'Deep ~30 min':'Quick ~10 min'}</button></div>
   ${tw.length?`<div style='margin-top:18px'><div style='font-weight:600;margin-bottom:6px'>Your trouble words</div><div class='small' style='margin-bottom:8px'>Words you keep getting wrong in typed answers — the lesson will keep drilling the phrases that contain them.</div>${tw.map(([w,s])=>`<span class='troubleWord'>${esc(w)} · ${s.wrong}×</span>`).join('')}</div>`:''}
   ${ll?`<div class='modebox'><div style='font-weight:600;margin-bottom:4px'>Last lesson</div><div class='small'>${ll.date} — ${ll.firstTry} of ${ll.total} right on the first try${ll.missed&&ll.missed.length?`. Still tricky: ${ll.missed.map(id=>{const p=phraseById(id);return p?`“${esc(p.german)}”`:''}).filter(Boolean).join(', ')}`:''}</div></div>`:''}
   <div class='help' style='margin-top:14px'><strong>How it teaches you back:</strong> new phrases are shown first, then tested as multiple choice. Once you know them, you must TYPE the German from the English. Every mistake is corrected word by word, you retype it once correctly, and it returns later in the lesson — and again tomorrow.</div>`;
 }
-function lessonProgressHtml(){const total=lesson.queue.length;const done=lesson.pos;const pct=Math.round(done/total*100);return `<div class='progressRow'><div class='small' style='white-space:nowrap'>${Math.min(done+1,total)} / ${total}</div><div class='bar'><div style='width:${pct}%;height:100%;background:#0f766e'></div></div><button class='ghost' style='width:auto;min-height:34px;padding:6px 12px;font-size:13px' onclick='endLessonAction()'>End</button></div>`}
+function lessonProgressHtml(){const total=lesson.queue.length;const done=lesson.pos;const pct=Math.round(done/total*100);return `<div class='progressRow'><div class='small' style='white-space:nowrap'>${CONTEXTS[state.context||'any'].label} · ${Math.min(done+1,total)} / ${total}</div><div class='bar'><div style='width:${pct}%;height:100%;background:#0f766e'></div></div><button class='ghost' style='width:auto;min-height:34px;padding:6px 12px;font-size:13px' onclick='endLessonAction()'>End</button></div>`}
 function renderLearn(){
   const el=document.getElementById('learnContent');if(!el)return;
   if(!lesson){el.innerHTML=learnHomeHtml();return}
@@ -656,6 +662,8 @@ function todaysPlanHtml(){const today=new Date().toISOString().split('T')[0];con
 window.planStoryAction=id=>{setView('stories');startStory(id)};
 window.toggleLessonSizeAction=()=>{state.lessonSize=state.lessonSize==='deep'?'quick':'deep';saveState();renderLearn()};
 window.setContextAction=k=>{state.context=k;saveState();if(lesson&&lesson.queue)lesson.queue.forEach((s,i)=>{if(i>=lesson.pos)delete s.mode});renderLearn()};
+window.startPlaceAction=k=>{state.context=k;saveState();startLessonAction()};
+window.walkPlaceAction=()=>{const dayIdx=Math.floor(Date.now()/86400000);planStoryAction(STORIES[dayIdx%STORIES.length].id)};
 // --- lesson actions ---
 window.startLessonAction=()=>{startLesson();if(!lesson){const el=document.getElementById('learnContent');el.innerHTML=learnHomeHtml()+"<div class='small' style='margin-top:10px'>Nothing due and nothing new — come back later or add phrases.</div>"}};
 window.endLessonAction=()=>{cancelRec();lesson=null;saveState();renderLearn();updateStats()};
