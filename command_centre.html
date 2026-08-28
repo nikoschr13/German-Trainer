@@ -272,8 +272,11 @@
         <button class="btn primary full" id="ai-run" onclick="aiRun()">
           <span class="ic">▶</span><span class="lbl">Run Screener</span><span class="ch" id="ai-run-ch">›</span>
         </button>
-        <a class="btn full" id="ai-open" href="http://127.0.0.1:8765/ai/screener" target="_blank" rel="noopener noreferrer">
+        <a class="btn full" id="ai-open" href="https://nikoschr13.github.io/German-Trainer/ai_screener.html" target="_blank" rel="noopener noreferrer">
           <span class="ic">→</span><span class="lbl">Open Screener</span><span class="ch">›</span>
+        </a>
+        <a class="btn full" id="ai-local" href="http://127.0.0.1:8765/ai/screener" target="_blank" rel="noopener noreferrer" style="display:none">
+          <span class="ic">⌘</span><span class="lbl">Local Copy (fresh)</span><span class="ch">›</span>
         </a>
         <a class="btn full" href="https://docs.google.com/spreadsheets/d/10nAH2yzmHVSnGknXmRr0DbnAILr209Z7oPeM4YBud7Q/edit" target="_blank" rel="noopener noreferrer">
           <span class="ic">⌘</span><span class="lbl">Mosh AI Market Sheet</span><span class="ch">›</span>
@@ -367,6 +370,7 @@
         var pill = document.getElementById('ai-pill');
         pill.style.display = '';
         pill.textContent = 'Bridge live';
+        document.getElementById('ai-local').style.display = '';
         if (j.built) {
           var d = new Date(j.built);
           if (!quiet) aiSay('Last built ' + d.toLocaleString('en-GB',
@@ -404,9 +408,14 @@
               b.disabled = false; b.style.opacity = 1;
               document.getElementById('ai-run-ch').textContent = '›';
               var secs = Math.round((Date.now() - t0) / 1000);
-              aiSay(run.status === 'done'
-                ? '✓ Built in ' + secs + 's — open the screener.'
-                : '✗ Run failed (exit ' + run.returncode + ') — see ~/Library/Logs/sniper_bridge/');
+              if (run.status !== 'done') {
+                aiSay('✗ Run failed (exit ' + run.returncode + ') — see ~/Library/Logs/sniper_bridge/');
+              } else if (run.published === false) {
+                aiSay('✓ Built in ' + secs + 's, but the publish to Pages failed — ' +
+                      'local copy is current.');
+              } else {
+                aiSay('✓ Built in ' + secs + 's and published — live on the phone in ~2 min.');
+              }
             }
           });
         }, 5000);
