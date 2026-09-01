@@ -32,7 +32,7 @@ button{cursor:pointer;font-weight:600;background:var(--accent);color:white;borde
 @media (max-width:820px){.toolbar,.grid,.sessionRow,.homeGrid{grid-template-columns:1fr 1fr}.german{font-size:24px}.english{font-size:17px}.list{max-height:none}}
 @media (max-width:820px){.toolbar,.grid,.sessionRow{grid-template-columns:1fr}}
 </style></head><body><div class='wrap'>
-<div class='hero'><div class='version'>V3.5 Structure-aware</div><h1>German Trainer</h1><div class='sub'>Adaptive lessons that learn from your mistakes, your own hands-free audio course for the car, and custom stories for your walks.</div>
+<div class='hero'><div class='version'>V3.6 Tankstelle ready</div><h1>German Trainer</h1><div class='sub'>Adaptive lessons that learn from your mistakes, your own hands-free audio course for the car, and custom stories for your walks.</div>
 <div class='tabs'><button class='tab active' data-view='learn'>🎓 Learn</button><button class='tab' data-view='course'>🎧 Course</button><button class='tab' data-view='stories'>📖 Stories</button><button class='tab' data-view='drive'>🚗 Drive</button><button class='tab' data-view='talk'>🎤 Talk</button><button class='tab' data-view='browse'>Browse</button><button class='tab' data-view='quiz'>Quiz</button><button class='tab' data-view='stats'>📊 Stats</button><button class='tab' data-view='builder'>My phrases</button></div>
 <div id='browseControls' class='toolbar hidden'><input id='search' placeholder='Search German, English, or note'><select id='category'></select><button id='shuffle'>Shuffle card</button></div>
 <div id='syncBar' style='display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:10px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted)'><span id='syncStatus'>Not signed in — progress saved locally only</span><button id='authBtn' style='width:auto;min-height:36px;padding:6px 14px;font-size:13px'>Sign in with Google</button></div>
@@ -194,7 +194,17 @@ const packPhrases=[
 {"id":"x63","category":"Ice hockey","german":"Wer spielt heute Abend?","english":"Who is playing tonight?","note":"Simple question that invites the other person to talk."},
 {"id":"x64","category":"Ice hockey","german":"Zug spielt gegen Bern.","english":"Zug is playing against Bern.","note":"'Gegen' + team = against. Swap in Davos, Lugano, Fribourg…"},
 {"id":"x65","category":"Ice hockey","german":"Das war ein schönes Tor.","english":"That was a beautiful goal.","note":"'Das Tor' = the goal. Useful for football small talk too."},
-{"id":"x66","category":"Ice hockey","german":"Die Saison beginnt im September.","english":"The season starts in September.","note":"'Die Saison' works for sport, skiing, and even business seasons."}
+{"id":"x66","category":"Ice hockey","german":"Die Saison beginnt im September.","english":"The season starts in September.","note":"'Die Saison' works for sport, skiing, and even business seasons."},
+{"id":"x67","category":"Gas station","german":"Säule drei, bitte.","english":"Pump three, please.","note":"THE key phrase at the till. 'Die Säule' (or Zapfsäule) = the pump. Just the number is enough."},
+{"id":"x68","category":"Gas station","german":"Ich habe an Säule fünf getankt.","english":"I filled up at pump five.","note":"Full-sentence version. 'Tanken' = to fill up with fuel."},
+{"id":"x69","category":"Gas station","german":"Welche Säule war es?","english":"Which pump was it?","note":"What the cashier asks YOU. Recognize it and just answer with the number."},
+{"id":"x70","category":"Gas station","german":"Ich habe vollgetankt.","english":"I filled the tank completely.","note":"'Volltanken' = to fill up the whole tank."},
+{"id":"x71","category":"Gas station","german":"Kann ich draussen an der Säule mit Karte zahlen?","english":"Can I pay by card outside at the pump?","note":"Many Swiss stations let you pay directly at the pump — worth asking."},
+{"id":"x72","category":"Gas station","german":"Haben Sie eine Kundenkarte?","english":"Do you have a loyalty card?","note":"Standard cashier question (Migrol, Coop…). Easy answer: 'Nein, leider nicht.'"},
+{"id":"x73","category":"Gas station","german":"Sonst noch etwas?","english":"Anything else?","note":"You will hear this at every till in Switzerland. Answer: 'Nein danke, das ist alles.'"},
+{"id":"x74","category":"Gas station","german":"Nein danke, das ist alles.","english":"No thanks, that is everything.","note":"Universal closing answer at any counter."},
+{"id":"x75","category":"Gas station","german":"Ich möchte auch eine Autowäsche.","english":"I would also like a car wash.","note":"'Die Autowäsche' — often bought as a code at the till."},
+{"id":"x76","category":"Gas station","german":"Wo ist die Luftpumpe?","english":"Where is the air pump?","note":"For tires. 'Die Luft' = air — same word you need for 'Luft prüfen' (check the pressure)."}
 ];
 const stateKey='german_trainer_v22_state';
 const defaultState={phrases:[...[...starterPhrases,...week24Phrases].map((p,i)=>({...p,id:'p'+i,source:'starter'})),...packPhrases.map(p=>({...p,source:'starter'}))],mastered:{},favorites:{},hard:{},review:{},knowledge:{},wordStats:{},mistakes:[],lastLesson:null,context:'any',lessonSize:'quick',coursePos:0,courseDone:{},courseCheck:false,storyEN:true,storyRepeat:1,dailyMode:false,favoritesOnly:false,myPhrases:[],hideEnglishListening:false,quizDirection:'en-de',quizFavoritesBias:true,speechRate:0.95,driveMode:'shadow',driveCheck:false,pauseLength:5,streak:0,longestStreak:0,totalDaysActive:0,totalReviews:0,dailyLog:{}};
@@ -552,6 +562,21 @@ const STORIES=[
 ["Es regnet öfter.","It rains more often."],
 ["Jede Jahreszeit hat etwas Schönes.","Every season has something beautiful."],
 ["Welche Jahreszeit magst du?","Which season do you like?"]]},
+{id:'s9',emoji:'⛽',title:'An der Tankstelle',topic:'Daily life',lines:[
+["Der Tank ist fast leer.","The tank is almost empty."],
+["Nikos fährt zur Tankstelle.","Nikos drives to the gas station."],
+["Er hält an Säule drei.","He stops at pump three."],
+["Er tankt Bleifrei fünfundneunzig.","He fills up with unleaded 95."],
+["Dann geht er zur Kasse.","Then he goes to the till."],
+["«Grüezi. Säule drei, bitte.»","'Grüezi. Pump three, please.'"],
+["Die Kassiererin fragt: «Die Nummer drei?»","The cashier asks: 'Number three?'"],
+["«Ja, genau. Ich habe vollgetankt.»","'Yes, exactly. I filled up.'"],
+["«Das macht fünfundachtzig Franken.»","'That comes to eighty-five francs.'"],
+["«Haben Sie eine Kundenkarte?»","'Do you have a loyalty card?'"],
+["«Nein, leider nicht.»","'No, unfortunately not.'"],
+["«Sonst noch etwas?»","'Anything else?'"],
+["«Nein danke, das ist alles. Ich zahle mit Karte.»","'No thanks, that is everything. I will pay by card.'"],
+["«Brauchen Sie den Bon?» — «Nein, danke. Schönen Tag!»","'Do you need the receipt?' — 'No, thanks. Have a nice day!'"]]},
 {id:'s8',emoji:'🏡',title:'Small Talk mit dem Nachbarn',topic:'Neighbours',lines:[
 ["Am Abend trifft Nikos seinen Nachbarn.","In the evening Nikos meets his neighbour."],
 ["«Guten Abend, wie geht's?»","'Good evening, how are you?'"],
@@ -602,7 +627,7 @@ window.resumeStoryAction=()=>{const st=STORIES.find(s=>s.id===story.id);if(story
 window.storyToggleENAction=()=>{state.storyEN=!state.storyEN;saveState();renderStories()};
 window.storyToggleRepeatAction=()=>{state.storyRepeat=(state.storyRepeat||1)>1?1:2;saveState();renderStories()};
 // ===== AUDIO COURSE (your own Pimsleur-style lessons) =====
-const COURSE_CATS=['Street chat','Identity','Control','Questions','Shop / takeaway','Baar / daily life','Swiss mode','Numbers & time','Appointments','Restaurant & café','Family / school','Kids & activities','Trains & transport','Social / neighbours','Weather & seasons','Ice hockey','Admin / bureaucracy','Healthcare','Work / professional','Opinions','Sentence builders'];
+const COURSE_CATS=['Street chat','Identity','Control','Questions','Shop / takeaway','Baar / daily life','Gas station','Swiss mode','Numbers & time','Appointments','Restaurant & café','Family / school','Kids & activities','Trains & transport','Social / neighbours','Weather & seasons','Ice hockey','Admin / bureaucracy','Healthcare','Work / professional','Opinions','Sentence builders'];
 function courseOrderIds(){const byCat={};allPhrases().forEach(p=>{(byCat[p.category]=byCat[p.category]||[]).push(p.id)});const out=[];COURSE_CATS.forEach(c=>{if(byCat[c]){out.push(...byCat[c]);delete byCat[c]}});Object.keys(byCat).forEach(c=>out.push(...byCat[c]));return out}
 function courseLessonCount(){return Math.ceil(courseOrderIds().length/6)}
 function buildCourseQueue(n){const ids=courseOrderIds();const s=n*6;const cur=ids.slice(s,s+6);const prev=ids.slice(Math.max(0,s-6),s);const q=[];
