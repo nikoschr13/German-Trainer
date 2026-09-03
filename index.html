@@ -32,8 +32,8 @@ button{cursor:pointer;font-weight:600;background:var(--accent);color:white;borde
 @media (max-width:820px){.toolbar,.grid,.sessionRow,.homeGrid{grid-template-columns:1fr 1fr}.german{font-size:24px}.english{font-size:17px}.list{max-height:none}}
 @media (max-width:820px){.toolbar,.grid,.sessionRow{grid-template-columns:1fr}}
 </style></head><body><div class='wrap'>
-<div class='hero'><div class='version'>V3.6 Tankstelle ready</div><h1>German Trainer</h1><div class='sub'>Adaptive lessons that learn from your mistakes, your own hands-free audio course for the car, and custom stories for your walks.</div>
-<div class='tabs'><button class='tab active' data-view='learn'>🎓 Learn</button><button class='tab' data-view='course'>🎧 Course</button><button class='tab' data-view='stories'>📖 Stories</button><button class='tab' data-view='drive'>🚗 Drive</button><button class='tab' data-view='talk'>🎤 Talk</button><button class='tab' data-view='browse'>Browse</button><button class='tab' data-view='quiz'>Quiz</button><button class='tab' data-view='stats'>📊 Stats</button><button class='tab' data-view='builder'>My phrases</button></div>
+<div class='hero'><div class='version'>V3.7 Real dialogues</div><h1>German Trainer</h1><div class='sub'>Adaptive lessons that learn from your mistakes, your own hands-free audio course for the car, and custom stories for your walks.</div>
+<div class='tabs'><button class='tab active' data-view='learn'>🎓 Learn</button><button class='tab' data-view='course'>🎧 Course</button><button class='tab' data-view='stories'>📖 Dialogues</button><button class='tab' data-view='drive'>🚗 Drive</button><button class='tab' data-view='talk'>🎤 Talk</button><button class='tab' data-view='browse'>Browse</button><button class='tab' data-view='quiz'>Quiz</button><button class='tab' data-view='stats'>📊 Stats</button><button class='tab' data-view='builder'>My phrases</button></div>
 <div id='browseControls' class='toolbar hidden'><input id='search' placeholder='Search German, English, or note'><select id='category'></select><button id='shuffle'>Shuffle card</button></div>
 <div id='syncBar' style='display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:10px 14px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted)'><span id='syncStatus'>Not signed in — progress saved locally only</span><button id='authBtn' style='width:auto;min-height:36px;padding:6px 14px;font-size:13px'>Sign in with Google</button></div>
 <div id='quickSettings'><button class='secondary' id='toggleDaily'>Daily: Off</button><button class='secondary' id='showFavoritesOnly'>★ Favs: Off</button><button class='secondary' id='toggleSpeed'>Speed: Normal</button><button class='secondary' id='resetProgress'>Reset</button></div>
@@ -207,7 +207,7 @@ const packPhrases=[
 {"id":"x76","category":"Gas station","german":"Wo ist die Luftpumpe?","english":"Where is the air pump?","note":"For tires. 'Die Luft' = air — same word you need for 'Luft prüfen' (check the pressure)."}
 ];
 const stateKey='german_trainer_v22_state';
-const defaultState={phrases:[...[...starterPhrases,...week24Phrases].map((p,i)=>({...p,id:'p'+i,source:'starter'})),...packPhrases.map(p=>({...p,source:'starter'}))],mastered:{},favorites:{},hard:{},review:{},knowledge:{},wordStats:{},mistakes:[],lastLesson:null,context:'any',lessonSize:'quick',coursePos:0,courseDone:{},courseCheck:false,storyEN:true,storyRepeat:1,dailyMode:false,favoritesOnly:false,myPhrases:[],hideEnglishListening:false,quizDirection:'en-de',quizFavoritesBias:true,speechRate:0.95,driveMode:'shadow',driveCheck:false,pauseLength:5,streak:0,longestStreak:0,totalDaysActive:0,totalReviews:0,dailyLog:{}};
+const defaultState={phrases:[...[...starterPhrases,...week24Phrases].map((p,i)=>({...p,id:'p'+i,source:'starter'})),...packPhrases.map(p=>({...p,source:'starter'}))],mastered:{},favorites:{},hard:{},review:{},knowledge:{},wordStats:{},mistakes:[],lastLesson:null,context:'any',lessonSize:'quick',coursePos:0,courseDone:{},courseCheck:false,storyEN:true,storyRepeat:1,storyMode:'listen',storyCheck:false,dailyMode:false,favoritesOnly:false,myPhrases:[],hideEnglishListening:false,quizDirection:'en-de',quizFavoritesBias:true,speechRate:0.95,driveMode:'shadow',driveCheck:false,pauseLength:5,streak:0,longestStreak:0,totalDaysActive:0,totalReviews:0,dailyLog:{}};
 const speakingPrompts=['Say in German: "Can I pay by card?"','Say in German: "I am just on my way."','Say in German: "I would like to make an appointment."','Say in German: "Could you repeat that, please?"','Say in German: "How is the family?"','Say in German: "I would like to discuss something briefly regarding my daughter."','Say in German: "It depends."','Say in German: "Excuse me, I am looking for …"','Say in German: "I am learning German because I live in Switzerland."','Say in German: "Nice to see you."','Say in German: "Thanks very much."','Say in German: "Enjoy your meal."','Say in German: "I do not feel well."','Say in German: "What documents do I need for that?"','Say in German: "I will take care of that."','Say in German: "Can we talk briefly?"','Say in German: "My child is sick and has a fever."','Say in German: "I received a letter and do not fully understand it."','Say in German: "I want to make sure I have understood everything correctly."','Say in German: "Thank you for your patience with my German."','Say in German: "I am responsible for this topic."','Say in German: "Do you have a good doctor in the area?"','Say in German: "Could you please write that down?"','Say in German: "Are there any open points remaining?"'];
 let state=loadState(),currentIndex=null,currentView='browse',quizPool=[],quizIndex=0,quizReveal=false,sessionItems=[],sessionIndex=0,listenTimer=null,listenQueue=[],listenIndex=0,driveTimer=null,driveQueue=[],driveIndex=0,driveRunning=false,driveResults=[];
 const views=['learn','course','stories','talk','browse','quiz','session','listening','drive','stats','builder'];
@@ -471,161 +471,173 @@ function lessonSummaryHtml(){
 }
 // ===== STORIES (custom comprehensible input, A1-A2) =====
 const STORIES=[
-{id:'s1',emoji:'🥐',title:'Samstag in Baar',topic:'Daily life',lines:[
-["Es ist Samstagmorgen in Baar.","It is Saturday morning in Baar."],
-["Die Sonne scheint.","The sun is shining."],
-["Nikos geht ins Dorf.","Nikos walks into the village."],
-["Zuerst geht er zur Bäckerei.","First he goes to the bakery."],
-["Er kauft frisches Brot und Gipfeli.","He buys fresh bread and croissants."],
-["Die Verkäuferin sagt: «Grüezi!»","The saleswoman says: 'Grüezi!'"],
-["Nikos sagt: «Ich hätte gern zwei Gipfeli.»","Nikos says: 'I would like two croissants.'"],
-["Er zahlt mit Twint.","He pays with Twint."],
-["Dann trinkt er einen Kaffee.","Then he drinks a coffee."],
-["Er sieht einen Nachbarn.","He sees a neighbour."],
-["Sie sprechen über das Wetter.","They talk about the weather."],
-["Der Samstag beginnt gut.","The Saturday starts well."]]},
-{id:'s2',emoji:'🎒',title:'Der Morgen mit den Kindern',topic:'Family & school',lines:[
-["Es ist sieben Uhr.","It is seven o'clock."],
-["Die Familie steht auf.","The family gets up."],
-["Die drei Töchter frühstücken.","The three daughters eat breakfast."],
-["Eine Tochter findet ihre Schuhe nicht.","One daughter cannot find her shoes."],
-["«Wo sind meine Schuhe?», fragt sie.","'Where are my shoes?' she asks."],
-["Die Schuhe sind unter dem Tisch.","The shoes are under the table."],
-["Papa macht die Znünibox.","Dad prepares the snack box."],
-["Um acht Uhr gehen sie zur Schule.","At eight o'clock they go to school."],
-["Der Schulweg ist kurz.","The way to school is short."],
-["«Tschüss, bis später!», sagt Papa.","'Bye, see you later!' says Dad."],
-["Die Kinder winken.","The children wave."],
-["Jetzt beginnt der Arbeitstag.","Now the workday begins."]]},
-{id:'s3',emoji:'💼',title:'Ein Tag im Büro',topic:'Work & finance',lines:[
-["Nikos arbeitet im Finanzbereich.","Nikos works in finance."],
-["Sein Büro ist in Zug.","His office is in Zug."],
-["Am Morgen liest er die Mails.","In the morning he reads the emails."],
-["Um neun Uhr hat er ein Meeting.","At nine o'clock he has a meeting."],
-["Das Team spricht über die Märkte.","The team talks about the markets."],
-["Die Aktien steigen heute.","The stocks are rising today."],
-["Ein Kollege fragt: «Wie ist der aktuelle Stand?»","A colleague asks: 'What is the current status?'"],
-["Nikos sagt: «Ich kümmere mich darum.»","Nikos says: 'I will take care of it.'"],
-["Am Mittag isst er das Tagesmenü.","At lunch he eats the daily menu."],
-["Am Nachmittag schreibt er einen Bericht.","In the afternoon he writes a report."],
-["Um sechs Uhr geht er nach Hause.","At six o'clock he goes home."],
-["Feierabend!","End of the workday!"]]},
-{id:'s4',emoji:'🏒',title:'Beim EVZ-Spiel',topic:'Ice hockey',lines:[
-["Heute spielt der EVZ gegen Bern.","Today EV Zug plays against Bern."],
-["Nikos geht mit einem Freund ins Stadion.","Nikos goes to the stadium with a friend."],
-["Das Stadion ist voll.","The stadium is full."],
-["Die Fans singen laut.","The fans sing loudly."],
-["Das Spiel beginnt um halb acht.","The game starts at half past seven."],
-["Zug schiesst das erste Tor.","Zug scores the first goal."],
-["«Was für ein schönes Tor!», ruft Nikos.","'What a beautiful goal!' shouts Nikos."],
-["In der Pause trinken sie ein Bier.","During the break they drink a beer."],
-["Bern spielt stark im zweiten Drittel.","Bern plays strongly in the second period."],
-["Aber Zug gewinnt drei zu eins.","But Zug wins three to one."],
-["Die Fans sind sehr glücklich.","The fans are very happy."],
-["Hopp Zug!","Go Zug!"]]},
-{id:'s5',emoji:'🛒',title:'Einkaufen bei der Migros',topic:'Daily life',lines:[
-["Am Donnerstag kauft Nikos ein.","On Thursday Nikos goes shopping."],
-["Er braucht Milch, Käse und Äpfel.","He needs milk, cheese and apples."],
-["Die Migros ist nicht weit.","The Migros is not far."],
-["Er nimmt einen Einkaufswagen.","He takes a shopping cart."],
-["Wo ist der Käse?","Where is the cheese?"],
-["Er fragt eine Mitarbeiterin.","He asks an employee."],
-["«Entschuldigung, ich suche den Käse.»","'Excuse me, I am looking for the cheese.'"],
-["«Dort hinten, bei der Milch», sagt sie.","'Back there, by the milk,' she says."],
-["An der Kasse ist eine Schlange.","There is a queue at the checkout."],
-["Er zahlt mit Karte.","He pays by card."],
-["«Brauchen Sie den Bon?» — «Nein, danke.»","'Do you need the receipt?' — 'No, thanks.'"],
-["Zu Hause kocht die Familie zusammen.","At home the family cooks together."]]},
-{id:'s6',emoji:'🚆',title:'Mit dem Zug nach Zürich',topic:'Transport',lines:[
-["Nikos fährt heute nach Zürich.","Nikos travels to Zurich today."],
-["Er geht zum Bahnhof in Baar.","He goes to the station in Baar."],
-["Der Zug fährt um zehn nach acht.","The train leaves at ten past eight."],
-["Er kauft das Billett in der App.","He buys the ticket in the app."],
-["Der Zug ist pünktlich.","The train is on time."],
-["Im Zug liest er die Zeitung.","On the train he reads the newspaper."],
-["Viele Leute pendeln nach Zürich.","Many people commute to Zurich."],
-["Die Fahrt dauert dreissig Minuten.","The trip takes thirty minutes."],
-["In Zürich muss er nicht umsteigen.","In Zurich he does not have to change trains."],
-["Er trinkt einen Kaffee am Hauptbahnhof.","He drinks a coffee at the main station."],
-["Am Abend fährt er zurück.","In the evening he travels back."],
-["Zugfahren in der Schweiz ist einfach.","Taking the train in Switzerland is easy."]]},
-{id:'s7',emoji:'🍂',title:'Die vier Jahreszeiten',topic:'Culture',lines:[
-["Die Schweiz hat vier Jahreszeiten.","Switzerland has four seasons."],
-["Im Winter liegt Schnee in den Bergen.","In winter there is snow in the mountains."],
-["Viele Familien fahren Ski.","Many families go skiing."],
-["Im Frühling wird es wärmer.","In spring it gets warmer."],
-["Die Blumen blühen.","The flowers bloom."],
-["Im Sommer ist es manchmal sehr heiss.","In summer it is sometimes very hot."],
-["Die Leute schwimmen im See.","People swim in the lake."],
-["Der Zugersee ist schön.","Lake Zug is beautiful."],
-["Im Herbst sind die Wälder bunt.","In autumn the forests are colourful."],
-["Es regnet öfter.","It rains more often."],
-["Jede Jahreszeit hat etwas Schönes.","Every season has something beautiful."],
-["Welche Jahreszeit magst du?","Which season do you like?"]]},
-{id:'s9',emoji:'⛽',title:'An der Tankstelle',topic:'Daily life',lines:[
-["Der Tank ist fast leer.","The tank is almost empty."],
-["Nikos fährt zur Tankstelle.","Nikos drives to the gas station."],
-["Er hält an Säule drei.","He stops at pump three."],
-["Er tankt Bleifrei fünfundneunzig.","He fills up with unleaded 95."],
-["Dann geht er zur Kasse.","Then he goes to the till."],
-["«Grüezi. Säule drei, bitte.»","'Grüezi. Pump three, please.'"],
-["Die Kassiererin fragt: «Die Nummer drei?»","The cashier asks: 'Number three?'"],
-["«Ja, genau. Ich habe vollgetankt.»","'Yes, exactly. I filled up.'"],
-["«Das macht fünfundachtzig Franken.»","'That comes to eighty-five francs.'"],
-["«Haben Sie eine Kundenkarte?»","'Do you have a loyalty card?'"],
-["«Nein, leider nicht.»","'No, unfortunately not.'"],
-["«Sonst noch etwas?»","'Anything else?'"],
-["«Nein danke, das ist alles. Ich zahle mit Karte.»","'No thanks, that is everything. I will pay by card.'"],
-["«Brauchen Sie den Bon?» — «Nein, danke. Schönen Tag!»","'Do you need the receipt?' — 'No, thanks. Have a nice day!'"]]},
-{id:'s8',emoji:'🏡',title:'Small Talk mit dem Nachbarn',topic:'Neighbours',lines:[
-["Am Abend trifft Nikos seinen Nachbarn.","In the evening Nikos meets his neighbour."],
-["«Guten Abend, wie geht's?»","'Good evening, how are you?'"],
-["«Gut, danke. Und Ihnen?»","'Good, thanks. And you?'"],
-["Sie sprechen über das Wochenende.","They talk about the weekend."],
-["Der Nachbar war in den Bergen.","The neighbour was in the mountains."],
-["«Das Wetter war perfekt», sagt er.","'The weather was perfect,' he says."],
-["Nikos erzählt vom EVZ-Spiel.","Nikos talks about the EVZ game."],
-["«Haben Sie das Spiel gesehen?»","'Did you see the game?'"],
-["«Ja, Zug hat super gespielt!»","'Yes, Zug played great!'"],
-["Sie lachen zusammen.","They laugh together."],
-["«Schönen Feierabend!», sagt der Nachbar.","'Have a nice evening!' says the neighbour."],
-["Kleine Gespräche machen das Leben schön.","Small conversations make life nice."]]}
+{id:'s1',emoji:'🥐',title:'In der Bäckerei',topic:'Daily life',aName:'Verkäuferin',lines:[
+["N","Samstagmorgen. Nikos ist in der Bäckerei in Baar.","Saturday morning. Nikos is at the bakery in Baar."],
+["A","Grüezi! Was darf es sein?","Hello! What can I get you?"],
+["ME","Grüezi. Ich hätte gern ein Brot und vier Gipfeli.","Hello. I would like a loaf of bread and four croissants."],
+["A","Gern. Möchten Sie das Brot geschnitten?","Gladly. Would you like the bread sliced?"],
+["ME","Ja, bitte.","Yes, please."],
+["A","Sonst noch etwas?","Anything else?"],
+["ME","Nein danke, das ist alles.","No thanks, that is everything."],
+["A","Das macht acht Franken fünfzig.","That comes to eight francs fifty."],
+["ME","Ich zahle mit Twint.","I will pay with Twint."],
+["A","Perfekt. Brauchen Sie den Bon?","Perfect. Do you need the receipt?"],
+["ME","Nein, danke. Schönen Tag!","No, thanks. Have a nice day!"],
+["A","Danke, gleichfalls. Ade!","Thanks, same to you. Bye!"]]},
+{id:'s2',emoji:'🎒',title:'Der Morgen mit den Kindern',topic:'Family & school',aName:'Tochter',lines:[
+["N","Es ist sieben Uhr am Morgen.","It is seven o'clock in the morning."],
+["ME","Guten Morgen! Aufstehen, bitte!","Good morning! Get up, please!"],
+["A","Ich bin so müde, Papa.","I am so tired, Dad."],
+["ME","Ich weiss. Das Frühstück ist fertig.","I know. Breakfast is ready."],
+["A","Wo sind meine Schuhe?","Where are my shoes?"],
+["ME","Deine Schuhe sind unter dem Tisch.","Your shoes are under the table."],
+["A","Und wo ist meine Znünibox?","And where is my snack box?"],
+["ME","Die Znünibox ist in deinem Rucksack.","The snack box is in your backpack."],
+["A","Holst du mich heute von der Schule ab?","Are you picking me up from school today?"],
+["ME","Nein, heute holt dich Mama ab.","No, today Mom is picking you up."],
+["A","Okay. Tschüss, Papa!","Okay. Bye, Dad!"],
+["ME","Tschüss! Bis später. Viel Spass!","Bye! See you later. Have fun!"]]},
+{id:'s3',emoji:'💼',title:'Im Büro',topic:'Work & finance',aName:'Kollege',lines:[
+["A","Guten Morgen! Möchtest du einen Kaffee?","Good morning! Would you like a coffee?"],
+["ME","Guten Morgen! Ja, gerne.","Good morning! Yes, gladly."],
+["A","Wie war dein Wochenende?","How was your weekend?"],
+["ME","Sehr schön. Wir waren am Zugersee.","Very nice. We were at Lake Zug."],
+["A","Hast du kurz Zeit? Es geht um das Projekt.","Do you have a moment? It is about the project."],
+["ME","Ja, klar. Wie ist der aktuelle Stand?","Yes, of course. What is the current status?"],
+["A","Der Kunde wartet auf den Bericht.","The client is waiting for the report."],
+["ME","Ich kümmere mich darum.","I will take care of it."],
+["A","Super. Können wir das um zwei Uhr besprechen?","Great. Can we discuss it at two o'clock?"],
+["ME","Zwei Uhr passt mir gut.","Two o'clock suits me well."],
+["A","Danke dir. Bis später!","Thank you. See you later!"],
+["ME","Bis später!","See you later!"]]},
+{id:'s4',emoji:'🏒',title:'Beim EVZ-Spiel',topic:'Ice hockey',aName:'Freund',lines:[
+["N","Nikos und sein Freund sind im Stadion.","Nikos and his friend are in the stadium."],
+["A","Endlich! Das Spiel beginnt gleich.","Finally! The game starts soon."],
+["ME","Wer spielt heute?","Who is playing today?"],
+["A","Der EVZ gegen Bern. Ein grosses Spiel!","EV Zug against Bern. A big game!"],
+["N","Zug schiesst das erste Tor.","Zug scores the first goal."],
+["ME","Was für ein schönes Tor!","What a beautiful goal!"],
+["A","Ja! Zug spielt heute sehr stark.","Yes! Zug is playing very strong today."],
+["ME","Möchtest du in der Pause ein Bier?","Do you want a beer during the break?"],
+["A","Gerne. Und eine Bratwurst!","Gladly. And a bratwurst!"],
+["N","Am Ende gewinnt Zug drei zu eins.","In the end Zug wins three to one."],
+["ME","Das Spiel war sehr spannend!","The game was very exciting!"],
+["A","Hopp Zug! Bis zum nächsten Spiel!","Go Zug! Until the next game!"]]},
+{id:'s5',emoji:'🛒',title:'Bei der Migros',topic:'Daily life',aName:'Mitarbeiterin',lines:[
+["ME","Entschuldigung, ich suche den Käse.","Excuse me, I am looking for the cheese."],
+["A","Dort hinten, bei der Milch.","Back there, by the milk."],
+["ME","Danke vielmal!","Thanks a lot!"],
+["N","Später, an der Kasse.","Later, at the checkout."],
+["A","Grüezi. Haben Sie eine Cumulus-Karte?","Hello. Do you have a Cumulus card?"],
+["ME","Nein, leider nicht.","No, unfortunately not."],
+["A","Das macht zweiunddreissig Franken.","That comes to thirty-two francs."],
+["ME","Kann ich mit Karte zahlen?","Can I pay by card?"],
+["A","Ja, natürlich. Brauchen Sie den Bon?","Yes, of course. Do you need the receipt?"],
+["ME","Nein, danke.","No, thanks."],
+["A","Schönen Abend!","Have a nice evening!"],
+["ME","Danke, gleichfalls!","Thanks, you too!"]]},
+{id:'s6',emoji:'🚆',title:'Am Bahnhof',topic:'Transport',aName:'Am Schalter',lines:[
+["ME","Grüezi. Einmal nach Zürich, hin und zurück, bitte.","Hello. One ticket to Zurich, return, please."],
+["A","Haben Sie ein Halbtax?","Do you have a half-fare card?"],
+["ME","Ja, hier bitte.","Yes, here you go."],
+["A","Danke. Das macht vierzehn Franken.","Thanks. That comes to fourteen francs."],
+["ME","Auf welchem Gleis fährt der Zug ab?","From which platform does the train leave?"],
+["A","Gleis drei, um zehn nach acht.","Platform three, at ten past eight."],
+["ME","Muss ich umsteigen?","Do I have to change trains?"],
+["A","Nein, der Zug fährt direkt.","No, the train goes direct."],
+["N","Im Zug kommt die Billettkontrolle.","On the train comes the ticket inspection."],
+["A","Grüezi mitenand, alle Billette, bitte.","Hello everyone, all tickets please."],
+["ME","Hier, bitte. Mit Halbtax.","Here you go. With the half-fare card."],
+["A","Danke schön. Gute Reise!","Thank you. Have a good trip!"]]},
+{id:'s7',emoji:'🍂',title:'Small Talk über das Wetter',topic:'Culture',aName:'Nachbarin',lines:[
+["A","Schönes Wetter heute, oder?","Nice weather today, isn't it?"],
+["ME","Ja, endlich scheint die Sonne wieder.","Yes, finally the sun is shining again."],
+["A","Der Sommer war dieses Jahr sehr heiss.","The summer was very hot this year."],
+["ME","Stimmt. Wir waren oft in der Badi.","True. We were often at the outdoor pool."],
+["A","Und bald kommt der Herbst.","And soon autumn is coming."],
+["ME","Ich mag den Herbst. Die Wälder sind so bunt.","I like autumn. The forests are so colourful."],
+["A","Fahren Sie im Winter Ski?","Do you ski in winter?"],
+["ME","Manchmal, mit den Kindern.","Sometimes, with the children."],
+["A","Es soll morgen regnen.","It is supposed to rain tomorrow."],
+["ME","Dann bleiben wir lieber drinnen.","Then we would rather stay inside."],
+["A","So ist es. Schönen Tag noch!","That is how it is. Have a nice day!"],
+["ME","Danke, gleichfalls!","Thanks, you too!"]]},
+{id:'s8',emoji:'🏡',title:'Mit dem Nachbarn',topic:'Neighbours',aName:'Nachbar',lines:[
+["A","Guten Abend! Wie geht's?","Good evening! How are you?"],
+["ME","Gut, danke. Und Ihnen?","Good, thanks. And you?"],
+["A","Auch gut. Wie war Ihr Wochenende?","Also good. How was your weekend?"],
+["ME","Sehr schön. Wir waren in den Bergen.","Very nice. We were in the mountains."],
+["A","Das Wetter war ja perfekt.","The weather was perfect after all."],
+["ME","Ja! Haben Sie das EVZ-Spiel gesehen?","Yes! Did you see the EVZ game?"],
+["A","Natürlich. Zug hat super gespielt!","Of course. Zug played great!"],
+["ME","Das Spiel war sehr spannend.","The game was very exciting."],
+["A","Kommen Sie doch mal auf einen Kaffee vorbei.","Do come by for a coffee sometime."],
+["ME","Sehr gerne. Danke für die Einladung!","With pleasure. Thanks for the invitation!"],
+["A","Schönen Feierabend!","Enjoy the rest of your evening!"],
+["ME","Danke, gleichfalls!","Thanks, you too!"]]},
+{id:'s9',emoji:'⛽',title:'An der Tankstelle',topic:'Daily life',aName:'Kassiererin',lines:[
+["N","Nikos hat an Säule drei getankt. Er geht zur Kasse.","Nikos filled up at pump three. He goes to the till."],
+["A","Grüezi. Welche Säule war es?","Hello. Which pump was it?"],
+["ME","Grüezi. Säule drei, bitte.","Hello. Pump three, please."],
+["A","Das macht fünfundachtzig Franken.","That comes to eighty-five francs."],
+["ME","Ich habe vollgetankt. Kann ich mit Karte zahlen?","I filled the tank. Can I pay by card?"],
+["A","Ja, natürlich. Haben Sie eine Kundenkarte?","Yes, of course. Do you have a loyalty card?"],
+["ME","Nein, leider nicht.","No, unfortunately not."],
+["A","Sonst noch etwas?","Anything else?"],
+["ME","Nein danke, das ist alles.","No thanks, that is everything."],
+["A","Brauchen Sie den Bon?","Do you need the receipt?"],
+["ME","Nein, danke. Schönen Tag!","No, thanks. Have a nice day!"],
+["A","Danke, gleichfalls. Auf Wiedersehen!","Thanks, same to you. Goodbye!"]]}
 ];
 function markDaily(key){const today=new Date().toISOString().split('T')[0];if(!state.dailyLog)state.dailyLog={};if(!state.dailyLog[today])state.dailyLog[today]={reviews:0,minutes:0,sessionStart:Date.now()};state.dailyLog[today][key]=true;saveState()}
-let story={playing:false,id:null,idx:0,timer:null,rep:0};
-function stopStory(){story.playing=false;if(story.timer)clearTimeout(story.timer);story.timer=null;if(window.speechSynthesis)speechSynthesis.cancel()}
-function startStory(id){stopStory();story={playing:true,id,idx:0,timer:null,rep:0};renderStories();playStoryLine()}
+let story={playing:false,id:null,idx:0,timer:null,phase:'play',best:undefined};
+function stopStory(){story.playing=false;cancelRec();if(story.timer)clearTimeout(story.timer);story.timer=null;if(window.speechSynthesis)speechSynthesis.cancel()}
+function startStory(id){stopStory();story={playing:true,id,idx:0,timer:null,phase:'play',best:undefined};renderStories();playStoryLine()}
+function speakStory(text,role,cb){if(!window.speechSynthesis){if(cb)cb();return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);const dv=speechSynthesis.getVoices().filter(v=>(v.lang||'').toLowerCase().startsWith('de'));try{if(dv.length)u.voice=dv[(role==='A'&&dv.length>1)?1:0]}catch(e){}u.lang=(u.voice&&u.voice.lang)||'de-DE';u.rate=Math.min(state.speechRate||0.95,0.85);u.pitch=role==='A'?1.12:0.95;u.onend=()=>{if(cb)cb()};speechSynthesis.speak(u)}
+function roleLabel(st,role){return role==='ME'?'🫵 Du':role==='N'?'📖 Erzähler':'👤 '+(st.aName||'Gesprächspartner')}
 function playStoryLine(){if(!story.playing)return;const st=STORIES.find(s=>s.id===story.id);if(!st)return;
- if(story.idx>=st.lines.length){story.playing=false;markDaily('story');renderStories();return}
- renderStories();
- const [de,en]=st.lines[story.idx];
- const next=()=>{story.timer=setTimeout(()=>{if(!story.playing)return;story.idx++;story.rep=0;playStoryLine()},900)};
- const sayEN=()=>{if(state.storyEN){speakWithCb(en,'en',next,1.0)}else next()};
- const sayDE=(cb)=>speakWithCb(de,'de',cb,Math.min(state.speechRate||0.95,0.85));
- sayDE(()=>{if(!story.playing)return;if((state.storyRepeat||1)>1){story.timer=setTimeout(()=>{if(!story.playing)return;sayDE(()=>{if(story.playing)sayEN()})},700)}else sayEN()});
+ if(story.idx>=st.lines.length){story.playing=false;story.phase='play';markDaily('story');renderStories();return}
+ const [role,de,en]=st.lines[story.idx];
+ const next=(d)=>{story.timer=setTimeout(()=>{if(!story.playing)return;story.idx++;story.phase='play';story.best=undefined;playStoryLine()},d||900)};
+ if(state.storyMode==='role'&&role==='ME'){
+  story.phase='cue';renderStories();
+  const pause=(state.pauseLength||5)*1000;
+  const finish=(best)=>{if(!story.playing)return;story.phase='reveal';story.best=best;renderStories();speakStory(de,'ME',()=>{if(story.playing)next(1300)})};
+  if(state.storyCheck&&SRClass){listenOnce(pause+2000,r=>{if(!story.playing)return;finish(r.ok?scoreSpoken(r.alts,de):null)})}
+  else{story.timer=setTimeout(()=>finish(undefined),pause)}
+  return}
+ story.phase='play';renderStories();
+ const afterDE=()=>{if(!story.playing)return;if(state.storyEN&&state.storyMode!=='role'){speakWithCb(en,'en',()=>next(800),1.0)}else next(900)};
+ speakStory(de,role,()=>{if(!story.playing)return;if((state.storyRepeat||1)>1&&state.storyMode!=='role'){story.timer=setTimeout(()=>{if(!story.playing)return;speakStory(de,role,afterDE)},700)}else afterDE()});
 }
 function renderStories(){const el=document.getElementById('storiesContent');if(!el)return;
  if(story.id&&(story.playing||story.idx>0)){const st=STORIES.find(s=>s.id===story.id);const done=!story.playing&&story.idx>=st.lines.length;
-  const line=st.lines[Math.min(story.idx,st.lines.length-1)];
+  const line=st.lines[Math.min(story.idx,st.lines.length-1)];const [role,de,en]=line;const rp=state.storyMode==='role';
+  let card='';
+  if(done){card=`<div class='feedbackBox fbRight'><div style='font-weight:600'>✅ ${rp?'Dialogue complete — you played your part!':'Story finished!'}</div><div class='small' style='margin-top:6px'>${rp?'Do it again with the mic check on, or switch to Listen mode to hear the whole conversation.':'Now try Role-play mode: the app plays the other person and YOU answer.'}</div></div>`}
+  else if(rp&&role==='ME'&&story.phase==='cue'){card=`<div class='pill' style='background:#fef9c3;border-color:#fde047'>🫵 YOUR turn — say it in German:</div><div class='answerLine' style='margin-top:10px'>“${esc(en)}”</div><div class='small' style='margin-top:8px'>${state.storyCheck&&SRClass?'🔴 Listening — speak now…':'Say it out loud — the correct German comes next.'}</div>`}
+  else if(rp&&role==='ME'&&story.phase==='reveal'){card=`<div class='pill'>✅ The natural way to say it:</div><div class='german' style='margin-top:8px'>${esc(de)}</div><div class='english'>${esc(en)}</div>${story.best!==undefined?(story.best?driveFeedbackHtml(story.best):`<div class='small' style='margin-top:8px'>🎤 Didn’t hear anything that time.</div>`):''}`}
+  else{card=`<div class='pill'>${roleLabel(st,role)}</div><div class='german' style='margin-top:8px'>${esc(de)}</div><div class='english ${(state.storyEN||rp)?'':'hidden'}'>${esc(en)}</div>`}
   el.innerHTML=`<div class='row'><div class='panelTitle'>${st.emoji} ${esc(st.title)}</div><button class='ghost' style='width:auto;min-height:36px;padding:6px 12px' onclick='exitStoryAction()'>← All stories</button></div>
-  <div class='small' style='margin-bottom:10px'>Sentence ${Math.min(story.idx+1,st.lines.length)} of ${st.lines.length} · Listen, then repeat it aloud.</div>
+  <div class='small' style='margin-bottom:10px'>${rp?`🎭 Role-play: the app is ${esc(st.aName||'the other person')}, you are you.`:'🎧 Listen mode: hear the whole dialogue.'} · Line ${Math.min(story.idx+1,st.lines.length)} of ${st.lines.length}</div>
   <div class='bar' style='margin-bottom:14px'><div style='width:${Math.round(Math.min(story.idx,st.lines.length)/st.lines.length*100)}%;height:100%;background:#0f766e'></div></div>
-  ${done?`<div class='feedbackBox fbRight'><div style='font-weight:600'>✅ Story finished!</div><div class='small' style='margin-top:6px'>Listen again with translations off — understanding it without English is the real goal.</div></div>`:
-  `<div class='german'>${esc(line[0])}</div><div class='english ${state.storyEN?'':'hidden'}'>${esc(line[1])}</div>`}
+  ${card}
   <div class='actions' style='margin-top:14px'>
   ${done||!story.playing?`<button onclick='resumeStoryAction()'>▶ ${done?'Play again':'Resume'}</button>`:`<button class='secondary' onclick='pauseStoryAction()'>⏸ Pause</button>`}
-  <button class='secondary' onclick='storyToggleENAction()'>English: ${state.storyEN?'On':'Off'}</button>
-  <button class='secondary' onclick='storyToggleRepeatAction()'>Repeat each: ${(state.storyRepeat||1)}×</button></div>
-  <div class='help' style='margin-top:14px'>Walk mode: press play, pocket the phone, repeat each sentence aloud in the gap. Second listen: turn English off.</div>`;
+  <button class='secondary' onclick='storyModeAction()'>Mode: ${rp?'🎭 Role-play':'🎧 Listen'}</button>
+  ${rp?(SRClass?`<button class='secondary' onclick='storyCheckAction()'>🎤 Check me: ${state.storyCheck?'On':'Off'}</button>`:''):`<button class='secondary' onclick='storyToggleENAction()'>English: ${state.storyEN?'On':'Off'}</button><button class='secondary' onclick='storyToggleRepeatAction()'>Repeat: ${(state.storyRepeat||1)}×</button>`}</div>
+  <div class='help' style='margin-top:14px'>${rp?'Your lines show only the English cue — produce the German yourself, out loud, then compare with the answer. The pause length follows the Drive slider.':'First listen fully. Then switch to 🎭 Role-play and answer as yourself — that is the real-life rehearsal.'}</div>`;
   return}
- el.innerHTML=`<div class='panelTitle'>📖 Stories</div><div class='small'>Short stories written for YOUR level and life: Baar, the kids, the office, the EVZ. Each sentence is spoken slowly, with a pause to repeat aloud, then the English. Perfect for walks.</div>
- <div class='list' style='margin-top:14px;max-height:none'>${STORIES.map(s=>`<div class='item' onclick="startStoryAction('${s.id}')"><div class='row'><div><span style='font-size:22px'>${s.emoji}</span> <strong>${esc(s.title)}</strong></div><div class='badge'>${esc(s.topic)}</div></div><div class='en'>${s.lines.length} sentences · ~${Math.round(s.lines.length*0.5+1)} min</div></div>`).join('')}</div>`}
+ el.innerHTML=`<div class='panelTitle'>📖 Dialogues</div><div class='small'>Real conversations from your life in Baar — the bakery, the till, the office, the stadium. <strong>🎧 Listen</strong> plays the whole dialogue with two voices. <strong>🎭 Role-play</strong> makes the app your conversation partner: it speaks, then YOU answer your lines out loud, then you hear the natural answer.</div>
+ <div class='list' style='margin-top:14px;max-height:none'>${STORIES.map(s=>`<div class='item' onclick="startStoryAction('${s.id}')"><div class='row'><div><span style='font-size:22px'>${s.emoji}</span> <strong>${esc(s.title)}</strong></div><div class='badge'>${esc(s.topic)}</div></div><div class='en'>With: ${esc(s.aName||'—')} · ${s.lines.filter(l=>l[0]==='ME').length} of your lines · ~${Math.round(s.lines.length*0.6+1)} min</div></div>`).join('')}</div>`}
 window.startStoryAction=id=>startStory(id);
-window.exitStoryAction=()=>{stopStory();story={playing:false,id:null,idx:0,timer:null,rep:0};renderStories()};
-window.pauseStoryAction=()=>{story.playing=false;if(story.timer)clearTimeout(story.timer);if(window.speechSynthesis)speechSynthesis.cancel();renderStories()};
-window.resumeStoryAction=()=>{const st=STORIES.find(s=>s.id===story.id);if(story.idx>=st.lines.length)story.idx=0;story.playing=true;playStoryLine()};
+window.exitStoryAction=()=>{stopStory();story={playing:false,id:null,idx:0,timer:null,phase:'play',best:undefined};renderStories()};
+window.pauseStoryAction=()=>{story.playing=false;cancelRec();if(story.timer)clearTimeout(story.timer);if(window.speechSynthesis)speechSynthesis.cancel();renderStories()};
+window.resumeStoryAction=()=>{const st=STORIES.find(s=>s.id===story.id);if(story.idx>=st.lines.length)story.idx=0;story.playing=true;story.phase='play';playStoryLine()};
 window.storyToggleENAction=()=>{state.storyEN=!state.storyEN;saveState();renderStories()};
 window.storyToggleRepeatAction=()=>{state.storyRepeat=(state.storyRepeat||1)>1?1:2;saveState();renderStories()};
+window.storyModeAction=()=>{state.storyMode=state.storyMode==='role'?'listen':'role';saveState();if(story.playing){cancelRec();if(story.timer)clearTimeout(story.timer);if(window.speechSynthesis)speechSynthesis.cancel();story.phase='play';story.best=undefined;playStoryLine()}else renderStories()};
+window.storyCheckAction=()=>{if(!SRClass)return;state.storyCheck=!state.storyCheck;saveState();renderStories()};
 // ===== AUDIO COURSE (your own Pimsleur-style lessons) =====
 const COURSE_CATS=['Street chat','Identity','Control','Questions','Shop / takeaway','Baar / daily life','Gas station','Swiss mode','Numbers & time','Appointments','Restaurant & café','Family / school','Kids & activities','Trains & transport','Social / neighbours','Weather & seasons','Ice hockey','Admin / bureaucracy','Healthcare','Work / professional','Opinions','Sentence builders'];
 function courseOrderIds(){const byCat={};allPhrases().forEach(p=>{(byCat[p.category]=byCat[p.category]||[]).push(p.id)});const out=[];COURSE_CATS.forEach(c=>{if(byCat[c]){out.push(...byCat[c]);delete byCat[c]}});Object.keys(byCat).forEach(c=>out.push(...byCat[c]));return out}
