@@ -397,47 +397,6 @@ var APPS = [
 
 /* ─────────── WORK ─────────── */
 {
-  id: "notion", group: "Work", icon: "🗂",
-  name: "Notion — work lane",
-  status: { label: "Work", tone: "slate" },
-  desc: "Work tasks, projects, meetings, clients. The relational side of the two-lane task setup.",
-  links: [
-    { label: "Open Notion", href: "https://www.notion.so", primary: true }
-  ],
-  what: "The <strong>work</strong> half of a deliberate two-lane task setup. Work items live in the Notion Tasks database and are linked to Projects, Meetings, Clients and Contacts. Personal items don’t belong here — they go to Todoist.",
-  steps: [
-    "Anything touching a meeting, client, project, deal or research goes into the Notion Tasks DB, linked to the relevant record.",
-    "Before a meeting, open the meeting page — the template embeds a linked “Meeting agenda” view filtered to the client items ticked <em>Add to next agenda</em>.",
-    "If a task turns up in both Notion and Todoist, that’s a lane violation — pick one."
-  ],
-  where: [
-    ["Work items", "Notion Tasks DB, related to Projects / Meetings / Clients / Contacts"],
-    ["Personal items", "Todoist — see the next card"],
-    ["Ideas capture", "Telegram → Notion Ideas, via the Kori bot"]
-  ],
-  rules: [
-    "Meetings and Client-items both carry a Client relation. Both were once pointed at a deleted database — if relations look empty, that’s the pattern to check first.",
-    "The split is on probation. If one lane clearly wins, consolidate rather than maintaining both out of habit."
-  ]
-},
-
-{
-  id: "todoist", group: "Work", icon: "✅",
-  name: "Todoist — personal lane",
-  status: { label: "Personal", tone: "slate" },
-  desc: "Errands, household, recurring. Quick add and mobile notifications.",
-  links: [
-    { label: "Open Todoist", href: "https://app.todoist.com", primary: true }
-  ],
-  what: "The <strong>personal</strong> half of the two-lane setup — errands, household, gym, vitamins, anything recurring. Kept separate from work on purpose: privacy and compartmentalisation, not just tooling.",
-  steps: [
-    "Dentist, family, gym, errands, household → here.",
-    "Meetings, clients, projects, deals, research → Notion.",
-    "Use quick add and recurrence — that’s what this lane is for."
-  ]
-},
-
-{
   id: "drive", group: "Work", icon: "📁",
   name: "Google Drive",
   status: { label: "Live", tone: "" },
