@@ -99,7 +99,7 @@
 <body>
 <div class="container">
   <h1>SNIPER Dashboard</h1>
-  <div class="subtitle">Wednesday, 09 September 2026 · 10:12</div>
+  <div class="subtitle">Wednesday, 09 September 2026 · 10:30</div>
 
   <div style="margin-bottom:16px">
     <button id="research-btn" onclick="readResearch()" style="background:#2a3a55;
@@ -294,349 +294,480 @@
   </tbody></table>
   <h3 style="margin:18px 0 6px;color:#e0e1dd;font-size:14px;">📈 TRADING 212 (43) — 0% commission · fractional shares</h3>
   <table>
-    <thead><tr><th>Action</th><th>Ticker</th><th>Name</th><th class="num">Price</th>
+    <thead><tr><th class="num">#</th><th>Action</th><th>Ticker</th><th>Name</th>
+    <th class="num">Price</th><th class="num">Score</th><th>Agreement</th>
+    <th class="num">SCS</th>
     <th class="num">INVEST</th><th class="num">Shares</th>
     <th class="num">Fee (round trip)</th><th>Signal From</th><th>Exit</th>
     </tr></thead><tbody>
     <tr>
+      <td class="num" data-label="#">1</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">HO.PA</td>
       <td data-label="Name">Thales</td><td class="num" data-label="Price">230.20</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.18</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.26</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">2</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">EL.PA</td>
       <td data-label="Name">EssilorLuxotti</td><td class="num" data-label="Price">147.95</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.18</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.41</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">3</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">LDO.MI</td>
       <td data-label="Name">Leonardo</td><td class="num" data-label="Price">50.01</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.11</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">1.20</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">4</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">RHM.DE</td>
       <td data-label="Name">Rheinmetall</td><td class="num" data-label="Price">1033.20</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.10</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.06</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">5</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">DG.PA</td>
       <td data-label="Name">Vinci</td><td class="num" data-label="Price">113.70</td>
+      <td class="num" data-label="Score">-8</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">+0.08</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.53</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">6</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">BEI.DE</td>
       <td data-label="Name">Beiersdorf</td><td class="num" data-label="Price">76.44</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">+0.05</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.78</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">7</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">MC.PA</td>
       <td data-label="Name">LVMH</td><td class="num" data-label="Price">429.10</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.04</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.14</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">8</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">PHIA.AS</td>
       <td data-label="Name">Philips</td><td class="num" data-label="Price">21.78</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">+0.04</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">2.75</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">9</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">KER.PA</td>
       <td data-label="Name">Kering</td><td class="num" data-label="Price">240.05</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.03</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.25</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">10</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">MRK.DE</td>
       <td data-label="Name">Merck KGaA</td><td class="num" data-label="Price">135.85</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">+0.03</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.44</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">11</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">RI.PA</td>
       <td data-label="Name">Pernod Ricard</td><td class="num" data-label="Price">59.82</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.03</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">1.00</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">12</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">SAN.PA</td>
       <td data-label="Name">Sanofi</td><td class="num" data-label="Price">76.26</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">-0.02</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.79</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">13</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">PRX.AS</td>
       <td data-label="Name">Prosus</td><td class="num" data-label="Price">36.09</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">+0.01</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">1.66</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">14</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">TEF.MC</td>
       <td data-label="Name">Telefonica</td><td class="num" data-label="Price">3.61</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">MAN_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.57</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">16.62</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">15</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">SREN.SW</td>
       <td data-label="Name">Swiss Re</td><td class="num" data-label="Price">135.55</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">MAN_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.19</td>
       <td class="num" data-label="INVEST"><b>CHF 60</b></td>
       <td class="num" data-label="Shares">0.44</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">CHF 0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">16</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">NOVN.SW</td>
       <td data-label="Name">Novartis</td><td class="num" data-label="Price">111.80</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.43</td>
       <td class="num" data-label="INVEST"><b>CHF 60</b></td>
       <td class="num" data-label="Shares">0.54</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">CHF 0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">17</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">ENEL.MI</td>
       <td data-label="Name">Enel</td><td class="num" data-label="Price">8.92</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.41</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">6.73</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">18</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">MUV2.DE</td>
       <td data-label="Name">Munich Re</td><td class="num" data-label="Price">498.60</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.38</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.12</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">19</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">RMS.PA</td>
       <td data-label="Name">Hermes</td><td class="num" data-label="Price">1431.50</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.37</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.04</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">20</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">UCB.BR</td>
       <td data-label="Name">UCB</td><td class="num" data-label="Price">206.60</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.35</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.29</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">21</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">LONN.SW</td>
       <td data-label="Name">Lonza</td><td class="num" data-label="Price">556.00</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.34</td>
       <td class="num" data-label="INVEST"><b>CHF 60</b></td>
       <td class="num" data-label="Shares">0.11</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">CHF 0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">22</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">VIE.PA</td>
       <td data-label="Name">Veolia</td><td class="num" data-label="Price">31.98</td>
+      <td class="num" data-label="Score">-8</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.25</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">1.88</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">23</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">SAF.PA</td>
       <td data-label="Name">Safran</td><td class="num" data-label="Price">328.45</td>
+      <td class="num" data-label="Score">-8</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.24</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.18</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">24</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">MONC.MI</td>
       <td data-label="Name">Moncler</td><td class="num" data-label="Price">45.50</td>
+      <td class="num" data-label="Score">-10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.24</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">1.32</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">25</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">ORA.PA</td>
       <td data-label="Name">Orange</td><td class="num" data-label="Price">15.28</td>
+      <td class="num" data-label="Score">-8</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">-0.22</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">3.93</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">26</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">CLNX.MC</td>
       <td data-label="Name">Cellnex</td><td class="num" data-label="Price">25.19</td>
+      <td class="num" data-label="Score">-10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">-0.73</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">2.38</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">27</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">TRN.MI</td>
       <td data-label="Name">Terna</td><td class="num" data-label="Price">9.32</td>
+      <td class="num" data-label="Score">-10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">-0.70</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">6.44</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">28</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">SRG.MI</td>
       <td data-label="Name">Snam</td><td class="num" data-label="Price">5.55</td>
+      <td class="num" data-label="Score">-10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">-0.68</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">10.81</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">29</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">SAMPO.HE</td>
       <td data-label="Name">Sampo</td><td class="num" data-label="Price">9.50</td>
+      <td class="num" data-label="Score">-10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">-0.55</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">6.32</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">30</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">AENA.MC</td>
       <td data-label="Name">Aena</td><td class="num" data-label="Price">25.10</td>
+      <td class="num" data-label="Score">-10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">-0.52</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">2.39</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">31</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">HEN3.DE</td>
       <td data-label="Name">Henkel pref</td><td class="num" data-label="Price">75.30</td>
+      <td class="num" data-label="Score">-8</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">+0.37</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">0.80</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.00 (0.0%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">32</td>
       <td class="buy" data-label="Action">BUYi</td><td class="ticker" data-label="Ticker">ML.PA</td>
       <td data-label="Name">Michelin</td><td class="num" data-label="Price">34.27</td>
+      <td class="num" data-label="Score">-8</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">-0.20</td>
       <td class="num" data-label="INVEST"><b>€60</b></td>
       <td class="num" data-label="Shares">1.75</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">€0.24 (0.4%)</span></td><td data-label="Signal From">2026-09-09</td>
       <td data-label="Exit">2026-09-30</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">33</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">MS</td>
       <td data-label="Name"></td><td class="num" data-label="Price">216.27</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">SPLIT</td>
+      <td class="num" data-label="SCS">+0.09</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.18</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">34</td>
       <td class="buy" data-label="Action">BUY</td><td class="ticker" data-label="Ticker">INTC</td>
       <td data-label="Name"></td><td class="num" data-label="Price">104.47</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">MAN_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.08</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.38</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">35</td>
       <td class="buy" data-label="Action">BUY</td><td class="ticker" data-label="Ticker">AMD</td>
       <td data-label="Name"></td><td class="num" data-label="Price">505.74</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">MAN_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.06</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.08</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">36</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">MU</td>
       <td data-label="Name"></td><td class="num" data-label="Price">1000.26</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">MAN_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.04</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.04</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">37</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">C</td>
       <td data-label="Name"></td><td class="num" data-label="Price">136.74</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.35</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.29</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">38</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">WFC</td>
       <td data-label="Name"></td><td class="num" data-label="Price">87.96</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.35</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.45</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">39</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">QCOM</td>
       <td data-label="Name"></td><td class="num" data-label="Price">174.09</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.27</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.23</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">40</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">DE</td>
       <td data-label="Name"></td><td class="num" data-label="Price">688.45</td>
+      <td class="num" data-label="Score">+10</td><td class="buy" data-label="Agreement">RESEARCH_OUTLIER</td>
+      <td class="num" data-label="SCS">+0.24</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.06</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">41</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">QQQ</td>
       <td data-label="Name"></td><td class="num" data-label="Price">718.36</td>
+      <td class="num" data-label="Score">+10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">+0.76</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.06</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">42</td>
       <td class="add" data-label="Action">ADD?</td><td class="ticker" data-label="Ticker">XLK</td>
       <td data-label="Name"></td><td class="num" data-label="Price">187.87</td>
+      <td class="num" data-label="Score">+10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">+0.54</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.21</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
       <td data-label="Exit">2026-09-29</td>
     </tr>
     <tr>
+      <td class="num" data-label="#">43</td>
       <td class="buy" data-label="Action">BUY</td><td class="ticker" data-label="Ticker">SMH</td>
       <td data-label="Name"></td><td class="num" data-label="Price">573.73</td>
+      <td class="num" data-label="Score">+10</td><td class="" data-label="Agreement">NO_RESEARCH</td>
+      <td class="num" data-label="SCS">+0.34</td>
       <td class="num" data-label="INVEST"><b>$40</b></td>
       <td class="num" data-label="Shares">0.07</td>
       <td class="num" data-label="Fee (round trip)"><span class="muted">$0.00 (0.0%)</span></td><td class="add" data-label="Signal From">2026-09-08</td>
@@ -1815,6 +1946,60 @@
       <td class="num" data-label="Size">0.40×</td>
     </tr>
   </tbody></table>
+  </details>
+  <details style="margin-top:26px;"><summary style="cursor:pointer;
+      font-size:16px;text-transform:uppercase;letter-spacing:1px;color:#e0e1dd;
+      font-weight:600;padding:8px 0;list-style:none;">
+      ▸ What the columns mean</summary>
+  <table>
+    <thead><tr><th>Column</th><th>Range</th><th>What it is</th></tr></thead>
+    <tbody>
+    <tr><td class="ticker" data-label="Column">Score</td><td class="num" data-label="Range">−10 … +10</td>
+        <td data-label="What it is">The <b>MAN score</b> — <b>technical only</b>. Ten indicators (Williams %R,
+        EMA crosses, higher-highs, ROC, RSI, two MACD histograms, stochastic,
+        price vs 50-day SMA, EMA21 vs EMA50), each voting +1 or −1, amplified
+        ×1.2. |score| ≥ 8 is the entry threshold.</td></tr>
+    <tr><td class="ticker" data-label="Column">SCS</td><td class="num" data-label="Range">−1.0 … +1.0</td>
+        <td data-label="What it is">The <b>SNIPER Composite Score</b> — <b>all five layers</b>:
+        technical 0.30 + research 0.30 + fundamentals 0.20 + revisions 0.20,
+        multiplied by a risk overlay. A name can be +10 on Score and weak on SCS:
+        strong technicals, but research, fundamentals or revisions disagree.
+        <b>Read the sign, not the magnitude</b> — magnitude showed r = −0.03
+        against outcomes over 2,242 closed trades.</td></tr>
+    <tr><td class="ticker" data-label="Column">Agreement</td><td data-label="Range">—</td>
+        <td data-label="What it is">How the three voters — MAN, Research, Composite — line up.
+        Candidates are ranked by this, best bucket first:<br>
+        <b>SPLIT</b> they disagree · <b>MAN_OUTLIER</b> / <b>RESEARCH_OUTLIER</b> /
+        <b>COMPOSITE_OUTLIER</b> two agree, one differs ·
+        <b>NO_RESEARCH</b> no broker covers this name ·
+        <b>NO_COMPOSITE</b> composite produced no score ·
+        <b>UNANIMOUS</b> all agree — <i>suppressed, it was the worst bucket in
+        every regime tested</i>.<br>
+        Rank is meaningful <b>across</b> buckets, not within one: ties break on
+        SCS magnitude, which is noise.</td></tr>
+    <tr><td class="ticker" data-label="Column">Action</td><td data-label="Range">—</td>
+        <td data-label="What it is"><b>BUY</b> new position, buying strength (bull regime) ·
+        <b>BUYi</b> new position, buying <i>weakness</i> — an inverted buy in a
+        bear regime, where the model rates the name Strong Sell and the system
+        bets on the bounce · <b>ADD?</b> signal on a name already held; shown
+        for review, never auto-recorded · <b>SELL</b> exit due today.</td></tr>
+    <tr><td class="ticker" data-label="Column">Signal From</td><td data-label="Range">—</td>
+        <td data-label="What it is">Which session's data produced the call. On a morning run US signals
+        are still the <i>previous</i> close while EU is today's — highlighted
+        when older than the brief date.</td></tr>
+    <tr><td class="ticker" data-label="Column">Fee</td><td data-label="Range">—</td>
+        <td data-label="What it is">Estimated round trip at the routed broker, on the INVEST amount
+        beside it. Currency amounts rather than percentages, because a flat
+        minimum commission is ruinous on a small ticket and percentages hide
+        that. French names carry a 0.40% FTT on every buy — a tax, not a broker
+        fee, so no venue avoids it.</td></tr>
+    <tr><td class="ticker" data-label="Column">Slip</td><td data-label="Range">—</td>
+        <td data-label="What it is">My Real Trades only. (fill − model price) ÷ model price. Positive
+        means you paid more than the model assumed. Check <b>model date</b>
+        first: on a same-day entry this is execution slippage, but on an ADD?
+        for a long-held name it is price drift since the original signal.</td></tr>
+    </tbody>
+  </table>
   </details>
   <h2>Regime Guide — where the system trades and how big</h2>
   <table>
