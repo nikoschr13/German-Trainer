@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SNIPER Dashboard · 2026-09-10</title>
+<title>SNIPER Dashboard · 2026-09-11</title>
 <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Segoe UI, sans-serif;
@@ -99,7 +99,7 @@
 <body>
 <div class="container">
   <h1>SNIPER Dashboard</h1>
-  <div class="subtitle">Thursday, 10 September 2026 · 16:45</div>
+  <div class="subtitle">Friday, 11 September 2026 · 09:40</div>
 
   <div style="margin-bottom:16px">
     <button id="research-btn" onclick="readResearch()" style="background:#2a3a55;
@@ -130,21 +130,21 @@
   </script>
   <div class="regime-bar">
     <span class="card-sub" style="min-width:28px">🇺🇸 US</span>
-    <span class="chip regime-bull">S4 · BULL_LEADER_RATES</span>
-    <span class="card-sub" style="color:#778da9">data: 2026-09-10</span>
-    <span class="card-sub">Size 0.0× · Expected hit 53.8% · Mean +1.8%</span>
+    <span class="chip regime-bear">S3 · BEAR_RATES_GENERIC</span>
+    <span class="card-sub" style="color:#dda15e">data: 2026-09-10 ⚠ stale</span>
+    <span class="card-sub">Size 0.0× · Expected hit 46.6% · Mean +-0.2%</span>
   </div>
   <div class="regime-bar">
     <span class="card-sub" style="min-width:28px">🇪🇺 EU</span>
     <span class="chip regime-bear">S3 · BEAR_RATES_GENERIC</span>
-    <span class="card-sub" style="color:#778da9">data: 2026-09-10</span>
-    <span class="card-sub">STOXX50E 6277.48 · 50dma 6382.65</span>
+    <span class="card-sub" style="color:#778da9">data: 2026-09-11</span>
+    <span class="card-sub">STOXX50E 6300.2 · 50dma 6380.23</span>
   </div>
   <div class="cards">
     <div class="card">
       <div class="card-label">Today · Actions</div>
-      <div class="card-value">0 US · 0 EU</div>
-      <div class="card-sub">0 add-to-held on US side · 4 exits in next 3d</div>
+      <div class="card-value">0 US · 0 EU · <span class=sell>4 SELL</span></div>
+      <div class="card-sub">0 add-to-held on US side · 2 exits in next 3d</div>
     </div>
     <div class="card">
       <div class="card-label">Portfolio · Open</div>
@@ -153,8 +153,8 @@
     </div>
     <div class="card">
       <div class="card-label">My Real Book</div>
-      <div class="card-value win">€-2.83 · $+16.20</div>
-      <div class="card-sub">5 open · 1 closed · invested €150 · $252 (+3.33%)</div>
+      <div class="card-value win">€-4.92 · $+16.20</div>
+      <div class="card-sub">5 open · 1 closed · invested €150 · $252 (+2.81%)</div>
     </div>
     <div class="card">
       <div class="card-label">Avg PnL Per Trade</div>
@@ -163,8 +163,8 @@
     </div>
     <div class="card">
       <div class="card-label">Macro</div>
-      <div class="card-value" style="font-size:15px">SPY $758.73 · VIX 17.43</div>
-      <div class="card-sub">TLT $81.07 · 50dma 82.67</div>
+      <div class="card-value" style="font-size:15px">SPY $757.83 · VIX 17.51</div>
+      <div class="card-sub">TLT $80.78 · 50dma 82.66</div>
     </div>
   </div>
 
@@ -200,8 +200,8 @@
       <td class="num warn">no signal</td>
       <td class="num">0.1977</td>
       <td class="num">—</td>
-      <td class="num">€144.96</td>
-      <td class="num loss">-4.47%</td>
+      <td class="num">€142.16</td>
+      <td class="num loss">-6.31%</td>
       <td>2026-09-17</td>
       <td>OPEN</td>
     </tr>
@@ -213,8 +213,8 @@
       <td class="num warn">+0.70%</td>
       <td class="num">0.5763</td>
       <td class="num">—</td>
-      <td class="num">€53.67</td>
-      <td class="num win">+3.09%</td>
+      <td class="num">€52.70</td>
+      <td class="num win">+1.23%</td>
       <td>2026-09-17</td>
       <td>OPEN</td>
     </tr>
@@ -226,8 +226,8 @@
       <td class="num win">+0.19%</td>
       <td class="num">0.3781</td>
       <td class="num">€0.12</td>
-      <td class="num">€74.18</td>
-      <td class="num loss">-6.13%</td>
+      <td class="num">€73.72</td>
+      <td class="num loss">-6.71%</td>
       <td>2026-09-17</td>
       <td>OPEN</td>
     </tr>
@@ -239,8 +239,8 @@
       <td class="num warn">+0.92%</td>
       <td class="num">0.6046</td>
       <td class="num">—</td>
-      <td class="num">€49.41</td>
-      <td class="num loss">-0.42%</td>
+      <td class="num">€49.00</td>
+      <td class="num loss">-1.25%</td>
       <td>2026-09-17</td>
       <td>OPEN</td>
     </tr>
@@ -252,16 +252,41 @@
       <td class="num win">+0.38%</td>
       <td class="num">0.0663</td>
       <td class="num">—</td>
-      <td class="num">€445.40</td>
-      <td class="num loss">-1.55%</td>
+      <td class="num">€437.10</td>
+      <td class="num loss">-3.38%</td>
       <td>2026-09-17</td>
       <td>OPEN</td>
     </tr>
   </tbody></table>
 <!--/SEC:mine-->
 <!--SEC:today-->
-  <h2>⚡ TODAY — 0 action(s)</h2>
-  <div class="card-sub" style="margin:-6px 0 12px;">Heads-up — 4 exit(s) due within 3 days: DIS (2026-09-11), V (2026-09-11), NOVN.SW (2026-09-11), BP.L (2026-09-11)</div>
+  <h2>⚡ TODAY — 4 action(s)</h2>
+  <div class="card-sub" style="margin:-6px 0 12px;">Heads-up — 2 exit(s) due within 3 days: XLC (2026-09-14), OR.PA (2026-09-14)</div>
+  <h3 style="margin:14px 0 6px;color:#e0e1dd;font-size:14px;">🔴 SELL FIRST (4) — free the capital before buying</h3>
+  <table>
+    <thead><tr><th>Action</th><th>Ticker</th><th class="num">Entry</th>
+    <th>Due</th><th>Status</th></tr></thead><tbody>
+    <tr>
+      <td class="sell" data-label="Action">SELL</td><td class="ticker" data-label="Ticker">DIS</td>
+      <td class="num" data-label="Entry">$107.23</td>
+      <td data-label="Due">2026-09-11</td><td data-label="Status">due</td>
+    </tr>
+    <tr>
+      <td class="sell" data-label="Action">SELL</td><td class="ticker" data-label="Ticker">V</td>
+      <td class="num" data-label="Entry">$367.73</td>
+      <td data-label="Due">2026-09-11</td><td data-label="Status">due</td>
+    </tr>
+    <tr>
+      <td class="sell" data-label="Action">SELL</td><td class="ticker" data-label="Ticker">NOVN.SW</td>
+      <td class="num" data-label="Entry">CHF 126.34</td>
+      <td data-label="Due">2026-09-11</td><td data-label="Status">due</td>
+    </tr>
+    <tr>
+      <td class="sell" data-label="Action">SELL</td><td class="ticker" data-label="Ticker">BP.L</td>
+      <td class="num" data-label="Entry">GBp 551.60</td>
+      <td data-label="Due">2026-09-11</td><td data-label="Status">due</td>
+    </tr>
+  </tbody></table>
   <div class="empty">Nothing new to buy today.</div>
   <details style="margin-top:26px;"><summary style="cursor:pointer;color:#778da9;font-size:13px;padding:8px 0;">▸ Full candidate detail (SCS, sector, signal dates)</summary>
 <!--/SEC:today-->
@@ -292,14 +317,14 @@
 
   <h2>🇪🇺 EU Buy Candidates — regime S3 · size 0.0× · actionable 09:00-17:30 Zurich</h2>
   <div class="empty">No EU candidates today (regime may be stand-down).</div>
-  <h2>🇺🇸 US Buy Candidates — regime S4 · actionable from 15:30 Zurich</h2>
+  <h2>🇺🇸 US Buy Candidates — regime S3 · actionable from 15:30 Zurich</h2>
   <div class="empty">No US candidates today (regime may be stand-down).</div>
   </details>
   <details><summary style="cursor:pointer;list-style:none;">
     <span style="font-size:16px;text-transform:uppercase;letter-spacing:1px;
                  color:#e0e1dd;font-weight:600;">
       ▸ Open Positions (43: 19 EU · 24 US)
-      — unrealized <span class="loss">$-1,234</span></span>
+      — unrealized <span class="loss">$-1,894</span></span>
     <span style="color:#778da9;font-size:12px;"> · 43 marked, last pipeline close · click to expand</span>
   </summary>
   <table>
@@ -314,10 +339,10 @@
       <td class="ticker" data-label="Ticker">NOVN.SW</td>
       <td data-label="Entry Date">2026-08-21</td>
       <td class="num" data-label="Entry">CHF 126.34</td>
-      <td class="num" data-label="Live">CHF 111.66</td>
-      <td class="num loss" data-label="Unr P/L">-11.62%</td>
+      <td class="num" data-label="Live">CHF 112.14</td>
+      <td class="num loss" data-label="Unr P/L">-11.24%</td>
       <td data-label="Exit Date">2026-09-11</td>
-      <td class="num" data-label="Days Left">1d</td>
+      <td class="num" data-label="Days Left">0d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -329,7 +354,7 @@
       <td class="num" data-label="Live">GBp 542.50</td>
       <td class="num loss" data-label="Unr P/L">-1.65%</td>
       <td data-label="Exit Date">2026-09-11</td>
-      <td class="num" data-label="Days Left">1d</td>
+      <td class="num" data-label="Days Left">0d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -338,10 +363,10 @@
       <td class="ticker" data-label="Ticker">OR.PA</td>
       <td data-label="Entry Date">2026-08-24</td>
       <td class="num" data-label="Entry">€387.90</td>
-      <td class="num" data-label="Live">€380.20</td>
-      <td class="num loss" data-label="Unr P/L">-1.99%</td>
+      <td class="num" data-label="Live">€376.10</td>
+      <td class="num loss" data-label="Unr P/L">-3.04%</td>
       <td data-label="Exit Date">2026-09-14</td>
-      <td class="num" data-label="Days Left">4d</td>
+      <td class="num" data-label="Days Left">3d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -350,10 +375,10 @@
       <td class="ticker" data-label="Ticker">SIE.DE</td>
       <td data-label="Entry Date">2026-08-26</td>
       <td class="num" data-label="Entry">€288.00</td>
-      <td class="num" data-label="Live">€264.90</td>
-      <td class="num loss" data-label="Unr P/L">-8.02%</td>
+      <td class="num" data-label="Live">€264.40</td>
+      <td class="num loss" data-label="Unr P/L">-8.19%</td>
       <td data-label="Exit Date">2026-09-16</td>
-      <td class="num" data-label="Days Left">6d</td>
+      <td class="num" data-label="Days Left">5d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -362,10 +387,10 @@
       <td class="ticker" data-label="Ticker">DBK.DE</td>
       <td data-label="Entry Date">2026-08-26</td>
       <td class="num" data-label="Entry">€33.81</td>
-      <td class="num" data-label="Live">€35.13</td>
-      <td class="num win" data-label="Unr P/L">+3.90%</td>
+      <td class="num" data-label="Live">€34.97</td>
+      <td class="num win" data-label="Unr P/L">+3.43%</td>
       <td data-label="Exit Date">2026-09-16</td>
-      <td class="num" data-label="Days Left">6d</td>
+      <td class="num" data-label="Days Left">5d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -374,10 +399,10 @@
       <td class="ticker" data-label="Ticker">BAS.DE</td>
       <td data-label="Entry Date">2026-08-26</td>
       <td class="num" data-label="Entry">€51.70</td>
-      <td class="num" data-label="Live">€53.67</td>
-      <td class="num win" data-label="Unr P/L">+3.81%</td>
+      <td class="num" data-label="Live">€52.70</td>
+      <td class="num win" data-label="Unr P/L">+1.93%</td>
       <td data-label="Exit Date">2026-09-16</td>
-      <td class="num" data-label="Days Left">6d</td>
+      <td class="num" data-label="Days Left">5d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -386,10 +411,10 @@
       <td class="ticker" data-label="Ticker">UBSG.SW</td>
       <td data-label="Entry Date">2026-08-27</td>
       <td class="num" data-label="Entry">CHF 43.86</td>
-      <td class="num" data-label="Live">CHF 44.57</td>
-      <td class="num win" data-label="Unr P/L">+1.62%</td>
+      <td class="num" data-label="Live">CHF 43.95</td>
+      <td class="num win" data-label="Unr P/L">+0.21%</td>
       <td data-label="Exit Date">2026-09-17</td>
-      <td class="num" data-label="Days Left">7d</td>
+      <td class="num" data-label="Days Left">6d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -401,7 +426,7 @@
       <td class="num" data-label="Live">GBp 7,530.00</td>
       <td class="num loss" data-label="Unr P/L">-1.65%</td>
       <td data-label="Exit Date">2026-09-17</td>
-      <td class="num" data-label="Days Left">7d</td>
+      <td class="num" data-label="Days Left">6d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -410,10 +435,10 @@
       <td class="ticker" data-label="Ticker">BAYN.DE</td>
       <td data-label="Entry Date">2026-08-27</td>
       <td class="num" data-label="Entry">€48.95</td>
-      <td class="num" data-label="Live">€49.41</td>
-      <td class="num win" data-label="Unr P/L">+0.94%</td>
+      <td class="num" data-label="Live">€49.00</td>
+      <td class="num win" data-label="Unr P/L">+0.10%</td>
       <td data-label="Exit Date">2026-09-17</td>
-      <td class="num" data-label="Days Left">7d</td>
+      <td class="num" data-label="Days Left">6d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -425,7 +450,7 @@
       <td class="num" data-label="Live">CHF 187.95</td>
       <td class="num loss" data-label="Unr P/L">-1.88%</td>
       <td data-label="Exit Date">2026-09-18</td>
-      <td class="num" data-label="Days Left">8d</td>
+      <td class="num" data-label="Days Left">7d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -434,10 +459,10 @@
       <td class="ticker" data-label="Ticker">BMW.DE</td>
       <td data-label="Entry Date">2026-08-31</td>
       <td class="num" data-label="Entry">€62.64</td>
-      <td class="num" data-label="Live">€63.70</td>
-      <td class="num win" data-label="Unr P/L">+1.69%</td>
+      <td class="num" data-label="Live">€62.66</td>
+      <td class="num win" data-label="Unr P/L">+0.03%</td>
       <td data-label="Exit Date">2026-09-18</td>
-      <td class="num" data-label="Days Left">8d</td>
+      <td class="num" data-label="Days Left">7d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -446,10 +471,10 @@
       <td class="ticker" data-label="Ticker">VOW3.DE</td>
       <td data-label="Entry Date">2026-08-31</td>
       <td class="num" data-label="Entry">€77.42</td>
-      <td class="num" data-label="Live">€83.10</td>
-      <td class="num win" data-label="Unr P/L">+7.34%</td>
+      <td class="num" data-label="Live">€81.70</td>
+      <td class="num win" data-label="Unr P/L">+5.53%</td>
       <td data-label="Exit Date">2026-09-18</td>
-      <td class="num" data-label="Days Left">8d</td>
+      <td class="num" data-label="Days Left">7d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -458,10 +483,10 @@
       <td class="ticker" data-label="Ticker">MRK.DE</td>
       <td data-label="Entry Date">2026-09-01</td>
       <td class="num" data-label="Entry">€140.25</td>
-      <td class="num" data-label="Live">€134.60</td>
-      <td class="num loss" data-label="Unr P/L">-4.03%</td>
+      <td class="num" data-label="Live">€132.70</td>
+      <td class="num loss" data-label="Unr P/L">-5.38%</td>
       <td data-label="Exit Date">2026-09-22</td>
-      <td class="num" data-label="Days Left">12d</td>
+      <td class="num" data-label="Days Left">11d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.30×</td>
     </tr>
@@ -470,10 +495,10 @@
       <td class="ticker" data-label="Ticker">NESN.SW</td>
       <td data-label="Entry Date">2026-09-01</td>
       <td class="num" data-label="Entry">CHF 78.62</td>
-      <td class="num" data-label="Live">CHF 77.73</td>
-      <td class="num loss" data-label="Unr P/L">-1.13%</td>
+      <td class="num" data-label="Live">CHF 77.74</td>
+      <td class="num loss" data-label="Unr P/L">-1.12%</td>
       <td data-label="Exit Date">2026-09-22</td>
-      <td class="num" data-label="Days Left">12d</td>
+      <td class="num" data-label="Days Left">11d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.60×</td>
     </tr>
@@ -482,10 +507,10 @@
       <td class="ticker" data-label="Ticker">BNP.PA</td>
       <td data-label="Entry Date">2026-09-01</td>
       <td class="num" data-label="Entry">€102.56</td>
-      <td class="num" data-label="Live">€103.88</td>
-      <td class="num win" data-label="Unr P/L">+1.29%</td>
+      <td class="num" data-label="Live">€103.50</td>
+      <td class="num win" data-label="Unr P/L">+0.92%</td>
       <td data-label="Exit Date">2026-09-22</td>
-      <td class="num" data-label="Days Left">12d</td>
+      <td class="num" data-label="Days Left">11d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.60×</td>
     </tr>
@@ -494,10 +519,10 @@
       <td class="ticker" data-label="Ticker">MC.PA</td>
       <td data-label="Entry Date">2026-09-02</td>
       <td class="num" data-label="Entry">€444.20</td>
-      <td class="num" data-label="Live">€426.55</td>
-      <td class="num loss" data-label="Unr P/L">-3.97%</td>
+      <td class="num" data-label="Live">€407.85</td>
+      <td class="num loss" data-label="Unr P/L">-8.18%</td>
       <td data-label="Exit Date">2026-09-23</td>
-      <td class="num" data-label="Days Left">13d</td>
+      <td class="num" data-label="Days Left">12d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.60×</td>
     </tr>
@@ -506,10 +531,10 @@
       <td class="ticker" data-label="Ticker">ZURN.SW</td>
       <td data-label="Entry Date">2026-09-04</td>
       <td class="num" data-label="Entry">CHF 594.20</td>
-      <td class="num" data-label="Live">CHF 585.40</td>
-      <td class="num loss" data-label="Unr P/L">-1.48%</td>
+      <td class="num" data-label="Live">CHF 585.20</td>
+      <td class="num loss" data-label="Unr P/L">-1.51%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -521,7 +546,7 @@
       <td class="num" data-label="Live">GBp 1,567.40</td>
       <td class="num loss" data-label="Unr P/L">+0.00%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -530,10 +555,10 @@
       <td class="ticker" data-label="Ticker">INGA.AS</td>
       <td data-label="Entry Date">2026-09-04</td>
       <td class="num" data-label="Entry">€31.31</td>
-      <td class="num" data-label="Live">€32.24</td>
-      <td class="num win" data-label="Unr P/L">+2.97%</td>
+      <td class="num" data-label="Live">€31.64</td>
+      <td class="num win" data-label="Unr P/L">+1.05%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Unknown</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -545,7 +570,7 @@
       <td class="num" data-label="Live">$104.38</td>
       <td class="num loss" data-label="Unr P/L">-2.66%</td>
       <td data-label="Exit Date">2026-09-11</td>
-      <td class="num" data-label="Days Left">1d</td>
+      <td class="num" data-label="Days Left">0d</td>
       <td data-label="Sector">Consumer</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -557,7 +582,7 @@
       <td class="num" data-label="Live">$366.77</td>
       <td class="num loss" data-label="Unr P/L">-0.26%</td>
       <td data-label="Exit Date">2026-09-11</td>
-      <td class="num" data-label="Days Left">1d</td>
+      <td class="num" data-label="Days Left">0d</td>
       <td data-label="Sector">Financials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -569,7 +594,7 @@
       <td class="num" data-label="Live">$111.13</td>
       <td class="num loss" data-label="Unr P/L">-0.56%</td>
       <td data-label="Exit Date">2026-09-14</td>
-      <td class="num" data-label="Days Left">4d</td>
+      <td class="num" data-label="Days Left">3d</td>
       <td data-label="Sector">ETF-Sector</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -581,7 +606,7 @@
       <td class="num" data-label="Live">$100.44</td>
       <td class="num loss" data-label="Unr P/L">-6.88%</td>
       <td data-label="Exit Date">2026-09-17</td>
-      <td class="num" data-label="Days Left">7d</td>
+      <td class="num" data-label="Days Left">6d</td>
       <td data-label="Sector">Consumer</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -593,7 +618,7 @@
       <td class="num" data-label="Live">$488.66</td>
       <td class="num loss" data-label="Unr P/L">-3.13%</td>
       <td data-label="Exit Date">2026-09-17</td>
-      <td class="num" data-label="Days Left">7d</td>
+      <td class="num" data-label="Days Left">6d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -605,7 +630,7 @@
       <td class="num" data-label="Live">$218.61</td>
       <td class="num loss" data-label="Unr P/L">-3.01%</td>
       <td data-label="Exit Date">2026-09-17</td>
-      <td class="num" data-label="Days Left">7d</td>
+      <td class="num" data-label="Days Left">6d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -617,7 +642,7 @@
       <td class="num" data-label="Live">$426.59</td>
       <td class="num loss" data-label="Unr P/L">-0.00%</td>
       <td data-label="Exit Date">2026-09-18</td>
-      <td class="num" data-label="Days Left">8d</td>
+      <td class="num" data-label="Days Left">7d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -629,7 +654,7 @@
       <td class="num" data-label="Live">$319.87</td>
       <td class="num win" data-label="Unr P/L">+0.80%</td>
       <td data-label="Exit Date">2026-09-21</td>
-      <td class="num" data-label="Days Left">11d</td>
+      <td class="num" data-label="Days Left">10d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -641,7 +666,7 @@
       <td class="num" data-label="Live">$65.18</td>
       <td class="num win" data-label="Unr P/L">+1.46%</td>
       <td data-label="Exit Date">2026-09-21</td>
-      <td class="num" data-label="Days Left">11d</td>
+      <td class="num" data-label="Days Left">10d</td>
       <td data-label="Sector">ETF-Sector</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -653,7 +678,7 @@
       <td class="num" data-label="Live">$677.01</td>
       <td class="num loss" data-label="Unr P/L">-0.88%</td>
       <td data-label="Exit Date">2026-09-23</td>
-      <td class="num" data-label="Days Left">13d</td>
+      <td class="num" data-label="Days Left">12d</td>
       <td data-label="Sector">Industrials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -665,7 +690,7 @@
       <td class="num" data-label="Live">$991.78</td>
       <td class="num loss" data-label="Unr P/L">-0.52%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -677,7 +702,7 @@
       <td class="num" data-label="Live">$157.29</td>
       <td class="num loss" data-label="Unr P/L">-0.22%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -689,7 +714,7 @@
       <td class="num" data-label="Live">$172.08</td>
       <td class="num win" data-label="Unr P/L">+1.12%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -701,7 +726,7 @@
       <td class="num" data-label="Live">$650.66</td>
       <td class="num win" data-label="Unr P/L">+7.22%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Tech</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -713,7 +738,7 @@
       <td class="num" data-label="Live">$137.62</td>
       <td class="num win" data-label="Unr P/L">+0.41%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Financials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -725,7 +750,7 @@
       <td class="num" data-label="Live">$89.48</td>
       <td class="num win" data-label="Unr P/L">+0.40%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Financials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -737,7 +762,7 @@
       <td class="num" data-label="Live">$351.58</td>
       <td class="num loss" data-label="Unr P/L">-2.30%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Financials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -749,7 +774,7 @@
       <td class="num" data-label="Live">$757.79</td>
       <td class="num loss" data-label="Unr P/L">-1.88%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">ETF-Broad</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -761,7 +786,7 @@
       <td class="num" data-label="Live">$522.11</td>
       <td class="num loss" data-label="Unr P/L">-2.54%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">ETF-Broad</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -773,7 +798,7 @@
       <td class="num" data-label="Live">$214.36</td>
       <td class="num loss" data-label="Unr P/L">-0.48%</td>
       <td data-label="Exit Date">2026-09-25</td>
-      <td class="num" data-label="Days Left">15d</td>
+      <td class="num" data-label="Days Left">14d</td>
       <td data-label="Sector">Financials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -785,7 +810,7 @@
       <td class="num" data-label="Live">$1,018.74</td>
       <td class="num loss" data-label="Unr P/L">-1.91%</td>
       <td data-label="Exit Date">2026-09-28</td>
-      <td class="num" data-label="Days Left">18d</td>
+      <td class="num" data-label="Days Left">17d</td>
       <td data-label="Sector">Financials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -797,7 +822,7 @@
       <td class="num" data-label="Live">$185.80</td>
       <td class="num loss" data-label="Unr P/L">-0.79%</td>
       <td data-label="Exit Date">2026-09-28</td>
-      <td class="num" data-label="Days Left">18d</td>
+      <td class="num" data-label="Days Left">17d</td>
       <td data-label="Sector">ETF-Sector</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -809,7 +834,7 @@
       <td class="num" data-label="Live">$62.64</td>
       <td class="num loss" data-label="Unr P/L">-0.06%</td>
       <td data-label="Exit Date">2026-09-28</td>
-      <td class="num" data-label="Days Left">18d</td>
+      <td class="num" data-label="Days Left">17d</td>
       <td data-label="Sector">Financials</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -821,7 +846,7 @@
       <td class="num" data-label="Live">$708.01</td>
       <td class="num loss" data-label="Unr P/L">-1.29%</td>
       <td data-label="Exit Date">2026-09-29</td>
-      <td class="num" data-label="Days Left">19d</td>
+      <td class="num" data-label="Days Left">18d</td>
       <td data-label="Sector">ETF-Broad</td>
       <td class="num" data-label="Size">0.40×</td>
     </tr>
@@ -1137,21 +1162,21 @@
       <td class="num" data-label="Hist. hit">78.4%</td>
       <td class="num" data-label="Hist. mean">+8.4%</td>
     </tr>
-    <tr>
-      <td class="ticker" data-label="State">S3</td>
-      <td data-label="Name">BEAR_RATES_GENERIC</td>
-      <td style="max-width:520px" data-label="What it means / what the system does">Generic bear: SPY and bonds both below 50-day avg, no panic yet. Inverted buys on oversold names.</td>
-      <td class="num" data-label="Size">0.6×</td>
-      <td class="num" data-label="Hist. hit">76.2%</td>
-      <td class="num" data-label="Hist. mean">+7.6%</td>
-    </tr>
     <tr style="background:#1b4332; box-shadow: inset 3px 0 0 #95d5b2;">
-      <td class="ticker">S4 <span class="chip regime-bull" style="font-size:10px; padding:2px 8px;">TODAY</span></td>
-      <td>BULL_LEADER_RATES</td>
-      <td style="max-width:520px">Early bull: SPY recently crossed above its 50-day avg (≤30 days ago), rates still pressuring bonds. BUY Strong Buy signals — but only on stocks outperforming SPY (the leaders).</td>
-      <td class="num">0.4×</td>
-      <td class="num">61.7%</td>
-      <td class="num">+4.4%</td>
+      <td class="ticker">S3 <span class="chip regime-bull" style="font-size:10px; padding:2px 8px;">TODAY</span></td>
+      <td>BEAR_RATES_GENERIC</td>
+      <td style="max-width:520px">Generic bear: SPY and bonds both below 50-day avg, no panic yet. Inverted buys on oversold names.</td>
+      <td class="num">0.6×</td>
+      <td class="num">76.2%</td>
+      <td class="num">+7.6%</td>
+    </tr>
+    <tr>
+      <td class="ticker" data-label="State">S4</td>
+      <td data-label="Name">BULL_LEADER_RATES</td>
+      <td style="max-width:520px" data-label="What it means / what the system does">Early bull: SPY recently crossed above its 50-day avg (≤30 days ago), rates still pressuring bonds. BUY Strong Buy signals — but only on stocks outperforming SPY (the leaders).</td>
+      <td class="num" data-label="Size">0.4×</td>
+      <td class="num" data-label="Hist. hit">61.7%</td>
+      <td class="num" data-label="Hist. mean">+4.4%</td>
     </tr>
     <tr>
       <td class="ticker" data-label="State">S5</td>
@@ -1184,7 +1209,7 @@
     Historical hit / mean are from the original cross-validated backtest.
   </div>
   <div class="footer">
-    <span>Brief: 2026-09-10 16:45 · Positions: 43 open / 230 closed · Realized $+25,180 (57.6% hit)</span>
+    <span>Brief: 2026-09-11 09:40 · Positions: 43 open / 230 closed · Realized $+25,180 (57.6% hit)</span>
     <span>Generated locally · published read-only</span>
   </div>
 </div>
